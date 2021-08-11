@@ -2,26 +2,21 @@ import { createContext, useState } from "react";
 
 export const GroupsContext = createContext();
 
-export const GroupsProvider = ({children}) => {
+export const GroupsProvider = ({ children }) => {
+  const [groupsList, setGroupsList] = useState([]);
+  const [group, setGroup] = useState([]);
 
-    const [groupsList, setGroupsList] = useState([]);
-    const [group, setGroup] = useState([]);
+  const addGroup = () => {};
 
-    const addGroup = () => {
-         
-    }
+  const removeGroup = () => {};
 
-    const removeGroup = () => {
+  const editGroup = () => {};
 
-    }
-
-    const editGroup = () => {
-
-    }
-
-    return (
-        <HabitsContext.Provider value={{groupsList, group, addGroup, removeGroup, editGroup}}>
-            {children}
-        </HabitsContext.Provider>
-    )
-}
+  return (
+    <GroupsContext.Provider
+      value={{ groupsList, group, addGroup, removeGroup, editGroup }}
+    >
+      {children}
+    </GroupsContext.Provider>
+  );
+};
