@@ -17,6 +17,11 @@ const Home = () => {
             Gerencie melhor a <br /> sua
             <span className="titleSpan"> Rotina </span> com <br /> Goodhabits
           </div>
+          <div className="subtitle">
+            GoodHabits é uma plataforma para enumerar e manter seus hábitos,
+            criar e participar de grupos onde os membros compartilham atividades
+            e definem metas
+          </div>
           <div>
             <MainButton onClick={() => history.push("/signup")}>
               Get Started

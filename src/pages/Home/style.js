@@ -7,4 +7,8 @@ export const Breaker = styled.div`
   .titleSpan {
     color: red;
   }
+
+  .subtitle {
+    font-size: 14px;
+  }
 `;

@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import registerImage from "../../assets/img/registerImage.png";
+import registerImage from "../../assets/img/registerImage.svg";
 
 export const FormContainer = styled.form`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
-  min-width: 25vw;
+  min-width: 30vw;
   height: 60vh;
   padding: 30px 0;
   background-color: #ffb479;
@@ -30,14 +30,22 @@ export const FormContainer = styled.form`
 
 export const Breaker = styled.div`
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-around;
 `;
 
 export const ImageContainer = styled.div`
-  display: flex;
-  background-image: url(${registerImage});
-  height: 200px;
-  width: 200px;
-  background-color: transparent;
+  @media (min-width: 800px) {
+    display: flex;
+    background: url(${registerImage}) no-repeat center;
+    background-size: contain;
+    height: 200px;
+    width: 200px;
+    background-color: transparent;
+    margin-left: 100px;
+  }
 `;
 
 export const FormInput = styled.input`
@@ -46,12 +54,12 @@ export const FormInput = styled.input`
   border: transparent;
   background-color: #fceee0;
   height: 30px;
-  width: 20vw;
+  width: 180px;
 `;
 
 export const FormButton = styled.button`
   margin: 5px;
-  width: 20vw;
+  width: 180px;
   cursor: pointer;
   padding: 10px;
   border: none;
