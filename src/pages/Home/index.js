@@ -13,7 +13,7 @@ const Home = () => {
       <Header />
       <InitialContainer>
         <Breaker>
-          <div>
+          <div className="title">
             Gerencie melhor a <br /> sua
             <span className="titleSpan"> Rotina </span> com <br /> Goodhabits
           </div>
