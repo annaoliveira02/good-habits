@@ -13,7 +13,7 @@ const SignUpForm = () => {
   const schema = yup.object().shape({
     username: yup
       .string()
-      .matches("[a-zA-Zs]+", "Apenas Letras")
+      .min(4, "Mínimo de 4 dígitos")
       .required("Campo Obrigatório"),
     email: yup.string().email("Email inválido").required("Campo Obrigatório"),
     password: yup
@@ -68,12 +68,17 @@ const SignUpForm = () => {
           <div className="ErrorMessage">{errors.email?.message}</div>
         </div>
         <div>
-          <FormInput placeholder="Senha" {...register("password")}></FormInput>
+          <FormInput
+            placeholder="Senha"
+            type="password"
+            {...register("password")}
+          ></FormInput>
           <div className="ErrorMessage">{errors.password?.message}</div>
         </div>
         <div>
           <FormInput
             placeholder="Confirmar senha"
+            type="password"
             {...register("passwordConfirm")}
           ></FormInput>
           <div className="ErrorMessage">{errors.passwordConfirm?.message}</div>
