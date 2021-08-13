@@ -15,9 +15,16 @@ export const InitialContainer = styled.div`
 
 export const DashboardContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  text-align: center;
   background-color: #fceee0;
+  padding: 20px;
+  margin: 15px;
+  width: 90vw;
+  min-height: 70vh;
+  margin-block-start: 70px;
+  border-radius: 5px;
 `;
 
 export const MainButton = styled.button`
