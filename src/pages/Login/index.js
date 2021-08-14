@@ -31,6 +31,7 @@ const Login = () => {
     api
       .post("/sessions/", data)
       .then((response) => {
+        localStorage.clear();
         const { access } = response.data;
         localStorage.setItem("@gestaohabitosg5:token", JSON.stringify(access));
         // setAthenticated(true);
