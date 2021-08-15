@@ -47,6 +47,13 @@ const GroupCreaterContainer = styled.form`
             margin: 15px 0 15px 10px;
             margin-left: 10px;
         }
+
+        > input + span {
+            padding-left: 10px;
+            color: red;
+            font-size: 14px;
+            margin-top: -14px;
+        }
     }
 
     > section + section {

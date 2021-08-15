@@ -15,8 +15,8 @@ const GroupCreatorPopup = () => {
     console.log(token);
 
     const schema = yup.object().shape({
-        name: yup.string().required("Campo Obrigatório"),
-        description: yup.string().required("Campo Obrigatório"),
+        name: yup.string().required("Nome obrigatório"),
+        description: yup.string().required("Descrição obrigatória"),
     });
 
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -51,11 +51,16 @@ const GroupCreatorPopup = () => {
     }
 
     return (
-        <GroupCreaterContainer selectedArray={selectedArray} onSubmit={handleSubmit(createGroup)}>
+        <GroupCreaterContainer
+            selectedArray={selectedArray}
+            onSubmit={handleSubmit(createGroup)}
+        >
             <section>
                 <h3> Crie seu grupo </h3>
                 <input placeholder="Nome do grupo"  {...register('name')} />
+                {errors.name && <span> {errors.name.message} </span>}
                 <input placeholder="Descrição"  {...register('description')} />
+                {errors.description && <span> {errors.description.message} </span>}
             </section>
             <section>
                 <p> Selecione a categoria: </p>
