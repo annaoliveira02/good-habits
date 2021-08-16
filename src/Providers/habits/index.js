@@ -72,8 +72,6 @@ export const HabitsProvider = ({ children }) => {
     }
   }, [1]);
 
-  console.log("token:", token);
-  console.log("habits:", habitsList);
   return (
     <HabitsContext.Provider
       value={{ habitsList, addHabit, removeHabit, editHabit }}
