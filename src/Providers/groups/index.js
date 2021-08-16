@@ -13,16 +13,14 @@ export const GroupsProvider = ({ children }) => {
 
 
   useEffect(() => {
-    if (token !== "") {
+    if (token) {
       api
         .get("/groups/subscriptions/", config)
-        .then((res) => {
-          console.log(res.data)
-          setGroupsList(res.data)
-        })
+        .then((res) => setGroupsList(res.data)
+        )
         .catch((err) => console.log(err))
     }
-  }, []);
+  }, [token]);
 
   const addGroup = () => { };
 
