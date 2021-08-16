@@ -6,15 +6,12 @@ import Footer from "../../components/Footer";
 import { useState } from "react";
 import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
+import Modal from '../../components/Modal';
 import GroupCreatorPopup from "../../components/GroupCreator";
-import GroupEditorPopup from '../../components/GroupEditor';
-import SubscribeGroupPopup from '../../components/SubscribeGroup';
-import { Modal } from "@material-ui/core";
+// import { Modal } from "@material-ui/core";
 
 const DashboardGroups = () => {
   const [openModalCreator, setOpenModalCreator] = useState(false);
-  const [openModalEditor, setOpenModalEditor] = useState(false);
-  const [subscribe, setSubscribe] = useState(false);
 
   const [showDrawer, setShowDrawer] = useState(false);
 
@@ -24,14 +21,6 @@ const DashboardGroups = () => {
 
   const handleCloseCreator = () => {
     setOpenModalCreator(false);
-  };
-
-  const handleOpenEditor = () => {
-    setOpenModalEditor(true);
-  };
-
-  const handleCloseEditor = () => {
-    setOpenModalEditor(false);
   };
 
   return (
@@ -52,12 +41,14 @@ const DashboardGroups = () => {
             Criar grupo
             <button onClick={handleOpenCreator}>Novo grupo</button>
           </div>
-          <Modal
+          {/* <Modal
             open={openModalCreator}
             onClose={handleCloseCreator}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
           >
+        </Modal> */}
+          <Modal openModal={openModalCreator} setOpenModal={setOpenModalCreator}>
             <GroupCreatorPopup />
           </Modal>
         </DashboardMainBox>

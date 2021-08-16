@@ -8,11 +8,11 @@ import { useToken } from "../../Providers/token";
 const SubscribeGroupList = ({ result }) => {
     console.log(result.id);
     const [isSubscribed, setIsSubscribed] = useState(false);
-    const { group } = useContext(GroupsContext);
+    const { groupsList } = useContext(GroupsContext);
     const { token } = useToken();
 
-    useEffect(() => {
-        if (group.find(group => group.id === result.id)) {
+    useEffect(() => {   // Verifica se usuário já é inscrito naquele grupo. Se for, desabilita o botão
+        if (groupsList.find(group => group.id === result.id)) {
             setIsSubscribed(true);
         }
     }, []);
