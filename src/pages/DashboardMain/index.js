@@ -7,9 +7,12 @@ import { useHabits } from "../../Providers/habits";
 import { useState } from "react";
 import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
+import { useContext } from "react";
+import { GroupsContext } from "../../Providers/groups";
 
 const DashboardMain = () => {
   const { habitsList, editHabit } = useHabits();
+  const { groupsList } = useContext(GroupsContext)
   const [showDrawer, setShowDrawer] = useState(false)
 
   return (
@@ -34,7 +37,13 @@ const DashboardMain = () => {
               );
             })}
           </div>
-          <div className="mainGroups">Meus grupos</div>
+          <div className="mainGroups">Meus grupos
+            {groupsList.map((group) => {
+              <div>
+                {group.name} - {group.category}
+              </div>
+            })}
+          </div>
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />

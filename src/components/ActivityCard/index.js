@@ -1,9 +1,9 @@
-const ActivityCard = () => {
+const ActivityCard = ({activity}) => {
 
     return (
         <div>
-            Nome da atividade
-            <button>editar</button>
+            {activity.title}
+            <button>concluir</button>
             <button>remover</button>
         </div>
     )
