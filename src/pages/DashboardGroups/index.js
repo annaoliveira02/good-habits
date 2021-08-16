@@ -8,11 +8,13 @@ import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
 import GroupCreatorPopup from "../../components/GroupCreator";
 import GroupEditorPopup from '../../components/GroupEditor';
+import SubscribeGroupPopup from '../../components/SubscribeGroup';
 import { Modal } from "@material-ui/core";
 
 const DashboardGroups = () => {
   const [openModalCreator, setOpenModalCreator] = useState(false);
   const [openModalEditor, setOpenModalEditor] = useState(false);
+  const [subscribe, setSubscribe] = useState(false);
 
   const [showDrawer, setShowDrawer] = useState(false);
 
@@ -58,16 +60,6 @@ const DashboardGroups = () => {
           >
             <GroupCreatorPopup />
           </Modal>
-          <button onClick={handleOpenEditor}> Editar grupo </button>
-          <Modal
-            open={openModalEditor}
-            onClose={handleCloseEditor}
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-          >
-            <GroupEditorPopup />
-          </Modal>
-
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />
