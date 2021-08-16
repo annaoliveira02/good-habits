@@ -10,7 +10,7 @@ import axios from "axios";
 
 const SignUpForm = () => {
   const history = useHistory();
-  const [allowed, setAllowed] = useState(false);
+
   const schema = yup.object().shape({
     username: yup
       .string()
