@@ -11,10 +11,10 @@ import { Modal } from "@material-ui/core";
 import GroupCard from "../../components/GroupCard";
 import { useContext } from "react";
 import { GroupsContext } from "../../Providers/groups";
+import { Redirect } from "react-router-dom";
 
-const DashboardGroups = () => {
-
-  const { groupsList } = useContext(GroupsContext)
+const DashboardGroups = (authenticated) => {
+  const { groupsList } = useContext(GroupsContext);
 
   const [openModal, setOpenModal] = useState(false);
   const [showDrawer, setShowDrawer] = useState(false);
@@ -25,6 +25,11 @@ const DashboardGroups = () => {
   const handleClose = () => {
     setOpenModal(false);
   };
+
+  if (!authenticated) {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <div>
       <Drawer
@@ -38,8 +43,11 @@ const DashboardGroups = () => {
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
-          <div className="mainHabits">Meus grupos
-          {groupsList.map((group) => <GroupCard key={group.id} group={group}/>)}
+          <div className="mainHabits">
+            Meus grupos
+            {groupsList.map((group) => (
+              <GroupCard key={group.id} group={group} />
+            ))}
           </div>
           <div className="mainGroups">
             Criar grupo

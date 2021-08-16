@@ -2,6 +2,13 @@ import { MenuButton, MenuContainer } from "./style";
 import { useHistory } from "react-router";
 import { Modal } from "@material-ui/core";
 import { useState } from "react";
+import UpdateUser from "../updateUser";
+import { Slide } from "@material-ui/core";
+import React from "react";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const SideMenu = () => {
   const [open, setOpen] = useState(false);
@@ -33,10 +40,13 @@ const SideMenu = () => {
       <MenuButton onClick={handleOpen}>Configurações</MenuButton>
       <Modal
         open={open}
+        TransitionComponent={Transition}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-      ></Modal>
+      >
+        <UpdateUser />
+      </Modal>
       <MenuButton onClick={handleLogout}>Logout</MenuButton>
     </MenuContainer>
   );

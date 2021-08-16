@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { AnimationContainer, Background, Content } from "./styles";
 import { TextField } from "@material-ui/core";
 
-const Login = () => {
+const Login = (authenticated, setAthenticated) => {
   const schema = yup.object().shape({
     username: yup.string().required("User Name obrigatório"),
     password: yup
@@ -34,15 +34,15 @@ const Login = () => {
         localStorage.clear();
         const { access } = response.data;
         localStorage.setItem("@gestaohabitosg5:token", JSON.stringify(access));
-        // setAthenticated(true);
+        setAthenticated(true);
         return history.push("/DashboardMain");
       })
       .catch((err) => toast.error("Email ou senha inválidos"));
   };
 
-  // if (authenticated) {
-  //   return <Redirect to="/dashboard" />;
-  // }
+  if (authenticated) {
+    return <Redirect to="/dashboardMain" />;
+  }
 
   return (
     <div>

@@ -9,18 +9,27 @@ import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
 import { useContext } from "react";
 import { GroupsContext } from "../../Providers/groups";
+import { Redirect } from "react-router-dom";
 
-const DashboardMain = () => {
+const DashboardMain = (authenticated) => {
   const { habitsList, editHabit } = useHabits();
-  const { groupsList } = useContext(GroupsContext)
-  const [showDrawer, setShowDrawer] = useState(false)
+  const { groupsList } = useContext(GroupsContext);
+  const [showDrawer, setShowDrawer] = useState(false);
+
+  if (!authenticated) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <div>
-      <Drawer anchor="left" open={showDrawer} onClose={() => setShowDrawer(false)}>
-        <DrawerMenu/>
+      <Drawer
+        anchor="left"
+        open={showDrawer}
+        onClose={() => setShowDrawer(false)}
+      >
+        <DrawerMenu />
       </Drawer>
-      <Header setShowDrawer={setShowDrawer}/>
+      <Header setShowDrawer={setShowDrawer} />
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
@@ -37,11 +46,12 @@ const DashboardMain = () => {
               );
             })}
           </div>
-          <div className="mainGroups">Meus grupos
+          <div className="mainGroups">
+            Meus grupos
             {groupsList.map((group) => {
               <div>
                 {group.name} - {group.category}
-              </div>
+              </div>;
             })}
           </div>
         </DashboardMainBox>

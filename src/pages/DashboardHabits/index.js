@@ -9,10 +9,15 @@ import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
 import { useState } from "react";
 import HabitCreator from "../../components/HabitCreator";
+import { Redirect } from "react-router-dom";
 
-const DashboardHabits = () => {
+const DashboardHabits = (authenticated) => {
   const { habitsList, addHabit } = useHabits();
   const [showDrawer, setShowDrawer] = useState(false);
+
+  if (!authenticated) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <div>
