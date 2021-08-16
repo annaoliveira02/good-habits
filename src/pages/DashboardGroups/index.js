@@ -6,25 +6,21 @@ import Footer from "../../components/Footer";
 import { useState } from "react";
 import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
+import Modal from '../../components/Modal';
 import GroupCreatorPopup from "../../components/GroupCreator";
-import { Modal } from "@material-ui/core";
 import GroupCard from "../../components/GroupCard";
 import { useContext } from "react";
 import { GroupsContext } from "../../Providers/groups";
 
 const DashboardGroups = () => {
-
+  const [openModalCreator, setOpenModalCreator] = useState(false);
   const { groupsList } = useContext(GroupsContext)
-
-  const [openModal, setOpenModal] = useState(false);
   const [showDrawer, setShowDrawer] = useState(false);
 
-  const handleOpen = () => {
-    setOpenModal(true);
+  const handleOpenCreator = () => {
+    setOpenModalCreator(true);
   };
-  const handleClose = () => {
-    setOpenModal(false);
-  };
+
   return (
     <div>
       <Drawer
@@ -39,18 +35,13 @@ const DashboardGroups = () => {
         <SideMenu />
         <DashboardMainBox>
           <div className="mainHabits">Meus grupos
-          {groupsList.map((group) => <GroupCard key={group.id} group={group}/>)}
+            {groupsList.map((group) => <GroupCard key={group.id} group={group} />)}
           </div>
           <div className="mainGroups">
             Criar grupo
-            <button onClick={handleOpen}>Novo grupo</button>
+            <button onClick={handleOpenCreator}>Novo grupo</button>
           </div>
-          <Modal
-            open={openModal}
-            onClose={handleClose}
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-          >
+          <Modal openModal={openModalCreator} setOpenModal={setOpenModalCreator}>
             <GroupCreatorPopup />
           </Modal>
         </DashboardMainBox>

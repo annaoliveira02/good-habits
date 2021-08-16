@@ -2,12 +2,11 @@ import { useUser } from "../../Providers/user";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import api from "../../services/api";
-import { useHistory } from "react-router";
-import { useState } from "react";
 import { FormInput } from "../SignUpForm/style";
-import { useToken } from "../../Providers/token";
+import { useHabits } from "../../Providers/habits";
+
 const HabitCreator = () => {
+  const { addHabit } = useHabits();
   const { userId } = useUser();
 
   // esse componente é um modal que deve abrir na tela ao clicar no botão Novo hábito
@@ -25,26 +24,14 @@ const HabitCreator = () => {
     reset,
   } = useForm({ resolver: yupResolver(schema) });
 
-  const history = useHistory();
-  const { token } = useToken();
-
   const handleForm = (data) => {
     const completeData = Object.assign(data, {
       achieved: false,
       how_much_achieved: 0,
       user: userId,
     });
-    console.log(completeData);
-    api
-      .post("/habits/", completeData, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        console.log(response);
 
-        // return history.push("/DashboardMain");
-      })
-      .catch((err) => console.log(err));
+    addHabit(completeData);
   };
 
   return (
