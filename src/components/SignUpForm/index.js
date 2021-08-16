@@ -5,11 +5,12 @@ import { useHistory, Link } from "react-router-dom";
 import { useState } from "react";
 import { FormContainer, FormInput, FormButton, Breaker } from "./style";
 import { ImageContainer } from "./style";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 const SignUpForm = () => {
   const history = useHistory();
-  const [allowed, setAllowed] = useState(false);
+
   const schema = yup.object().shape({
     username: yup
       .string()
@@ -46,7 +47,7 @@ const SignUpForm = () => {
         reset({});
         history.push("/login");
       })
-      .catch((e) => console.log(e));
+      .catch((e) => toast.error("Nome ou email já cadastrado"));
   };
 
   return (
