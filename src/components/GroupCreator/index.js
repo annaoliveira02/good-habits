@@ -1,4 +1,4 @@
-import { FiActivity, FiBook, FiXCircle } from 'react-icons/fi'
+import { FiActivity, FiBook } from 'react-icons/fi'
 import { BsBriefcase } from 'react-icons/bs';
 import GroupCreaterContainer from './style';
 import { useState } from 'react';
@@ -12,7 +12,6 @@ const GroupCreatorPopup = () => {
     const [selectedArray, setSelectedArray] = useState([1, 0, 0]);
     const categories = ['Saúde', 'Etudos', 'Trabalho'];
     const { token } = useToken();
-    console.log(token);
 
     const schema = yup.object().shape({
         name: yup.string().required("Nome obrigatório"),

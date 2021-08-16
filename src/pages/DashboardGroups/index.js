@@ -7,19 +7,31 @@ import { useState } from "react";
 import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
 import GroupCreatorPopup from "../../components/GroupCreator";
+import GroupEditorPopup from '../../components/GroupEditor';
 import { Modal } from "@material-ui/core";
 
 const DashboardGroups = () => {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModalCreator, setOpenModalCreator] = useState(false);
+  const [openModalEditor, setOpenModalEditor] = useState(false);
 
   const [showDrawer, setShowDrawer] = useState(false);
 
-  const handleOpen = () => {
-    setOpenModal(true);
+  const handleOpenCreator = () => {
+    setOpenModalCreator(true);
   };
-  const handleClose = () => {
-    setOpenModal(false);
+
+  const handleCloseCreator = () => {
+    setOpenModalCreator(false);
   };
+
+  const handleOpenEditor = () => {
+    setOpenModalEditor(true);
+  };
+
+  const handleCloseEditor = () => {
+    setOpenModalEditor(false);
+  };
+
   return (
     <div>
       <Drawer
@@ -36,16 +48,26 @@ const DashboardGroups = () => {
           <div className="mainHabits">Meus grupos</div>
           <div className="mainGroups">
             Criar grupo
-            <button onClick={handleOpen}>Novo grupo</button>
+            <button onClick={handleOpenCreator}>Novo grupo</button>
           </div>
           <Modal
-            open={openModal}
-            onClose={handleClose}
+            open={openModalCreator}
+            onClose={handleCloseCreator}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
           >
             <GroupCreatorPopup />
           </Modal>
+          <button onClick={handleOpenEditor}> Editar grupo </button>
+          <Modal
+            open={openModalEditor}
+            onClose={handleCloseEditor}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            <GroupEditorPopup />
+          </Modal>
+
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />
