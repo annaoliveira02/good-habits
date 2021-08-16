@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
 import GroupCreatorPopup from "../../components/GroupCreator";
+import { Modal } from "@material-ui/core";
 
 const DashboardGroups = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -35,8 +36,16 @@ const DashboardGroups = () => {
           <div className="mainHabits">Meus grupos</div>
           <div className="mainGroups">
             Criar grupo
-            <button>Novo grupo</button>
+            <button onClick={handleOpen}>Novo grupo</button>
           </div>
+          <Modal
+            open={openModal}
+            onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            <GroupCreatorPopup />
+          </Modal>
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />
