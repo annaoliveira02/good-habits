@@ -1,9 +1,9 @@
-const GoalCard = () => {
+const GoalCard = ({goal}) => {
 
     return (
         <div>
-            Nome da meta - Progresso
-            <button>editar</button>
+            {goal.title}
+            <button>concluir</button>
             <button>remover</button>
         </div>
     )

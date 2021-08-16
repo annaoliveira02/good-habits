@@ -10,12 +10,18 @@ import GroupCreatorPopup from "../../components/GroupCreator";
 import GroupEditorPopup from '../../components/GroupEditor';
 import SubscribeGroupPopup from '../../components/SubscribeGroup';
 import { Modal } from "@material-ui/core";
+import GroupCard from "../../components/GroupCard";
+import { useContext } from "react";
+import { GroupsContext } from "../../Providers/groups";
 
 const DashboardGroups = () => {
   const [openModalCreator, setOpenModalCreator] = useState(false);
   const [openModalEditor, setOpenModalEditor] = useState(false);
   const [subscribe, setSubscribe] = useState(false);
 
+  const { groupsList } = useContext(GroupsContext)
+
+  const [openModal, setOpenModal] = useState(false);
   const [showDrawer, setShowDrawer] = useState(false);
 
   const handleOpenCreator = () => {
@@ -47,7 +53,9 @@ const DashboardGroups = () => {
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
-          <div className="mainHabits">Meus grupos</div>
+          <div className="mainHabits">Meus grupos
+            {groupsList.map((group) => <GroupCard key={group.id} group={group} />)}
+          </div>
           <div className="mainGroups">
             Criar grupo
             <button onClick={handleOpenCreator}>Novo grupo</button>

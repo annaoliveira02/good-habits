@@ -8,22 +8,28 @@ import HabitCard from "../../components/HabitCard";
 import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
 import { useState } from "react";
+import HabitCreator from "../../components/HabitCreator";
 
 const DashboardHabits = () => {
   const { habitsList, addHabit } = useHabits();
-  const [showDrawer, setShowDrawer] = useState(false)
+  const [showDrawer, setShowDrawer] = useState(false);
 
   return (
     <div>
-      <Drawer anchor="left" open={showDrawer} onClose={() => setShowDrawer(false)}>
-        <DrawerMenu/>
+      <Drawer
+        anchor="left"
+        open={showDrawer}
+        onClose={() => setShowDrawer(false)}
+      >
+        <DrawerMenu />
       </Drawer>
-      <Header setShowDrawer={setShowDrawer}/>
+      <Header setShowDrawer={setShowDrawer} />
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
           <div className="mainHabits">
             Meus hábitos
+            <HabitCreator />
             <div>
               {habitsList.map((habit) => {
                 return <HabitCard key={habit.id} habit={habit} />;
