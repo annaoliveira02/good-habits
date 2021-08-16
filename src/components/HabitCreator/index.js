@@ -6,12 +6,10 @@ import api from "../../services/api";
 import { useHistory } from "react-router";
 import { useState } from "react";
 import { FormInput } from "../SignUpForm/style";
+import { useToken } from "../../Providers/token";
 const HabitCreator = () => {
   const { userId } = useUser();
-  const [allowed, setAllowed] = useState(false);
-  const [achieved, setAchieved] = useState(false);
-  const [how_much_achieved, setHow_much_achieved] = useState(0);
-  const [user, setUser] = useState(userId);
+
   // esse componente é um modal que deve abrir na tela ao clicar no botão Novo hábito
   const schema = yup.object().shape({
     title: yup.string().required("Título obrigatório"),
@@ -28,18 +26,23 @@ const HabitCreator = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const history = useHistory();
+  const { token } = useToken();
 
-  const handleForm = (data, achieved) => {
-    const completeData = (data, achieved);
+  const handleForm = (data) => {
+    const completeData = Object.assign(data, {
+      achieved: false,
+      how_much_achieved: 0,
+      user: userId,
+    });
     console.log(completeData);
     api
-      .post("/habits/", data)
+      .post("/habits/", completeData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         console.log(response);
-        // const { access } = response.data;
-        // localStorage.setItem("@gestaohabitosg5:token", JSON.stringify(access));
-        // setAthenticated(true);
-        return history.push("/DashboardMain");
+
+        // return history.push("/DashboardMain");
       })
       .catch((err) => console.log(err));
   };
