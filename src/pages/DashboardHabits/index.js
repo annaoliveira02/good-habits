@@ -5,13 +5,20 @@ import { DashboardMainBox } from "../DashboardMain/style";
 import Footer from "../../components/Footer";
 import { useHabits } from "../../Providers/habits";
 import HabitCard from "../../components/HabitCard";
+import { Drawer } from "@material-ui/core";
+import DrawerMenu from "../../components/DrawerMenu";
+import { useState } from "react";
 
 const DashboardHabits = () => {
   const { habitsList, addHabit } = useHabits();
+  const [showDrawer, setShowDrawer] = useState(false)
 
   return (
     <div>
-      <Header />
+      <Drawer anchor="left" open={showDrawer} onClose={() => setShowDrawer(false)}>
+        <DrawerMenu/>
+      </Drawer>
+      <Header setShowDrawer={setShowDrawer}/>
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>

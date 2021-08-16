@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MenuContainer = styled.div`
+export const DrawerContainer = styled.div`
     min-height: 70vh;
     display: flex;
     flex-direction: column;
@@ -13,12 +13,12 @@ export const MenuContainer = styled.div`
         margin-block-end: 15px;
     }
 
-    @media(max-width: 600px) {
+    @media(min-width: 600px) {
         display: none
     }
 `
 
-export const MenuButton = styled.button`
+export const DrawerButton = styled.button`
     border: none;
     text-align: left;
     padding: 10px;

@@ -7,6 +7,7 @@ export const FooterMain = styled.div`
     width: 100vw;
     padding: 15px 0;
     background-color: #FFD6B7;
+    font-family: "Nunito", sans-serif;
     position: absolute;
     bottom: 0;
     left: 0;

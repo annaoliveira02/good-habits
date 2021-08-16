@@ -7,14 +7,18 @@ export const Breaker = styled.div`
   .title {
     margin-bottom: 40px;
     font-size: 24px;
+    font-family: "Nunito", sans-serif;
   }
 
-  .titleSpan {
-    color: red;
+  .trademark {
+    color: rgba(246, 72, 37);
+    font-family: 'Flamenco', cursive;
+    font-size: 28px;
   }
 
   .subtitle {
-    font-size: 14px;
+    font-size: 12px;
+    font-family: "Nunito", sans-serif;
     margin-bottom: 40px;
   }
 `;

@@ -14,17 +14,16 @@ const Home = () => {
       <InitialContainer>
         <Breaker>
           <div className="title">
-            Gerencie melhor a <br /> sua
-            <span className="titleSpan"> Rotina </span> com <br /> Goodhabits
+            Gerencie melhor sua rotina com <span className="trademark">goodhabits</span>™
           </div>
           <div className="subtitle">
-            GoodHabits é uma plataforma para enumerar e manter seus hábitos,
+            A plataforma que faltava para enumerar e manter seus hábitos,
             criar e participar de grupos onde os membros compartilham atividades
-            e definem metas
+            e definem metas.
           </div>
           <div>
             <MainButton onClick={() => history.push("/signup")}>
-              Get Started
+              Começar
             </MainButton>
           </div>
         </Breaker>

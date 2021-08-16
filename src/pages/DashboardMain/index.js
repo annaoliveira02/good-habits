@@ -4,13 +4,20 @@ import { DashboardContainer } from "../../styles/mainContainers";
 import { DashboardMainBox } from "./style";
 import Footer from "../../components/Footer";
 import { useHabits } from "../../Providers/habits";
+import { useState } from "react";
+import { Drawer } from "@material-ui/core";
+import DrawerMenu from "../../components/DrawerMenu";
 
 const DashboardMain = () => {
   const { habitsList, editHabit } = useHabits();
-  console.log(habitsList);
+  const [showDrawer, setShowDrawer] = useState(false)
+
   return (
     <div>
-      <Header />
+      <Drawer anchor="left" open={showDrawer} onClose={() => setShowDrawer(false)}>
+        <DrawerMenu/>
+      </Drawer>
+      <Header setShowDrawer={setShowDrawer}/>
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
