@@ -7,25 +7,28 @@ import { useHabits } from "../../Providers/habits";
 import { useState } from "react";
 import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
+import { useContext } from "react";
+import { GroupsContext } from "../../Providers/groups";
 
 const DashboardMain = () => {
   const { habitsList, editHabit } = useHabits();
+  const { groupsList } = useContext(GroupsContext)
   const [showDrawer, setShowDrawer] = useState(false)
 
   return (
     <div>
       <Drawer anchor="left" open={showDrawer} onClose={() => setShowDrawer(false)}>
-        <DrawerMenu/>
+        <DrawerMenu />
       </Drawer>
-      <Header setShowDrawer={setShowDrawer}/>
+      <Header setShowDrawer={setShowDrawer} />
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
           <div className="mainHabits">
             <h3>Acompanhe seus hábitos</h3>
-            {habitsList.map((habits) => {
+            {habitsList.map((habits, index) => {
               return (
-                <div>
+                <div key={index}>
                   <h4>{habits.title}</h4>
                   <button onClick={() => editHabit(habits)}>
                     editar hábito
@@ -34,7 +37,15 @@ const DashboardMain = () => {
               );
             })}
           </div>
-          <div className="mainGroups">Meus grupos</div>
+          <div className="mainGroups"> Meus grupos
+            {groupsList.map((group, index) => {
+              return (
+                <div key={index}>
+                  {group.name} - {group.category}
+                </div>
+              )
+            })}
+          </div>
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />

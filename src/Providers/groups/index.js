@@ -1,16 +1,32 @@
+import { useEffect } from "react";
 import { createContext, useState } from "react";
+import api from "../../services/api";
+import { useToken } from "../token";
 
 export const GroupsContext = createContext();
 
 export const GroupsProvider = ({ children }) => {
   const [groupsList, setGroupsList] = useState([]);
   const [group, setGroup] = useState([]);
+  const { token } = useToken();
+  const config = { headers: { Authorization: `Bearer ${token}` } };
 
-  const addGroup = () => {};
 
-  const removeGroup = () => {};
+  useEffect(() => {
+    if (token) {
+      api
+        .get("/groups/subscriptions/", config)
+        .then((res) => setGroupsList(res.data)
+        )
+        .catch((err) => console.log(err))
+    }
+  }, [token]);
 
-  const editGroup = () => {};
+  const addGroup = () => { };
+
+  const removeGroup = () => { };
+
+  const editGroup = () => { };
 
   return (
     <GroupsContext.Provider
