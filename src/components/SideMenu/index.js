@@ -1,19 +1,24 @@
-import { MenuContainer } from "./style";
+import { MenuButton, MenuContainer } from "./style";
 import { useHistory } from "react-router";
 
 const SideMenu = () => {
 
     const history = useHistory();
 
+    const handleLogout = () => {
+        localStorage.clear()
+        history.push("/")
+    }
+
     return (
         <MenuContainer>
-            <img src="" alt="avatar"/>
-            <button onClick={() => history.push("/dashboardMain")}>Início</button>
-            <button onClick={() => history.push("/dashboardHabits")}>Meus hábitos</button>
-            <button onClick={() => history.push("/dashboardGroups")}>Meus grupos</button>
-            <button>Configurações</button>
-            <button onClick={() => history.push("/")}>Logout</button>
-        </MenuContainer>
+            <img src="https://i.pravatar.cc/120" alt="avatar"/>
+            <MenuButton onClick={() => history.push("/dashboardMain")}>Início</MenuButton>
+            <MenuButton onClick={() => history.push("/dashboardHabits")}>Meus hábitos</MenuButton>
+            <MenuButton onClick={() => history.push("/dashboardGroups")}>Meus grupos</MenuButton>
+            <MenuButton>Configurações</MenuButton>
+            <MenuButton onClick={handleLogout}>Logout</MenuButton>
+        </MenuContainer>       
     )
 }
 

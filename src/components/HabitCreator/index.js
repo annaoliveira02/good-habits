@@ -11,7 +11,7 @@ const HabitCreator = () => {
             <input placeholder="Concluído"/>
             <input placeholder="Progresso"/>
             <input placeholder="Usuário"/>
-            <button>Criar grupo</button>
+            <button>Criar hábito</button>
         </div>
     )
 }

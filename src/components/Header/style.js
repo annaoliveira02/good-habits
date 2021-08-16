@@ -11,12 +11,45 @@ export const HeaderMain = styled.div`
     top: 0;
     left: 0;
 
-    .HeaderLogo {
+    .MenuButton {
+        align-self: center;
+        font-size: 25px;
         margin-inline-start: 15px;
         cursor: pointer;
+
+        &:active {
+        }
+    }
+
+    .HeaderLogo {
+        margin-inline-start: 1px;
+        cursor: pointer;
+        display: flex;
+        align-itens: center;
+        font-family: 'Flamenco', cursive;
+
+        .Logo1 {
+            color: rgba(246, 72, 37);
+            font-size: 30px;
+        }
+
+        .Logo2 {
+            font-weight: 400;
+            font-size: 30px;
+        }
     }
 
     .HeaderButtons {
         margin-inline-end: 15px;
+    }
+
+    @media(min-width: 600px) {
+        .MenuButton {
+            display: none;
+        }
+
+        .HeaderLogo {
+            margin-inline-start: 15px;
+        }
     }
 `
