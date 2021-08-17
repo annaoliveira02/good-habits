@@ -68,8 +68,7 @@ export const HabitsProvider = ({ children }) => {
         })
         .catch((err) => console.log(err));
     }
-  }, [token]);
-
+  }, [token, habitsList]);
 
   return (
     <HabitsContext.Provider

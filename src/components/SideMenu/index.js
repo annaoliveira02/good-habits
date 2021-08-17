@@ -3,13 +3,9 @@ import { useHistory } from "react-router";
 import ModalComponent from '../Modal';
 import { useState } from "react";
 import UpdateUser from "../updateUser";
-import { Slide } from "@material-ui/core";
 import React from "react";
 import { useAuthentication } from "../../Providers/Authentication";
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import Modal from "../Modal";
 
 const SideMenu = () => {
   const [open, setOpen] = useState(false);
@@ -22,12 +18,8 @@ const SideMenu = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-<<<<<<< HEAD
     setAuthenticated(false);
     history.push("/");
-=======
-    history.push("/login");
->>>>>>> fix
   };
 
   return (

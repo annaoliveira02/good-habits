@@ -12,7 +12,6 @@ const GroupCreatorPopup = () => {
   const [selectedArray, setSelectedArray] = useState([1, 0, 0]);
   const categories = ["Saúde", "Etudos", "Trabalho"];
   const { token } = useToken();
-  console.log(token);
 
   const schema = yup.object().shape({
     name: yup.string().required("Nome obrigatório"),
