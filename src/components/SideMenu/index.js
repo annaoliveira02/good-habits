@@ -35,7 +35,7 @@ const SideMenu = () => {
         Meus grupos
       </MenuButton>
       <MenuButton onClick={handleOpen}>Configurações</MenuButton>
-      <ModalComponent>
+      <ModalComponent openModal={open} setOpenModal={setOpen}>
         <UpdateUser />
       </ModalComponent>
       <MenuButton onClick={handleLogout}>Logout</MenuButton>

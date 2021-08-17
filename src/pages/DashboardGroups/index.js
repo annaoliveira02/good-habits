@@ -14,9 +14,11 @@ import { GroupsContext } from "../../Providers/groups";
 import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
 import { GroupsBox } from "./style";
+import SubscribeGroup from '../../components/SubscribeGroup';
 
 const DashboardGroups = () => {
   const [openModalCreator, setOpenModalCreator] = useState(false);
+  const [openModalSubscribe, setOpenModalSubscribe] = useState(false);
   const { groupsList } = useContext(GroupsContext);
   const [showDrawer, setShowDrawer] = useState(false);
   const { authenticated } = useAuthentication();
@@ -25,6 +27,10 @@ const DashboardGroups = () => {
   const handleOpenCreator = () => {
     setOpenModalCreator(true);
   };
+
+  const handleOpenSubscribe = () => {
+    setOpenModalSubscribe(true);
+  }
 
   if (authenticated === false) {
     return <Redirect to="/login" />;
@@ -48,19 +54,23 @@ const DashboardGroups = () => {
             {groupsList.map((group) => (
               <GroupCard key={group.id} group={group} />
             ))}
+            <button onClick={handleOpenCreator}>Novo grupo</button>
+            <ModalComponent
+              openModal={openModalCreator}
+              setOpenModal={setOpenModalCreator}
+            >
+              <GroupCreatorPopup />
+            </ModalComponent>
           </GroupsBox>
           <GroupsBox>
             <h1 className="DashboardTitle">explorar grupos</h1>
             <div className="GroupExplorer">
-              <button onClick={handleOpenCreator}>Novo grupo</button>
+              <button onClick={handleOpenSubscribe} > Procurar grupo novo </button>
             </div>
+            <ModalComponent openModal={openModalSubscribe} setOpenModal={setOpenModalSubscribe}>
+              <SubscribeGroup />
+            </ModalComponent>
           </GroupsBox>
-          <ModalComponent
-            openModal={openModalCreator}
-            setOpenModal={setOpenModalCreator}
-          >
-            <GroupCreatorPopup />
-          </ModalComponent>
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />
