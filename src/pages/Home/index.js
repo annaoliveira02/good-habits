@@ -4,9 +4,11 @@ import { InitialContainer } from "../../styles/mainContainers";
 import { MainButton } from "../../styles/mainContainers";
 import { Breaker } from "./style";
 import { useHistory, Redirect } from "react-router-dom";
+import { useAuthentication } from "../../Providers/Authentication";
 
-const Home = ({ authenticated }) => {
+const Home = () => {
   const history = useHistory();
+  const { authenticated } = useAuthentication();
 
   if (authenticated) {
     return <Redirect to='/dashboardMain' />
