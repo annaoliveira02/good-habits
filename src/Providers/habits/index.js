@@ -7,9 +7,7 @@ export const HabitsContext = createContext();
 
 export const HabitsProvider = ({ children }) => {
   const [habitsList, setHabitsList] = useState([]);
-  const [token] = useState(
-    JSON.parse(localStorage.getItem("@gestaohabitosg5:token"))
-  );
+  const { token } = useToken();
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
   const addHabit = (data) => {
@@ -70,7 +68,7 @@ export const HabitsProvider = ({ children }) => {
         })
         .catch((err) => console.log(err));
     }
-  }, [habitsList]);
+  }, [token, habitsList]);
 
   return (
     <HabitsContext.Provider

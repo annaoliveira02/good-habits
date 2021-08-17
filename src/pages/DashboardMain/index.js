@@ -35,6 +35,7 @@ const DashboardMain = () => {
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
+
           <div className="mainHabits">
             <h1 className="DashboardTitle">meus hábitos</h1>
             {habitsList.map((habits, index) => {
@@ -58,6 +59,7 @@ const DashboardMain = () => {
               );
             })}
           </div>
+
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />
