@@ -43,13 +43,6 @@ const DashboardGroups = () => {
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
-          <div className="mainHabits">Meus grupos
-            {groupsList.map((group) => <GroupCard key={group.id} group={group} />)}
-          </div>
-          <div className="mainGroups">
-            Criar grupo
-            <button onClick={handleOpenCreator}>Novo grupo</button>
-          </div>
           <GroupsBox>
             <h1 className="DashboardTitle">meus grupos</h1>
             {groupsList.map((group) => (

@@ -14,11 +14,7 @@ import { useAuthentication } from "../../Providers/Authentication";
 import { HabitsBox } from "./style";
 import Modal from "../../components/Modal";
 
-<<<<<<< HEAD
-const DashboardHabits = ({ authenticated }) => {
-=======
 const DashboardHabits = () => {
->>>>>>> 2dc38dfaa0cd26bb6932001efe1750cc44cf0aad
   const { habitsList, addHabit } = useHabits();
   const [showDrawer, setShowDrawer] = useState(false);
   const { authenticated } = useAuthentication();

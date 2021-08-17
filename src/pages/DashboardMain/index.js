@@ -12,18 +12,11 @@ import { GroupsContext } from "../../Providers/groups";
 import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
 
-<<<<<<< HEAD
-const DashboardMain = ({ authenticated }) => {
-  const { habitsList, editHabit } = useHabits();
-  const { groupsList } = useContext(GroupsContext);
-  const [showDrawer, setShowDrawer] = useState(false);
-=======
 const DashboardMain = () => {
   const { habitsList, editHabit } = useHabits();
   const { groupsList } = useContext(GroupsContext);
   const [showDrawer, setShowDrawer] = useState(false);
   const { authenticated } = useAuthentication();
->>>>>>> 2dc38dfaa0cd26bb6932001efe1750cc44cf0aad
 
   if (!authenticated) {
     return <Redirect to="/login" />;
@@ -56,13 +49,8 @@ const DashboardMain = () => {
               );
             })}
           </div>
-<<<<<<< HEAD
-
-          <div className="mainGroups"> Meus grupos
-=======
           <div className="mainGroups">
             <h1 className="DashboardTitle">meus grupos</h1>
->>>>>>> 2dc38dfaa0cd26bb6932001efe1750cc44cf0aad
             {groupsList.map((group, index) => {
               return (
                 <div key={index}>
