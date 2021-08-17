@@ -5,9 +5,6 @@ import SignUp from "../pages/SignUp";
 import DashboardMain from "../pages/DashboardMain";
 import DashboardHabits from "../pages/DashboardHabits";
 import DashboardGroups from "../pages/DashboardGroups";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useToken } from "../Providers/token";
 
 const Routes = () => {
   return (

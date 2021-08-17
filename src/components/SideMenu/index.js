@@ -1,5 +1,6 @@
 import { MenuButton, MenuContainer } from "./style";
 import { useHistory } from "react-router";
+import ModalComponent from '../Modal';
 import { useState } from "react";
 import UpdateUser from "../updateUser";
 import React from "react";
@@ -12,9 +13,7 @@ const SideMenu = () => {
   const handleOpen = () => {
     setOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
+
   const history = useHistory();
 
   const handleLogout = () => {
@@ -36,9 +35,9 @@ const SideMenu = () => {
         Meus grupos
       </MenuButton>
       <MenuButton onClick={handleOpen}>Configurações</MenuButton>
-      <Modal openModal={open} setOpenModal={handleClose}>
+      <ModalComponent openModal={open} setOpenModal={setOpen}>
         <UpdateUser />
-      </Modal>
+      </ModalComponent>
       <MenuButton onClick={handleLogout}>Logout</MenuButton>
     </MenuContainer>
   );

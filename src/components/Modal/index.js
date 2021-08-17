@@ -1,6 +1,6 @@
 import ModalContainer from './style';
 
-const Modal = ({ children, openModal, setOpenModal }) => {
+const ModalComponent = ({ children, openModal, setOpenModal }) => {
     const fora = (e) => {
         if (typeof e.target.className === 'string') {
             if (e.target.className.includes('container')) {
@@ -21,4 +21,4 @@ const Modal = ({ children, openModal, setOpenModal }) => {
 
 }
 
-export default Modal;
+export default ModalComponent;
