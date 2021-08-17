@@ -1,6 +1,6 @@
 import { MenuButton, MenuContainer } from "./style";
 import { useHistory } from "react-router";
-import { Modal } from "@material-ui/core";
+import ModalComponent from '../Modal';
 import { useState } from "react";
 import UpdateUser from "../updateUser";
 import { Slide } from "@material-ui/core";
@@ -17,15 +17,17 @@ const SideMenu = () => {
   const handleOpen = () => {
     setOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
+
   const history = useHistory();
 
   const handleLogout = () => {
     localStorage.clear();
+<<<<<<< HEAD
     setAuthenticated(false);
     history.push("/");
+=======
+    history.push("/login");
+>>>>>>> fix
   };
 
   return (
@@ -41,15 +43,9 @@ const SideMenu = () => {
         Meus grupos
       </MenuButton>
       <MenuButton onClick={handleOpen}>Configurações</MenuButton>
-      <Modal
-        open={open}
-        TransitionComponent={Transition}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
+      <ModalComponent>
         <UpdateUser />
-      </Modal>
+      </ModalComponent>
       <MenuButton onClick={handleLogout}>Logout</MenuButton>
     </MenuContainer>
   );

@@ -35,6 +35,7 @@ const DashboardMain = () => {
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
+
           <div className="mainHabits">
             <h1 className="DashboardTitle">meus hábitos</h1>
             {habitsList.map((habits, index) => {
@@ -48,8 +49,8 @@ const DashboardMain = () => {
               );
             })}
           </div>
-          <div className="mainGroups">
-            <h1 className="DashboardTitle">meus grupos</h1>
+
+          <div className="mainGroups"> Meus grupos
             {groupsList.map((group, index) => {
               return (
                 <div key={index}>
@@ -58,6 +59,7 @@ const DashboardMain = () => {
               );
             })}
           </div>
+
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />

@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import { useState } from "react";
 import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
-import Modal from "../../components/Modal";
+import ModalComponent from '../../components/Modal';
 import GroupCreatorPopup from "../../components/GroupCreator";
 import GroupCard from "../../components/GroupCard";
 import { useContext } from "react";
@@ -55,12 +55,12 @@ const DashboardGroups = () => {
               <button onClick={handleOpenCreator}>Novo grupo</button>
             </div>
           </GroupsBox>
-          <Modal
+          <ModalComponent
             openModal={openModalCreator}
             setOpenModal={setOpenModalCreator}
           >
             <GroupCreatorPopup />
-          </Modal>
+          </ModalComponent>
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />
