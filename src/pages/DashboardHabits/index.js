@@ -34,7 +34,7 @@ const DashboardHabits = (authenticated) => {
         <DashboardMainBox>
           <div className="mainHabits">
             Meus hábitos
-            <HabitCreator />
+            {/* <HabitCreator /> */}
             <div>
               {habitsList.map((habit) => {
                 return <HabitCard key={habit.id} habit={habit} />;
