@@ -1,19 +1,22 @@
 import { useHabits } from "../../Providers/habits";
+import { HabitContainer } from "./style";
+import { FaCheckCircle } from "react-icons/fa"
 
 const HabitCard = ({ habit }) => {
   const { removeHabit, editHabit } = useHabits();
 
   return (
-    <div>
-      <p>Título: {habit.title}</p>
-      <p>Dificuldade: {habit.difficulty}</p>
-      <p>Categoria: {habit.category}</p>
-      <p>Frequência: {habit.frequency}</p>
-      <p>Progresso: {habit.how_much_achieved}%</p>
-      <p>Concluído: {habit.achieved}</p>
-      <button onClick={() => removeHabit(habit.id)}>Remover hábito</button>
-      <button onClick={() => editHabit(habit)}>Editar hábito</button>
-    </div>
+    <HabitContainer>
+      <h1>{habit.title}</h1>
+      <h3>Categoria: {habit.category}
+      {habit.achieved && <FaCheckCircle/>}
+      </h3>
+      <h3>Dificuldade: {habit.difficulty}</h3>
+      <div className="HabitButtons">
+        <button onClick={() => removeHabit(habit.id)}>Remover hábito</button>
+        <button onClick={() => editHabit(habit)}>Editar hábito</button>
+      </div>
+    </HabitContainer>
   );
 };
 
