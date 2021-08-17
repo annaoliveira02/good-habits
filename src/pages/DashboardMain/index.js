@@ -15,8 +15,11 @@ const DashboardMain = (authenticated) => {
   const { habitsList, editHabit } = useHabits();
   const { groupsList } = useContext(GroupsContext);
   const [showDrawer, setShowDrawer] = useState(false);
+  const [initialtoken] = useState(
+    JSON.parse(localStorage.getItem("@gestaohabitosg5:token"))
+  );
 
-  if (!authenticated) {
+  if (initialtoken === "") {
     return <Redirect to="/login" />;
   }
 
