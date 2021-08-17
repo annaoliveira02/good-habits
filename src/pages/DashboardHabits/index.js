@@ -12,11 +12,17 @@ import HabitCreator from "../../components/HabitCreator";
 import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
 import { HabitsBox } from "./style";
+import Modal from "../../components/Modal";
 
 const DashboardHabits = () => {
   const { habitsList, addHabit } = useHabits();
   const [showDrawer, setShowDrawer] = useState(false);
   const { authenticated } = useAuthentication();
+  const [openModalCreator, setOpenModalCreator] = useState(false);
+
+  const handleOpenHabitsCreator = () => {
+    setOpenModalCreator(true);
+  };
 
   if (authenticated === false) {
     return <Redirect to="/login" />;
@@ -37,14 +43,20 @@ const DashboardHabits = () => {
         <DashboardMainBox>
           <HabitsBox>
             <h1 className="DashboardTitle">meus hábitos</h1>
-            <HabitCreator />
+
             <div>
               {habitsList.map((habit) => {
                 return <HabitCard key={habit.id} habit={habit} />;
               })}
             </div>
-            <button onClick={addHabit}>Novo hábito</button>
+            <button onClick={handleOpenHabitsCreator}>Novo hábito</button>
           </HabitsBox>
+          <Modal
+            openModal={openModalCreator}
+            setOpenModal={setOpenModalCreator}
+          >
+            <HabitCreator />
+          </Modal>
 
           <div>Mais informações</div>
         </DashboardMainBox>

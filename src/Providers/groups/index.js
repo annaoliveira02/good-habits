@@ -11,22 +11,20 @@ export const GroupsProvider = ({ children }) => {
   const { token } = useToken();
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
-
   useEffect(() => {
     if (token) {
       api
         .get("/groups/subscriptions/", config)
-        .then((res) => setGroupsList(res.data)
-        )
-        .catch((err) => console.log(err))
+        .then((res) => setGroupsList(res.data))
+        .catch((err) => console.log(err));
     }
-  }, [token]);
+  }, [token, groupsList]);
 
-  const addGroup = () => { };
+  const addGroup = () => {};
 
-  const removeGroup = () => { };
+  const removeGroup = () => {};
 
-  const editGroup = () => { };
+  const editGroup = () => {};
 
   return (
     <GroupsContext.Provider
