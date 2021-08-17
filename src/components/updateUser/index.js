@@ -31,7 +31,7 @@ const UpdateUser = () => {
   return (
     <Container>
       <form onSubmit={handleSubmit(onUpdateForm)}>
-        <h2 id="simple-modal-title">Altere seu nome de usuário</h2>
+        <h2>Altere seu nome de usuário</h2>
         <TextField
           variant="outlined"
           size="small"
