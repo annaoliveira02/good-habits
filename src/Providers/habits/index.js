@@ -36,7 +36,7 @@ export const HabitsProvider = ({ children }) => {
         },
         { headers: { Authorization: `Bearer ${token}` } }
       )
-      .then((e) => console.log(e))
+      .then((e) => setHabitsList([...habitsList, e.data]))
       .catch((error) => console.log(error));
   };
 
@@ -71,6 +71,7 @@ export const HabitsProvider = ({ children }) => {
         .catch((err) => console.log(err));
     }
   }, []);
+
 
   return (
     <HabitsContext.Provider

@@ -25,11 +25,7 @@ const DashboardMain = (authenticated) => {
 
   return (
     <div>
-      <Drawer
-        anchor="left"
-        open={showDrawer}
-        onClose={() => setShowDrawer(false)}
-      >
+      <Drawer anchor="left" open={showDrawer} onClose={() => setShowDrawer(false)}>
         <DrawerMenu />
       </Drawer>
       <Header setShowDrawer={setShowDrawer} />
@@ -38,9 +34,9 @@ const DashboardMain = (authenticated) => {
         <DashboardMainBox>
           <div className="mainHabits">
             <h3>Acompanhe seus hábitos</h3>
-            {habitsList.map((habits) => {
+            {habitsList.map((habits, index) => {
               return (
-                <div>
+                <div key={index}>
                   <h4>{habits.title}</h4>
                   <button onClick={() => editHabit(habits)}>
                     editar hábito
@@ -49,12 +45,13 @@ const DashboardMain = (authenticated) => {
               );
             })}
           </div>
-          <div className="mainGroups">
-            Meus grupos
-            {groupsList.map((group) => {
-              <div>
-                {group.name} - {group.category}
-              </div>;
+          <div className="mainGroups"> Meus grupos
+            {groupsList.map((group, index) => {
+              return (
+                <div key={index}>
+                  {group.name} - {group.category}
+                </div>
+              )
             })}
           </div>
         </DashboardMainBox>

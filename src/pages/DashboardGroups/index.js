@@ -6,24 +6,20 @@ import Footer from "../../components/Footer";
 import { useState } from "react";
 import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
+import Modal from '../../components/Modal';
 import GroupCreatorPopup from "../../components/GroupCreator";
-import { Modal } from "@material-ui/core";
 import GroupCard from "../../components/GroupCard";
 import { useContext } from "react";
 import { GroupsContext } from "../../Providers/groups";
 import { Redirect } from "react-router-dom";
 
-const DashboardGroups = (authenticated) => {
-  const { groupsList } = useContext(GroupsContext);
-
-  const [openModal, setOpenModal] = useState(false);
+const DashboardGroups = () => {
+  const [openModalCreator, setOpenModalCreator] = useState(false);
+  const { groupsList } = useContext(GroupsContext)
   const [showDrawer, setShowDrawer] = useState(false);
 
-  const handleOpen = () => {
-    setOpenModal(true);
-  };
-  const handleClose = () => {
-    setOpenModal(false);
+  const handleOpenCreator = () => {
+    setOpenModalCreator(true);
   };
 
   if (!authenticated) {
@@ -43,22 +39,14 @@ const DashboardGroups = (authenticated) => {
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
-          <div className="mainHabits">
-            Meus grupos
-            {groupsList.map((group) => (
-              <GroupCard key={group.id} group={group} />
-            ))}
+          <div className="mainHabits">Meus grupos
+            {groupsList.map((group) => <GroupCard key={group.id} group={group} />)}
           </div>
           <div className="mainGroups">
             Criar grupo
-            <button onClick={handleOpen}>Novo grupo</button>
+            <button onClick={handleOpenCreator}>Novo grupo</button>
           </div>
-          <Modal
-            open={openModal}
-            onClose={handleClose}
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-          >
+          <Modal openModal={openModalCreator} setOpenModal={setOpenModalCreator}>
             <GroupCreatorPopup />
           </Modal>
         </DashboardMainBox>
