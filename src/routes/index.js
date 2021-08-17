@@ -5,24 +5,8 @@ import SignUp from "../pages/SignUp";
 import DashboardMain from "../pages/DashboardMain";
 import DashboardHabits from "../pages/DashboardHabits";
 import DashboardGroups from "../pages/DashboardGroups";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useToken } from "../Providers/token";
 
 const Routes = () => {
-<<<<<<< HEAD
-  const [authenticated, setAuthenticated] = useState(false);
-
-  const { token } = useToken();
-
-  useEffect(() => {
-    if (token) {
-      return setAuthenticated(true);
-    }
-  }, [token]);
-
-=======
->>>>>>> f58ec73834399765bb973414f09d2207aaa518d5
   return (
     <Switch>
       <Route exact path="/">
