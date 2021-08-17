@@ -40,9 +40,9 @@ const Login = (authenticated, setAthenticated) => {
       .catch((err) => toast.error("Usuário ou senha inválidos"));
   };
 
-  // if (authenticated) {
-  //   return <Redirect to="/dashboardMain" />;
-  // }
+  if (authenticated) {
+    return <Redirect to="/dashboardMain" />;
+  }
 
   return (
     <div>

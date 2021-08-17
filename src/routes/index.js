@@ -23,7 +23,7 @@ const Routes = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <Home />
+        <Home authenticated={authenticated} />
       </Route>
       <Route exact path="/login">
         <Login

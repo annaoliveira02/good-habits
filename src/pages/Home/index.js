@@ -3,10 +3,14 @@ import Header from "../../components/Header";
 import { InitialContainer } from "../../styles/mainContainers";
 import { MainButton } from "../../styles/mainContainers";
 import { Breaker } from "./style";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 
-const Home = () => {
+const Home = ({ authenticated }) => {
   const history = useHistory();
+
+  if (authenticated) {
+    return <Redirect to='/dashboardMain' />
+  }
 
   return (
     <div>
