@@ -26,7 +26,7 @@ export const DashboardContainer = styled.div`
   max-height: 70vh;
   margin-block-start: 70px;
   border-radius: 5px;
-  overflow: auto; 
+  overflow: auto;
 `;
 
 export const MainButton = styled.button`
@@ -57,21 +57,21 @@ export const MainButton = styled.button`
 
 export const ModalBackground = styled.div`
   z-index: auto;
-  display: ${({show}) => (show ? 'block' : 'none')};
+  display: ${({ show }) => (show ? "block" : "none")};
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   width: 100vw;
-  background: rgba(0,0,0,0.5);
-`
+  background: rgba(0, 0, 0, 0.5);
+`;
 
 export const ModalContainer = styled.div`
   position: absolute;
   margin: 0 auto;
   min-width: 30%;
-  display: ${({show}) => (show ? 'block' : 'none')};
+  display: ${({ show }) => (show ? "block" : "none")};
   padding: 15px;
   background-color: white;
   border-radius: 5px;
-`
+`;

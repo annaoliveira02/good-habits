@@ -1,15 +1,10 @@
 import { MenuButton, MenuContainer } from "./style";
 import { useHistory } from "react-router";
-import { Modal } from "@material-ui/core";
 import { useState } from "react";
 import UpdateUser from "../updateUser";
-import { Slide } from "@material-ui/core";
 import React from "react";
 import { useAuthentication } from "../../Providers/Authentication";
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import Modal from "../Modal";
 
 const SideMenu = () => {
   const [open, setOpen] = useState(false);
@@ -41,13 +36,7 @@ const SideMenu = () => {
         Meus grupos
       </MenuButton>
       <MenuButton onClick={handleOpen}>Configurações</MenuButton>
-      <Modal
-        open={open}
-        TransitionComponent={Transition}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
+      <Modal openModal={open} setOpenModal={handleClose}>
         <UpdateUser />
       </Modal>
       <MenuButton onClick={handleLogout}>Logout</MenuButton>
