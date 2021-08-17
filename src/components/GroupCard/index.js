@@ -5,29 +5,29 @@ import api from "../../services/api";
 import ActivityCard from "../ActivityCard";
 import GoalCard from "../GoalCard";
 
-const GroupCard = ({group}) => {
+const GroupCard = ({ group }) => {
 
     const { token } = useToken();
-    const config = {headers: { Authorization: `Bearer ${token}`}};
+    const config = { headers: { Authorization: `Bearer ${token}` } };
     const [activitiesList, setActivitiesList] = useState([])
     const [goalsList, setGoalsList] = useState([])
 
     useEffect(() => {
         if (token !== "") {
-           api
-            .get(`https://kabit-api.herokuapp.com/activities/?group=${group.id}&page=1`, config)
-            .then((res) => setActivitiesList(res.data))
-            .catch((err) => console.log(err))
-        }        
+            api
+                .get(`https://kabit-api.herokuapp.com/activities/?group=${group.id}&page=1`, config)
+                .then((res) => setActivitiesList(res.data.results))
+                .catch((err) => console.log(err))
+        }
     }, [])
 
     useEffect(() => {
         if (token !== "") {
-           api
-            .get(`https://kabit-api.herokuapp.com/goals/?group=${group.id}&page=1`, config)
-            .then((res) => setGoalsList(res.data))
-            .catch((err) => console.log(err))
-        }        
+            api
+                .get(`https://kabit-api.herokuapp.com/goals/?group=${group.id}&page=1`, config)
+                .then((res) => setGoalsList(res.data.results))
+                .catch((err) => console.log(err))
+        }
     }, [])
 
     return (
@@ -37,13 +37,13 @@ const GroupCard = ({group}) => {
             <p>Categoria: {group.category}</p>
             <div>
                 Atividades:
-                {activitiesList.map((activity) => {
-                    return <ActivityCard key={activity.title} activity={activity}/>
+                {activitiesList.map((activity, index) => {
+                    return <ActivityCard key={index} activity={activity} />
                 })}
             </div>
             <div>Metas:
-                {goalsList.map((goal) => {
-                    return <GoalCard key={goal.title} goal={goal} />
+                {goalsList.map((goal, index) => {
+                    return <GoalCard key={index} goal={goal} />
                 })}
             </div>
             <button>Editar grupo</button>
