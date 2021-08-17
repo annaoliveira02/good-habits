@@ -11,7 +11,7 @@ import { useState } from "react";
 import HabitCreator from "../../components/HabitCreator";
 import { Redirect } from "react-router-dom";
 
-const DashboardHabits = (authenticated) => {
+const DashboardHabits = ({ authenticated }) => {
   const { habitsList, addHabit } = useHabits();
   const [showDrawer, setShowDrawer] = useState(false);
 

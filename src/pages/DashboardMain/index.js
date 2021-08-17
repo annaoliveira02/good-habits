@@ -11,15 +11,12 @@ import { useContext } from "react";
 import { GroupsContext } from "../../Providers/groups";
 import { Redirect } from "react-router-dom";
 
-const DashboardMain = (authenticated) => {
+const DashboardMain = ({ authenticated }) => {
   const { habitsList, editHabit } = useHabits();
   const { groupsList } = useContext(GroupsContext);
   const [showDrawer, setShowDrawer] = useState(false);
-  const [initialtoken] = useState(
-    JSON.parse(localStorage.getItem("@gestaohabitosg5:token"))
-  );
 
-  if (initialtoken === "") {
+  if (!authenticated) {
     return <Redirect to="/login" />;
   }
 

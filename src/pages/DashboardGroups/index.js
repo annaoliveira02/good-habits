@@ -13,10 +13,11 @@ import { useContext } from "react";
 import { GroupsContext } from "../../Providers/groups";
 import { Redirect } from "react-router-dom";
 
-const DashboardGroups = () => {
+const DashboardGroups = ({ authenticated }) => {
   const [openModalCreator, setOpenModalCreator] = useState(false);
   const { groupsList } = useContext(GroupsContext)
   const [showDrawer, setShowDrawer] = useState(false);
+
 
   const handleOpenCreator = () => {
     setOpenModalCreator(true);

@@ -18,7 +18,7 @@ const Routes = () => {
     if (token) {
       return setAuthenticated(true);
     }
-  }, [authenticated]);
+  }, [token]);
 
   return (
     <Switch>
