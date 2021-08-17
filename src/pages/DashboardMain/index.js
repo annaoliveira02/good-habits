@@ -29,6 +29,7 @@ const DashboardMain = ({ authenticated }) => {
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
+
           <div className="mainHabits">
             <h3>Acompanhe seus hábitos</h3>
             {habitsList.map((habits, index) => {
@@ -42,6 +43,7 @@ const DashboardMain = ({ authenticated }) => {
               );
             })}
           </div>
+
           <div className="mainGroups"> Meus grupos
             {groupsList.map((group, index) => {
               return (
@@ -51,6 +53,7 @@ const DashboardMain = ({ authenticated }) => {
               )
             })}
           </div>
+
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />

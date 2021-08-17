@@ -9,9 +9,8 @@ import api from "../../services/api";
 import { toast } from "react-toastify";
 import { AnimationContainer, Background, Content } from "./styles";
 import { TextField } from "@material-ui/core";
-import { useState } from "react";
 
-const Login = (authenticated, setAthenticated) => {
+const Login = ({ authenticated, setAuthenticated }) => {
   const schema = yup.object().shape({
     username: yup.string().required("User Name obrigatório"),
     password: yup
@@ -35,6 +34,7 @@ const Login = (authenticated, setAthenticated) => {
         localStorage.clear();
         const { access } = response.data;
         localStorage.setItem("@gestaohabitosg5:token", JSON.stringify(access));
+        setAuthenticated(true);
         return history.push("/DashboardMain");
       })
       .catch((err) => toast.error("Usuário ou senha inválidos"));
