@@ -7,17 +7,24 @@ export const DashboardMainBox = styled.div`
     justify-content: flex-start;
     width: 100%;
 
+    .DashboardTitle {
+        font-size: 35px;
+        font-family: "Flamenco", cursive;
+        width: 100%;
+        margin-block: 20px;
+    }
+
     .mainHabits {
         width: 100%;
-        background-color: white;
         min-height: 30vh;
         margin: 5px;
+        border-radius: 5px;
     }
 
     .mainGroups {
         width: 100%;
-        background-color: white;
         min-height: 30vh;
         margin: 5px;
+        border-radius: 5px;
     }
 `

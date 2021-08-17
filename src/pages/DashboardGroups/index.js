@@ -12,18 +12,27 @@ import GroupCard from "../../components/GroupCard";
 import { useContext } from "react";
 import { GroupsContext } from "../../Providers/groups";
 import { Redirect } from "react-router-dom";
+import { useAuthentication } from "../../Providers/Authentication";
+import { GroupsBox } from "./style";
+import SubscribeGroup from '../../components/SubscribeGroup';
 
-const DashboardGroups = ({ authenticated }) => {
+const DashboardGroups = () => {
   const [openModalCreator, setOpenModalCreator] = useState(false);
-  const { groupsList } = useContext(GroupsContext)
+  const [openModalSubscribe, setOpenModalSubscribe] = useState(false);
+  const { groupsList } = useContext(GroupsContext);
   const [showDrawer, setShowDrawer] = useState(false);
+  const { authenticated } = useAuthentication();
 
 
   const handleOpenCreator = () => {
     setOpenModalCreator(true);
   };
 
-  if (!authenticated) {
+  const handleOpenSubscribe = () => {
+    setOpenModalSubscribe(true);
+  }
+
+  if (authenticated === false) {
     return <Redirect to="/login" />;
   }
 
@@ -40,16 +49,28 @@ const DashboardGroups = ({ authenticated }) => {
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
-          <div className="mainHabits">Meus grupos
-            {groupsList.map((group) => <GroupCard key={group.id} group={group} />)}
-          </div>
-          <div className="mainGroups">
-            Criar grupo
+          <GroupsBox>
+            <h1 className="DashboardTitle">meus grupos</h1>
+            {groupsList.map((group) => (
+              <GroupCard key={group.id} group={group} />
+            ))}
             <button onClick={handleOpenCreator}>Novo grupo</button>
-          </div>
-          <ModalComponent openModal={openModalCreator} setOpenModal={setOpenModalCreator}>
-            <GroupCreatorPopup />
-          </ModalComponent>
+            <ModalComponent
+              openModal={openModalCreator}
+              setOpenModal={setOpenModalCreator}
+            >
+              <GroupCreatorPopup />
+            </ModalComponent>
+          </GroupsBox>
+          <GroupsBox>
+            <h1 className="DashboardTitle">explorar grupos</h1>
+            <div className="GroupExplorer">
+              <button onClick={handleOpenSubscribe} > Procurar grupo novo </button>
+            </div>
+            <ModalComponent openModal={openModalSubscribe} setOpenModal={setOpenModalSubscribe}>
+              <SubscribeGroup />
+            </ModalComponent>
+          </GroupsBox>
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />
