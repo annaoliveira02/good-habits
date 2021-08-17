@@ -10,12 +10,15 @@ import DrawerMenu from "../../components/DrawerMenu";
 import { useState } from "react";
 import HabitCreator from "../../components/HabitCreator";
 import { Redirect } from "react-router-dom";
+import { useAuthentication } from "../../Providers/Authentication";
+import { HabitsBox } from "./style";
 
-const DashboardHabits = ({ authenticated }) => {
+const DashboardHabits = () => {
   const { habitsList, addHabit } = useHabits();
   const [showDrawer, setShowDrawer] = useState(false);
+  const { authenticated } = useAuthentication();
 
-  if (!authenticated) {
+  if (authenticated === false) {
     return <Redirect to="/login" />;
   }
 
@@ -32,8 +35,8 @@ const DashboardHabits = ({ authenticated }) => {
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
-          <div className="mainHabits">
-            Meus hábitos
+          <HabitsBox>
+            <h1 className="DashboardTitle">meus hábitos</h1>
             <HabitCreator />
             <div>
               {habitsList.map((habit) => {
@@ -41,7 +44,7 @@ const DashboardHabits = ({ authenticated }) => {
               })}
             </div>
             <button onClick={addHabit}>Novo hábito</button>
-          </div>
+          </HabitsBox>
 
           <div>Mais informações</div>
         </DashboardMainBox>

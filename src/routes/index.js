@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useToken } from "../Providers/token";
 
 const Routes = () => {
+<<<<<<< HEAD
   const [authenticated, setAuthenticated] = useState(false);
 
   const { token } = useToken();
@@ -20,28 +21,27 @@ const Routes = () => {
     }
   }, [token]);
 
+=======
+>>>>>>> f58ec73834399765bb973414f09d2207aaa518d5
   return (
     <Switch>
       <Route exact path="/">
         <Home />
       </Route>
       <Route exact path="/login">
-        <Login
-          authenticated={authenticated}
-          setAuthenticated={setAuthenticated}
-        />
+        <Login />
       </Route>
       <Route exact path="/signUp">
-        <SignUp authenticated={authenticated} />
+        <SignUp />
       </Route>
       <Route exact path="/dashboardMain">
-        <DashboardMain authenticated={authenticated} />
+        <DashboardMain />
       </Route>
       <Route exact path="/dashboardHabits">
-        <DashboardHabits authenticated={authenticated} />
+        <DashboardHabits />
       </Route>
       <Route exact path="/dashboardGroups">
-        <DashboardGroups authenticated={authenticated} />
+        <DashboardGroups />
       </Route>
     </Switch>
   );
