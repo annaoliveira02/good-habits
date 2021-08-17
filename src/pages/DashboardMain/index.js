@@ -10,22 +10,25 @@ import DrawerMenu from "../../components/DrawerMenu";
 import { useContext } from "react";
 import { GroupsContext } from "../../Providers/groups";
 import { Redirect } from "react-router-dom";
+import { useAuthentication } from "../../Providers/Authentication";
 
-const DashboardMain = (authenticated) => {
+const DashboardMain = () => {
   const { habitsList, editHabit } = useHabits();
   const { groupsList } = useContext(GroupsContext);
   const [showDrawer, setShowDrawer] = useState(false);
-  const [initialtoken] = useState(
-    JSON.parse(localStorage.getItem("@gestaohabitosg5:token"))
-  );
+  const { authenticated } = useAuthentication();
 
-  if (initialtoken === "") {
+  if (!authenticated) {
     return <Redirect to="/login" />;
   }
 
   return (
     <div>
-      <Drawer anchor="left" open={showDrawer} onClose={() => setShowDrawer(false)}>
+      <Drawer
+        anchor="left"
+        open={showDrawer}
+        onClose={() => setShowDrawer(false)}
+      >
         <DrawerMenu />
       </Drawer>
       <Header setShowDrawer={setShowDrawer} />
@@ -45,13 +48,15 @@ const DashboardMain = (authenticated) => {
               );
             })}
           </div>
-          <div className="mainGroups"> Meus grupos
+          <div className="mainGroups">
+            {" "}
+            Meus grupos
             {groupsList.map((group, index) => {
               return (
                 <div key={index}>
                   {group.name} - {group.category}
                 </div>
-              )
+              );
             })}
           </div>
         </DashboardMainBox>

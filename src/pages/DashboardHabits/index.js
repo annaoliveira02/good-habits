@@ -10,12 +10,14 @@ import DrawerMenu from "../../components/DrawerMenu";
 import { useState } from "react";
 import HabitCreator from "../../components/HabitCreator";
 import { Redirect } from "react-router-dom";
+import { useAuthentication } from "../../Providers/Authentication";
 
-const DashboardHabits = (authenticated) => {
+const DashboardHabits = () => {
   const { habitsList, addHabit } = useHabits();
   const [showDrawer, setShowDrawer] = useState(false);
+  const { authenticated } = useAuthentication();
 
-  if (!authenticated) {
+  if (authenticated === false) {
     return <Redirect to="/login" />;
   }
 

@@ -6,23 +6,25 @@ import Footer from "../../components/Footer";
 import { useState } from "react";
 import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
-import Modal from '../../components/Modal';
+import Modal from "../../components/Modal";
 import GroupCreatorPopup from "../../components/GroupCreator";
 import GroupCard from "../../components/GroupCard";
 import { useContext } from "react";
 import { GroupsContext } from "../../Providers/groups";
 import { Redirect } from "react-router-dom";
+import { useAuthentication } from "../../Providers/Authentication";
 
 const DashboardGroups = () => {
   const [openModalCreator, setOpenModalCreator] = useState(false);
-  const { groupsList } = useContext(GroupsContext)
+  const { groupsList } = useContext(GroupsContext);
   const [showDrawer, setShowDrawer] = useState(false);
+  const { authenticated } = useAuthentication();
 
   const handleOpenCreator = () => {
     setOpenModalCreator(true);
   };
 
-  if (!authenticated) {
+  if (authenticated === false) {
     return <Redirect to="/login" />;
   }
 
@@ -39,14 +41,20 @@ const DashboardGroups = () => {
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
-          <div className="mainHabits">Meus grupos
-            {groupsList.map((group) => <GroupCard key={group.id} group={group} />)}
+          <div className="mainHabits">
+            Meus grupos
+            {groupsList.map((group) => (
+              <GroupCard key={group.id} group={group} />
+            ))}
           </div>
           <div className="mainGroups">
             Criar grupo
             <button onClick={handleOpenCreator}>Novo grupo</button>
           </div>
-          <Modal openModal={openModalCreator} setOpenModal={setOpenModalCreator}>
+          <Modal
+            openModal={openModalCreator}
+            setOpenModal={setOpenModalCreator}
+          >
             <GroupCreatorPopup />
           </Modal>
         </DashboardMainBox>
