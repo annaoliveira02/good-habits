@@ -9,18 +9,13 @@ import api from "../../services/api";
 import { toast } from "react-toastify";
 import { AnimationContainer, Background, Content } from "./styles";
 import { TextField } from "@material-ui/core";
-<<<<<<< HEAD
-import { useState } from "react";
-import { useAuthentication } from "../../Providers/Authentication";
+import { useToken } from '../../Providers/token';
+import { useAuthentication } from '../../Providers/Authentication'
 
 const Login = () => {
-  const { authenticated, setAuthenticated } = useAuthentication();
-=======
-import { useToken } from '../../Providers/token';
+  const { authenticated, setAuthenticated } = useAuthentication()
 
-const Login = ({ authenticated, setAuthenticated }) => {
   const { setToken } = useToken();
->>>>>>> fix
   const schema = yup.object().shape({
     username: yup.string().required("User Name obrigatório"),
     password: yup
@@ -43,7 +38,6 @@ const Login = ({ authenticated, setAuthenticated }) => {
       .then((response) => {
         localStorage.clear();
         const { access } = response.data;
-        setAuthenticated(true);
         localStorage.setItem("@gestaohabitosg5:token", JSON.stringify(access));
         setAuthenticated(true);
         setToken(access);

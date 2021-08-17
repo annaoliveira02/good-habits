@@ -22,12 +22,8 @@ const SideMenu = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-<<<<<<< HEAD
     setAuthenticated(false);
     history.push("/");
-=======
-    history.push("/login");
->>>>>>> fix
   };
 
   return (
