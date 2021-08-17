@@ -11,6 +11,7 @@ import GroupCreatorPopup from "../../components/GroupCreator";
 import GroupCard from "../../components/GroupCard";
 import { useContext } from "react";
 import { GroupsContext } from "../../Providers/groups";
+import { Redirect } from "react-router-dom";
 
 const DashboardGroups = () => {
   const [openModalCreator, setOpenModalCreator] = useState(false);
@@ -20,6 +21,10 @@ const DashboardGroups = () => {
   const handleOpenCreator = () => {
     setOpenModalCreator(true);
   };
+
+  if (!authenticated) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <div>

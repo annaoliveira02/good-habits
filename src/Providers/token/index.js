@@ -15,7 +15,6 @@ export const TokenProvider = ({ children }) => {
     setToken(initialToken);
   }, []);
 
-  console.log("provider:", token);
   return (
     <TokenContext.Provider value={{ token, setToken }}>
       {children}
