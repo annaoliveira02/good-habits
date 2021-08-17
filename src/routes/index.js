@@ -23,25 +23,22 @@ const Routes = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <Home authenticated={authenticated} />
+        <Home />
       </Route>
       <Route exact path="/login">
-        <Login
-          authenticated={authenticated}
-          setAuthenticated={setAuthenticated}
-        />
+        <Login />
       </Route>
       <Route exact path="/signUp">
-        <SignUp authenticated={authenticated} />
+        <SignUp />
       </Route>
       <Route exact path="/dashboardMain">
-        <DashboardMain authenticated={authenticated} />
+        <DashboardMain />
       </Route>
       <Route exact path="/dashboardHabits">
-        <DashboardHabits authenticated={authenticated} />
+        <DashboardHabits />
       </Route>
       <Route exact path="/dashboardGroups">
-        <DashboardGroups authenticated={authenticated} />
+        <DashboardGroups />
       </Route>
     </Switch>
   );

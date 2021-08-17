@@ -10,12 +10,25 @@ import DrawerMenu from "../../components/DrawerMenu";
 import { useState } from "react";
 import HabitCreator from "../../components/HabitCreator";
 import { Redirect } from "react-router-dom";
+import { useAuthentication } from "../../Providers/Authentication";
+import { HabitsBox } from "./style";
+import Modal from "../../components/Modal";
 
+<<<<<<< HEAD
 const DashboardHabits = ({ authenticated }) => {
+=======
+const DashboardHabits = () => {
+>>>>>>> 2dc38dfaa0cd26bb6932001efe1750cc44cf0aad
   const { habitsList, addHabit } = useHabits();
   const [showDrawer, setShowDrawer] = useState(false);
+  const { authenticated } = useAuthentication();
+  const [openModalCreator, setOpenModalCreator] = useState(false);
 
-  if (!authenticated) {
+  const handleOpenHabitsCreator = () => {
+    setOpenModalCreator(true);
+  };
+
+  if (authenticated === false) {
     return <Redirect to="/login" />;
   }
 
@@ -32,16 +45,22 @@ const DashboardHabits = ({ authenticated }) => {
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
-          <div className="mainHabits">
-            Meus hábitos
-            <HabitCreator />
+          <HabitsBox>
+            <h1 className="DashboardTitle">meus hábitos</h1>
+
             <div>
               {habitsList.map((habit) => {
                 return <HabitCard key={habit.id} habit={habit} />;
               })}
             </div>
-            <button onClick={addHabit}>Novo hábito</button>
-          </div>
+            <button onClick={handleOpenHabitsCreator}>Novo hábito</button>
+          </HabitsBox>
+          <Modal
+            openModal={openModalCreator}
+            setOpenModal={setOpenModalCreator}
+          >
+            <HabitCreator />
+          </Modal>
 
           <div>Mais informações</div>
         </DashboardMainBox>

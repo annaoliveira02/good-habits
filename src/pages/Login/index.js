@@ -9,10 +9,11 @@ import api from "../../services/api";
 import { toast } from "react-toastify";
 import { AnimationContainer, Background, Content } from "./styles";
 import { TextField } from "@material-ui/core";
-import { useToken } from '../../Providers/token';
+import { useState } from "react";
+import { useAuthentication } from "../../Providers/Authentication";
 
-const Login = ({ authenticated, setAuthenticated }) => {
-  const { setToken } = useToken();
+const Login = () => {
+  const { authenticated, setAuthenticated } = useAuthentication();
   const schema = yup.object().shape({
     username: yup.string().required("User Name obrigatório"),
     password: yup
@@ -35,12 +36,16 @@ const Login = ({ authenticated, setAuthenticated }) => {
       .then((response) => {
         localStorage.clear();
         const { access } = response.data;
+        setAuthenticated(true);
         localStorage.setItem("@gestaohabitosg5:token", JSON.stringify(access));
         setAuthenticated(true);
-        setToken(access);
+        // setToken(access);
         return history.push("/DashboardMain");
       })
-      .catch((err) => toast.error("Usuário ou senha inválidos"));
+      .catch((err) =>
+        // toast.error("Usuário ou senha inválidos")
+        console.log(err)
+      );
   };
 
   if (authenticated) {
