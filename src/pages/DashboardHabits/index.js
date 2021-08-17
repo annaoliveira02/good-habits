@@ -11,6 +11,7 @@ import { useState } from "react";
 import HabitCreator from "../../components/HabitCreator";
 import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
+import { HabitsBox } from "./style";
 
 const DashboardHabits = () => {
   const { habitsList, addHabit } = useHabits();
@@ -34,8 +35,8 @@ const DashboardHabits = () => {
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
-          <div className="mainHabits">
-            Meus hábitos
+          <HabitsBox>
+            <h1 className="DashboardTitle">meus hábitos</h1>
             <HabitCreator />
             <div>
               {habitsList.map((habit) => {
@@ -43,7 +44,7 @@ const DashboardHabits = () => {
               })}
             </div>
             <button onClick={addHabit}>Novo hábito</button>
-          </div>
+          </HabitsBox>
 
           <div>Mais informações</div>
         </DashboardMainBox>

@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { GroupsContext } from "../../Providers/groups";
 import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
+import { GroupsBox } from "./style";
 
 const DashboardGroups = () => {
   const [openModalCreator, setOpenModalCreator] = useState(false);
@@ -41,16 +42,18 @@ const DashboardGroups = () => {
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
-          <div className="mainHabits">
-            Meus grupos
+          <GroupsBox>
+            <h1 className="DashboardTitle">meus grupos</h1>
             {groupsList.map((group) => (
               <GroupCard key={group.id} group={group} />
             ))}
-          </div>
-          <div className="mainGroups">
-            Criar grupo
-            <button onClick={handleOpenCreator}>Novo grupo</button>
-          </div>
+          </GroupsBox>
+          <GroupsBox>
+            <h1 className="DashboardTitle">explorar grupos</h1>
+            <div className="GroupExplorer">
+              <button onClick={handleOpenCreator}>Novo grupo</button>
+            </div>
+          </GroupsBox>
           <Modal
             openModal={openModalCreator}
             setOpenModal={setOpenModalCreator}

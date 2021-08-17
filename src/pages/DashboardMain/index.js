@@ -36,7 +36,7 @@ const DashboardMain = () => {
         <SideMenu />
         <DashboardMainBox>
           <div className="mainHabits">
-            <h3>Acompanhe seus hábitos</h3>
+            <h1 className="DashboardTitle">meus hábitos</h1>
             {habitsList.map((habits, index) => {
               return (
                 <div key={index}>
@@ -49,8 +49,7 @@ const DashboardMain = () => {
             })}
           </div>
           <div className="mainGroups">
-            {" "}
-            Meus grupos
+            <h1 className="DashboardTitle">meus grupos</h1>
             {groupsList.map((group, index) => {
               return (
                 <div key={index}>
