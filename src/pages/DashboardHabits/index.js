@@ -12,7 +12,7 @@ import HabitCreator from "../../components/HabitCreator";
 import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
 import { HabitsBox } from "./style";
-import Modal from "../../components/Modal";
+import ModalContainer from '../../components/Modal';
 
 const DashboardHabits = () => {
   const { habitsList, addHabit } = useHabits();
@@ -43,7 +43,6 @@ const DashboardHabits = () => {
         <DashboardMainBox>
           <HabitsBox>
             <h1 className="DashboardTitle">meus hábitos</h1>
-
             <div>
               {habitsList.map((habit) => {
                 return <HabitCard key={habit.id} habit={habit} />;
@@ -51,12 +50,12 @@ const DashboardHabits = () => {
             </div>
             <button onClick={handleOpenHabitsCreator}>Novo hábito</button>
           </HabitsBox>
-          <Modal
+          <ModalContainer
             openModal={openModalCreator}
             setOpenModal={setOpenModalCreator}
           >
             <HabitCreator />
-          </Modal>
+          </ModalContainer>
 
           <div>Mais informações</div>
         </DashboardMainBox>
