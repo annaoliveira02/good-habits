@@ -46,6 +46,7 @@ export const HabitsProvider = ({ children }) => {
   };
 
   const editHabit = (data, habit) => {
+    console.log('Na requisição: ', data);
     api
       .patch(
         `/habits/${habit.id}/`,

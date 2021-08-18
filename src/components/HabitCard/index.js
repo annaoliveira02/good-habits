@@ -5,31 +5,30 @@ import { useEffect, useState } from 'react';
 import { EditText } from 'react-edit-text';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import api from '../../services/api';
-// import { CircleProgress } from 'react-gradient-progress'
-// import Slider from '@material-ui/core/Slider';
-// import Input from '@material-ui/core/Input';
 
 const HabitCard = ({ habit }) => {
   const { removeHabit, editHabit } = useHabits();
   const [inputValue, setInputValue] = useState(habit.how_much_achieved);
   const [showInput, setShowInput] = useState(false);
-  const [achieved, setAchieved] = useState(false);
+  const [achieved, setAchieved] = useState(habit.achieved);
+  console.log('Terminado: ', achieved);
 
   const correctInput = (e) => {
     setShowInput(false);
-    setAchieved(false);
+    // setAchieved(false);
+    let isComplete = false;
     e.value = parseInt(e.value);
     if (e.value < 0) {
       e.value = 0;
     } else if (e.value >= 100) {
       e.value = 100;
-      setAchieved(true)
+      isComplete = true
     }
+    setAchieved(isComplete)
     setInputValue(e.value);
     editHabit({
       how_much_achieved: e.value,
-      achieved: achieved
+      achieved: isComplete
     }, habit)
   }
 
@@ -45,7 +44,7 @@ const HabitCard = ({ habit }) => {
   return (
     <HabitContainer>
       <h1>
-        {habit.title} {habit.achieved && <FaCheckCircle />}
+        {habit.title} {achieved && <FaCheckCircle />}
       </h1>
       <h3>Categoria: {habit.category}</h3>
       <h3>Dificuldade: {habit.difficulty}</h3>
