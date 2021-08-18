@@ -1,14 +1,16 @@
-import { FiActivity, FiBook, FiXCircle } from "react-icons/fi";
+import { FiActivity, FiBook } from "react-icons/fi";
 import { BsBriefcase } from "react-icons/bs";
 import GroupCreaterContainer from "./style";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import { useToken } from "../../Providers/token";
+import { GroupsContext } from "../../Providers/groups";
 
 const GroupCreatorPopup = () => {
+  const { setGroupsList } = useContext(GroupsContext);
   const [selectedArray, setSelectedArray] = useState([1, 0, 0]);
   const categories = ["Saúde", "Etudos", "Trabalho"];
   const { token } = useToken();
@@ -46,12 +48,18 @@ const GroupCreatorPopup = () => {
   const createGroup = (data) => {
     const categoryArr = getCategory();
     data.category = categoryArr[0];
+    // const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
     api
       .post("/groups/", data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => console.log("Grupo criado", res));
-  };
+      .then((res) => api
+        .get('/groups/subscriptions/', {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        .then(res => setGroupsList(res.data))
+      )
+  }
 
   return (
     <GroupCreaterContainer
