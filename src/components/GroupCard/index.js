@@ -52,7 +52,7 @@ const GroupCard = ({ group }) => {
     // getActivities(group.id, tk)
 
 
-  }, [token]);
+  }, []);
 
   console.log('Lista atividades: ', activitiesList)
 
