@@ -12,6 +12,12 @@ export const DrawerContainer = styled.div`
         border-radius: 100px;
         margin-block-end: 15px;
     }
+    .userTitle {
+        font-size: 20px;
+        font-family: "Flamenco", cursive;
+        text-transform: capitalize;
+        margin-block-end: 15px;
+    }    
 
     @media(min-width: 600px) {
         display: none

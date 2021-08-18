@@ -14,7 +14,6 @@ const SubscribeGroupPopup = () => {
             .then(result => setSearchResults(result))
     }
 
-
     return (
         <SubscribeContainer>
             <header>
@@ -34,9 +33,7 @@ const SubscribeGroupPopup = () => {
                     </ul>
                 }
             </main>
-
         </SubscribeContainer>
-
     )
 
 }
