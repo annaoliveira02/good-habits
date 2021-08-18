@@ -12,8 +12,9 @@ import HabitCreator from "../../components/HabitCreator";
 import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
 import { HabitsBox } from "./style";
-import ModalContainer from '../../components/Modal';
-import { GrAdd } from "react-icons/gr"
+import ModalContainer from "../../components/Modal";
+import { GrAdd } from "react-icons/gr";
+import ModalComponent from "../../components/Modal";
 
 const DashboardHabits = () => {
   const { habitsList } = useHabits();
@@ -27,13 +28,26 @@ const DashboardHabits = () => {
 
   const setMotivation = () => {
     if (habitsList.length <= 3) {
-      return <div className="motivationMessage">Crie novos hábitos e otimize sua rotina!</div>
+      return (
+        <div className="motivationMessage">
+          Crie novos hábitos e otimize sua rotina!
+        </div>
+      );
     } else if (habitsList.length <= 7 && habitsList.length > 3) {
-      return <div className="motivationMessage">Você está no caminho certo! Tente manter a disciplina!</div>
+      return (
+        <div className="motivationMessage">
+          Você está no caminho certo! Tente manter a disciplina!
+        </div>
+      );
     } else if (habitsList.length > 7) {
-      return <div className="motivationMessage">Muitos hábitos novos... Melhor priorizar alguns pra não ficar sobrecarregado!</div>
+      return (
+        <div className="motivationMessage">
+          Muitos hábitos novos... Melhor priorizar alguns pra não ficar
+          sobrecarregado!
+        </div>
+      );
     }
-  }
+  };
 
   if (authenticated === false) {
     return <Redirect to="/login" />;
@@ -54,24 +68,26 @@ const DashboardHabits = () => {
         <DashboardMainBox>
           <HabitsBox>
             <h1 className="DashboardTitle">meus hábitos</h1>
-               {habitsList.map((habit, index) => {
-                return <HabitCard key={index} habit={habit} />;
-              })}
+            {habitsList.map((habit, index) => {
+              return <HabitCard key={index} habit={habit} />;
+            })}
             <div className="habitsButton" onClick={handleOpenHabitsCreator}>
-              <GrAdd/>
-            </div>          
+              <GrAdd />
+            </div>
             <div className="habitsExplorer">
               <h1 className="DashboardTitle">mais informações</h1>
-              <p className="habitsCounter">Você possui {habitsList.length} hábito(s)!</p>
+              <p className="habitsCounter">
+                Você possui {habitsList.length} hábito(s)!
+              </p>
               {setMotivation()}
             </div>
           </HabitsBox>
-          <ModalContainer
+          <ModalComponent
             openModal={openModalCreator}
             setOpenModal={setOpenModalCreator}
           >
             <HabitCreator />
-          </ModalContainer>
+          </ModalComponent>
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />
