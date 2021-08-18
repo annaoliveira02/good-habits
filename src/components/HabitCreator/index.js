@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { FormInput } from "../SignUpForm/style";
 import { useHabits } from "../../Providers/habits";
+import HabitsCreatorContainer from "./style";
 
 const HabitCreator = () => {
   const { addHabit } = useHabits();
@@ -35,7 +36,8 @@ const HabitCreator = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleForm)}>
+    <HabitsCreatorContainer onSubmit={handleSubmit(handleForm)}>
+      <h3> Crie o seu hábito </h3>
       <div>
         <FormInput placeholder="Título" {...register("title")}></FormInput>
         <div className="ErrorMessage">{errors.title?.message}</div>
@@ -62,7 +64,7 @@ const HabitCreator = () => {
         <div className="ErrorMessage">{errors.frequency?.message}</div>
       </div>
       <button type="submit">Criar hábito</button>
-    </form>
+    </HabitsCreatorContainer>
   );
 };
 
