@@ -5,6 +5,7 @@ import { useGoalsActivities } from "../../Providers/Goals&Activities";
 import { TextField } from "@material-ui/core";
 import { Container } from "./style";
 import api from "../../services/api";
+import { toast } from "react-toastify";
 
 const AddGoalModal = ({ group, setGoalsList }) => {
   const id = group.id;
@@ -24,7 +25,13 @@ const AddGoalModal = ({ group, setGoalsList }) => {
   const handleAdd = (data) => {
     data.how_much_achieved = 0;
     data.group = id;
-    addGoal(data);
+    const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
+    // addGoal(data);
+    api
+      .post("/goals/", data, {
+        headers: { Authorization: `Bearer ${tk}` }
+      })
+      .then((_) => toast.success("Meta criada!"))
     api.get(`/goals/?group=${group.id}`)
       .then(res => setGoalsList(res.data.results))
   };

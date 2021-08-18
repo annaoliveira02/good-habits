@@ -7,28 +7,39 @@ export const GroupsContext = createContext();
 
 export const GroupsProvider = ({ children }) => {
   const [groupsList, setGroupsList] = useState([]);
-  const [group, setGroup] = useState([]);
   const { token } = useToken();
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
-  useEffect(() => {
-    if (token) {
-      api
-        .get("/groups/subscriptions/", config)
-        .then((res) => setGroupsList(res.data))
-        .catch((err) => console.log(err));
-    }
-  }, [token, groupsList]);
+  const getGroups = (tk) => {
+    api
+      .get("/groups/subscriptions/", {
+        headers: { Authorization: `Bearer ${tk}` }
+      })
+      .then((res) => {
+        setGroupsList(res.data)
+      })
+      .catch((err) => console.log(err));
+    // console.log('Config: ', config);
+  }
 
-  const addGroup = () => {};
+  // useEffect(() => {
+  //   console.log(token);
+  //   if (token) {
+  //     api
+  //       .get("/groups/subscriptions/", config)
+  //       .then((res) => setGroupsList(res.data))
+  //       .catch((err) => console.log(err));
+  //     console.log('Foi');
+  //   }
+  // }, [token]);
 
-  const removeGroup = () => {};
+  const removeGroup = () => { };
 
-  const editGroup = () => {};
+  const editGroup = () => { };
 
   return (
     <GroupsContext.Provider
-      value={{ groupsList, group, addGroup, removeGroup, editGroup }}
+      value={{ groupsList, getGroups, setGroupsList, removeGroup, editGroup }}
     >
       {children}
     </GroupsContext.Provider>

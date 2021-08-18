@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useToken } from "../token";
 import api from "../../services/api";
 import { toast } from "react-toastify";
@@ -6,10 +6,28 @@ import { toast } from "react-toastify";
 const GoalsActivitiesContext = createContext();
 
 export const GoalsActivitiesProvider = ({ children }) => {
-  const [goals, setGoals] = useState("");
-  const [activities, setActivities] = useState();
+  const [goals, setGoals] = useState([]);
+  const [activities, setActivities] = useState([]);
   const { token } = useToken();
   const config = { headers: { Authorization: `Bearer ${token}` } };
+
+  const getGoals = (ID, tk) => {
+    api
+      .get(`/goals/?group=${ID}`, {
+        headers: { Authorization: `Bearer ${tk}` }
+      })
+      .then((res) => setGoals(res.data.results))
+      .catch((e) => console.log(e));
+  }
+
+  const getActivities = (ID, tk) => {
+    api
+      .get(`/activities/?group=${ID}`, {
+        headers: { Authorization: `Bearer ${tk}` }
+      })
+      .then((res) => setActivities(res.data.results))
+      .catch((e) => console.log(e));
+  }
 
   const deleteGoal = (id) => {
     api
@@ -60,6 +78,10 @@ export const GoalsActivitiesProvider = ({ children }) => {
       value={{
         goals,
         activities,
+        setGoals,
+        setActivities,
+        getGoals,
+        getActivities,
         deleteGoal,
         addGoal,
         updateGoal,

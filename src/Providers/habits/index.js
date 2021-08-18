@@ -59,20 +59,25 @@ export const HabitsProvider = ({ children }) => {
       .catch((e) => toast.error("Falha ao editar "));
   };
 
-  useEffect(() => {
-    if (token !== "") {
-      api
-        .get("/habits/personal/", config)
-        .then((response) => {
-          setHabitsList(response.data);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [token, habitsList]);
+  const getHabits = (tk) => {
+    api
+      .get("/habits/personal/", {
+        headers: { Authorization: `Bearer ${tk}` }
+      })
+      .then((response) => {
+        setHabitsList(response.data);
+      })
+  }
+
+  // useEffect(() => {
+  //   if (token) {
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [token]);
 
   return (
     <HabitsContext.Provider
-      value={{ habitsList, addHabit, removeHabit, editHabit }}
+      value={{ habitsList, addHabit, removeHabit, editHabit, getHabits }}
     >
       {children}
     </HabitsContext.Provider>

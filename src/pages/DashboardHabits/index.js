@@ -44,8 +44,8 @@ const DashboardHabits = () => {
           <HabitsBox>
             <h1 className="DashboardTitle">meus hábitos</h1>
             <div>
-              {habitsList.map((habit) => {
-                return <HabitCard key={habit.id} habit={habit} />;
+              {habitsList.map((habit, index) => {
+                return <HabitCard key={index} habit={habit} />;
               })}
             </div>
             <button onClick={handleOpenHabitsCreator}>Novo hábito</button>

@@ -5,7 +5,7 @@ import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { ActivityBox } from "./style";
 
-const ActivityCard = ({ activity }) => {
+const ActivityCard = ({ activity, setActivitiesList, group }) => {
   const [specificActivity, setSpecificActivity] = useState([]);
   const { token } = useToken();
   const config = { headers: { Authorization: `Bearer ${token}` } };
@@ -25,10 +25,13 @@ const ActivityCard = ({ activity }) => {
   };
 
   const deleteActivity = () => {
-    // getOneActivity();
+    const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
     api
-      .delete(`/activities/${activity.id}/`, config)
-      .then((response) => console.log(response))
+      .delete(`/activities/${activity.id}/`, {
+        headers: { Authorization: `Bearer ${tk}` }
+      })
+      .then(() => api.get(`activities/?group=${group.id}`))
+      .then(res => setActivitiesList(res.data.results))
       .catch((err) => console.log(err));
   };
 

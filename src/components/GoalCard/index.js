@@ -24,9 +24,11 @@ const GoalCard = ({ goal, setGoalsList, group }) => {
   };
 
   const deleteGoal = () => {
-    // getOneGoal();
+    const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
     api
-      .delete(`/goals/${goal.id}/`, config)
+      .delete(`/goals/${goal.id}/`, {
+        headers: { Authorization: `Bearer ${tk}` }
+      })
       .then((_) => toast.info("Deletado!"))
       .then((res) => api.get(`/goals/?group=${group.id}`))
       .then((res) => setGoalsList(res.data.results))
