@@ -49,8 +49,8 @@ const DashboardMain = () => {
               );
             })}
           </div>
-
-          <div className="mainGroups"> Meus grupos
+          <div className="mainGroups">
+            <h1 className="DashboardTitle">meus grupos</h1>
             {groupsList.map((group, index) => {
               return (
                 <div key={index}>

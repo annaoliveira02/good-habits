@@ -38,7 +38,8 @@ const Login = () => {
         const { access } = response.data;
         setAuthenticated(true);
         localStorage.setItem("@gestaohabitosg5:token", JSON.stringify(access));
-
+        setAuthenticated(true);
+        // setToken(access);
         return history.push("/DashboardMain");
       })
       .catch((err) =>
