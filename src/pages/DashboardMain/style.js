@@ -16,9 +16,9 @@ export const DashboardMainBox = styled.div`
 
     .mainHabits {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         width: 96%;
         min-height: 30vh;
         margin-block: 5px;
@@ -27,9 +27,9 @@ export const DashboardMainBox = styled.div`
 
     .mainGroups {
         display: flex;
-        flex-direction: column;
+        flex-wrap:wrap;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         width: 96%;
         min-height: 30vh;
         margin: 5px;
