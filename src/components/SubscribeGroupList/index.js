@@ -8,7 +8,7 @@ import { useToken } from "../../Providers/token";
 const SubscribeGroupList = ({ result }) => {
     console.log(result.id);
     const [isSubscribed, setIsSubscribed] = useState(false);
-    const { groupsList } = useContext(GroupsContext);
+    const { groupsList, setGroupsList, getGroups } = useContext(GroupsContext);
     const { token } = useToken();
 
     useEffect(() => {   // Verifica se usuário já é inscrito naquele grupo. Se for, desabilita o botão
@@ -17,15 +17,20 @@ const SubscribeGroupList = ({ result }) => {
         }
     }, []);
 
-    const handleSubscription = () => {
+    const handleSubscription = async () => {
         api.post(`groups/${result.id}/subscribe/`, {},
             {
                 headers: { Authorization: `Bearer ${token}` }
             })
-            .then(res => console.log(res))
+            .then(res => api
+                .get("/groups/subscriptions/", {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+                .then((res) => {
+                    setGroupsList(res.data)
+                }))
             .catch(err => console.log(err))
     }
-
 
     return (
         <ListContainer isSubscribed={isSubscribed}>
