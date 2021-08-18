@@ -25,10 +25,43 @@ export const HabitContainer = styled.div`
         font-weight: 400;
     }
 
+    > div {
+        font-size: 22px;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .progressEdit {
+        display:flex;
+        justify-content: center;
+    }
+
     .HabitButtons {
         display:flex;
+        flex-direction: column;
         align-items:center;
         justify-content: center;
+    }
+
+    .reset {
+        margin-inline: 3px;
+        margin-block: 5px;
+        cursor: pointer;
+        padding: 8px;
+        border: none;
+        outline: none;
+        background-color: #37C57E;
+        border-radius: 50px;
+        color: white;
+        font-size: 10px;
+        font-weight: bold;
+        font-family: "Nunito", sans-serif;
+
+        &:hover {
+            background-color: #3FDA99;
+            color: black;
+            transition: 0.4s;
+        }
     }
 
     button {
@@ -43,11 +76,12 @@ export const HabitContainer = styled.div`
         color: white;
         font-size: 10px;
         font-weight: bold;
-        font-family: "Nunito", sans serif;
+        font-family: "Nunito", sans-serif;
 
         &:hover {
             background-color: #91BFEB;
             color: black;
             transition: 0.4s;
         }
-`
+    }
+`;

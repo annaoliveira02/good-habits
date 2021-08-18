@@ -45,18 +45,19 @@ export const HabitsProvider = ({ children }) => {
       .then((response) => setHabitsList(filteredHabits));
   };
 
-  const editHabit = (data) => {
-    const { how_much_achieved, achieved, id } = data;
+  const editHabit = (data, habit) => {
+    console.log('Na requisição: ', data);
     api
       .patch(
-        `/habits/${id}/`,
-        {
-          how_much_achieved: how_much_achieved,
-          achieved: achieved,
-        },
+        `/habits/${habit.id}/`,
+        data,
         config
       )
-      .catch((e) => toast.error("Falha ao editar "));
+      .then(res => habit = {
+        ...habit,
+        how_much_achieved: res.data.how_much_achieved,
+        achieved: res.data.achieved
+      })
   };
 
   const getHabits = (tk) => {

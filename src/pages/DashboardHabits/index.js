@@ -7,7 +7,7 @@ import { useHabits } from "../../Providers/habits";
 import HabitCard from "../../components/HabitCard";
 import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HabitCreator from "../../components/HabitCreator";
 import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
@@ -17,10 +17,16 @@ import { GrAdd } from "react-icons/gr";
 import ModalComponent from "../../components/Modal";
 
 const DashboardHabits = () => {
-  const { habitsList, addHabit } = useHabits();
+  const { habitsList, getHabits } = useHabits();
   const [showDrawer, setShowDrawer] = useState(false);
   const { authenticated } = useAuthentication();
   const [openModalCreator, setOpenModalCreator] = useState(false);
+
+  useEffect(() => {
+    const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
+    getHabits(tk);
+
+  }, []);
 
   const handleOpenHabitsCreator = () => {
     setOpenModalCreator(true);
