@@ -40,13 +40,6 @@ const GoalCard = ({ goal, setGoalsList, group }) => {
       .delete(`/goals/${goal.id}/`, {
         headers: { Authorization: `Bearer ${tk}` }
       })
-      .then(() => toast.success("Meta excluída!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        }))
       .then((res) => api.get(`/goals/?group=${group.id}`))
       .then((res) => setGoalsList(res.data.results))
       .catch((err) => console.log(err));

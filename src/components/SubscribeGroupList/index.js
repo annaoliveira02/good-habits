@@ -3,6 +3,7 @@ import { GroupsContext } from "../../Providers/groups";
 import { useContext, useState, useEffect } from "react";
 import api from '../../services/api';
 import { useToken } from "../../Providers/token";
+import { toast } from "react-toastify";
 
 
 const SubscribeGroupList = ({ result }) => {
@@ -22,6 +23,13 @@ const SubscribeGroupList = ({ result }) => {
             {
                 headers: { Authorization: `Bearer ${token}` }
             })
+            .then(toast.success("Inscrição feita com sucesso!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                }))
             .then(res => api
                 .get("/groups/subscriptions/", {
                     headers: { Authorization: `Bearer ${token}` }

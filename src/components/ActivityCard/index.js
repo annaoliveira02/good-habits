@@ -44,13 +44,6 @@ const ActivityCard = ({ activity, setActivitiesList, group }) => {
       .delete(`/activities/${activity.id}/`, {
         headers: { Authorization: `Bearer ${tk}` }
       })
-      .then(() => toast.success("Atividade excluída!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        }))
       .then(() => api.get(`activities/?group=${group.id}`))
       .then(res => setActivitiesList(res.data.results))
       .catch((err) => console.log(err));

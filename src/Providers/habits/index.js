@@ -36,7 +36,7 @@ export const HabitsProvider = ({ children }) => {
       )
       .then((e) => {
         setHabitsList([...habitsList, e.data])
-        toast.success("Hábito adicionado com sucesso!", {
+        toast.success("Hábito criado com sucesso!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
