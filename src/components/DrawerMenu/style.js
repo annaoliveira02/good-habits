@@ -13,6 +13,8 @@ export const DrawerContainer = styled.div`
         margin-block-end: 15px;
     }
 
+    
+
     @media(min-width: 600px) {
         display: none
     }

@@ -9,7 +9,7 @@ import DrawerMenu from "../../components/DrawerMenu";
 import ModalComponent from '../../components/Modal';
 import GroupCreatorPopup from "../../components/GroupCreator";
 import GroupCard from "../../components/GroupCard";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GroupsContext } from "../../Providers/groups";
 import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
@@ -20,10 +20,17 @@ import { GrAdd } from "react-icons/gr"
 const DashboardGroups = () => {
   const [openModalCreator, setOpenModalCreator] = useState(false);
   const [openModalSubscribe, setOpenModalSubscribe] = useState(false);
-  const { groupsList } = useContext(GroupsContext);
+  const { groupsList, getGroups } = useContext(GroupsContext);
   const [showDrawer, setShowDrawer] = useState(false);
   const { authenticated } = useAuthentication();
 
+  useEffect(() => {
+
+    const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
+    getGroups(tk);
+
+  }, [])
+  // console.log('Foi');
 
   const handleOpenCreator = () => {
     setOpenModalCreator(true);
@@ -36,6 +43,7 @@ const DashboardGroups = () => {
   if (authenticated === false) {
     return <Redirect to="/login" />;
   }
+
 
   return (
     <div>
@@ -52,8 +60,8 @@ const DashboardGroups = () => {
         <DashboardMainBox>
           <GroupsBox>
             <h1 className="DashboardTitle">meus grupos</h1>
-            {groupsList.map((group) => (
-              <GroupCard key={group.id} group={group} />
+            {groupsList.map((group, index) => (
+              <GroupCard key={index} group={group} />
             ))}
             <div className="groupsButton" onClick={handleOpenCreator}>
               <GrAdd/>

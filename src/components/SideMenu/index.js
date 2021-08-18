@@ -12,7 +12,7 @@ import { UserContext } from "../../Providers/user";
 const SideMenu = () => {
   const [open, setOpen] = useState(false);
   const { setAuthenticated } = useAuthentication();
-  const { userName } = useContext(UserContext)
+  const { userName } = useContext(UserContext);
   const handleOpen = () => {
     setOpen(true);
   };

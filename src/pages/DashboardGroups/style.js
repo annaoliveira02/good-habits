@@ -4,7 +4,7 @@ export const GroupsBox = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 0;
     overflow: auto;
 
@@ -31,6 +31,7 @@ export const GroupsBox = styled.div`
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        align-self: center;
         padding: 12px;
         border-radius: 100px;
         background-color: #FFD6B7;
@@ -38,6 +39,7 @@ export const GroupsBox = styled.div`
         font-size: 28px;
         color: white;
         cursor: pointer;
+        margin-block-end: 15px;
 
         &:hover {
             background-color: rgba(247, 133, 55, 1);

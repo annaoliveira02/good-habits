@@ -4,23 +4,30 @@ import { DashboardContainer } from "../../styles/mainContainers";
 import { DashboardMainBox } from "./style";
 import Footer from "../../components/Footer";
 import { useHabits } from "../../Providers/habits";
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
-import { useContext } from "react";
 import { GroupsContext } from "../../Providers/groups";
 import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
 
 const DashboardMain = () => {
-  const { habitsList, editHabit } = useHabits();
-  const { groupsList } = useContext(GroupsContext);
+  const { habitsList, editHabit, getHabits } = useHabits();
+  const { groupsList, getGroups } = useContext(GroupsContext);
   const [showDrawer, setShowDrawer] = useState(false);
   const { authenticated } = useAuthentication();
+
+  useEffect(() => {
+    const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
+    getGroups(tk);
+    getHabits(tk);
+
+  }, []);
 
   if (!authenticated) {
     return <Redirect to="/login" />;
   }
+
 
   return (
     <div>
