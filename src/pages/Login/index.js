@@ -15,11 +15,11 @@ import { useAuthentication } from "../../Providers/Authentication";
 const Login = () => {
   const { authenticated, setAuthenticated } = useAuthentication();
   const schema = yup.object().shape({
-    username: yup.string().required("User Name obrigatório"),
+    username: yup.string().required("Campo obrigatório"),
     password: yup
       .string()
       .min(6, "Mínimo de 6 caracateres")
-      .required("Senha obrigatória"),
+      .required("Campo obrigatório"),
   });
 
   const {
@@ -60,30 +60,29 @@ const Login = () => {
         <Content>
           <AnimationContainer>
             <form onSubmit={handleSubmit(onSubmitLogin)}>
-              <h1>Login</h1>
-
+              <h1>login</h1>
               <TextField
                 variant="outlined"
-                margin="normal"
+                margin="dense"
                 size="small"
-                label="Nome de Usuário"
+                placeholder="Nome de usuário"
                 {...register("username")}
                 helperText={errors.username?.message}
               />
               <TextField
                 variant="outlined"
-                margin="normal"
-                label="Senha"
+                margin="dense"
+                placeholder="Senha"
                 size="small"
                 type="password"
                 {...register("password")}
                 helperText={errors.password?.message}
               />
 
-              <button type="submit">Login</button>
-              <p>
-                Não possui conta? <Link to="/signUp">Crie a sua</Link>
-              </p>
+              <button type="submit">Entrar</button>
+              <h2>
+                Não possui conta? <Link to="/signUp">Crie a sua!</Link>
+              </h2>
             </form>
           </AnimationContainer>
         </Content>

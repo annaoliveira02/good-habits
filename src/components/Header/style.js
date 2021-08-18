@@ -7,9 +7,7 @@ export const HeaderMain = styled.div`
     width: 100vw;
     padding: 30px 0;
     background-color: #FFD6B7;
-    position: absolute;
-    top: 0;
-    left: 0;
+    margin-block-start: 0;
 
     .MenuButton {
         align-self: center;

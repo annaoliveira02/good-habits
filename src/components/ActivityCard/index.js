@@ -4,10 +4,13 @@ import api from "../../services/api";
 import { FiEdit } from "react-icons/fi"
 import { AiOutlineDelete } from "react-icons/ai"
 import { ActivityBox } from "./style";
+import { EditText, EditTextarea } from 'react-edit-text';
+import 'react-edit-text/dist/index.css';
 
 const ActivityCard = ({activity}) => {
 
     const [specificActivity, setSpecificActivity] = useState([])
+    const [newActivity, setNewActivity] = useState(activity.title)
     const { token } = useToken();
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
@@ -19,9 +22,11 @@ const ActivityCard = ({activity}) => {
     }
 
     const editActivity = () => {
-        getOneActivity();  
+        getOneActivity();
+        const submitData = { title: newActivity }
+        console.log(submitData)  
         api
-            .patch(`/activities/${specificActivity.id}/`, config)
+            .patch(`/activities/${activity.id}/`, submitData, config)
             .catch((err) => console.log(err))
     }
 
@@ -34,9 +39,14 @@ const ActivityCard = ({activity}) => {
 
     return (
         <ActivityBox>
-            <div className="activityTitle">{activity.title}</div>
+            <div>
+              <EditText
+                placeholder={activity.title} 
+                value={newActivity}
+                onChange={setNewActivity}/>
+            </div>
             <div className="activityButtons">
-              <button><FiEdit/></button>
+              <button onClick={editActivity}><FiEdit/></button>
               <button onClick={deleteActivity}><AiOutlineDelete/></button>  
             </div>            
         </ActivityBox>

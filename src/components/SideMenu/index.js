@@ -6,10 +6,13 @@ import UpdateUser from "../updateUser";
 import React from "react";
 import { useAuthentication } from "../../Providers/Authentication";
 import Modal from "../Modal";
+import { useContext } from "react";
+import { UserContext } from "../../Providers/user";
 
 const SideMenu = () => {
   const [open, setOpen] = useState(false);
   const { setAuthenticated } = useAuthentication();
+  const { userName } = useContext(UserContext)
   const handleOpen = () => {
     setOpen(true);
   };
@@ -25,6 +28,7 @@ const SideMenu = () => {
   return (
     <MenuContainer>
       <img src="https://i.pravatar.cc/120" alt="avatar" />
+      <h4 className="userTitle">Olá, {userName}</h4>
       <MenuButton onClick={() => history.push("/dashboardMain")}>
         Início
       </MenuButton>

@@ -35,15 +35,14 @@ const DashboardMain = () => {
       <DashboardContainer>
         <SideMenu />
         <DashboardMainBox>
-
           <div className="mainHabits">
             <h1 className="DashboardTitle">meus hábitos</h1>
             {habitsList.map((habits, index) => {
               return (
-                <div key={index}>
-                  <h4>{habits.title}</h4>
+                <div className="habitsMinicard" key={index}>
+                  <h1>{habits.title}</h1>
                   <button onClick={() => editHabit(habits)}>
-                    editar hábito
+                    concluir hábito
                   </button>
                 </div>
               );
@@ -53,8 +52,9 @@ const DashboardMain = () => {
             <h1 className="DashboardTitle">meus grupos</h1>
             {groupsList.map((group, index) => {
               return (
-                <div key={index}>
-                  {group.name} - {group.category}
+                <div className="groupsMinicard" key={index}>
+                  <h1>{group.name}</h1>
+                  <h3>Categoria: {group.category}</h3>
                 </div>
               );
             })}

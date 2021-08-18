@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useToken } from "../../Providers/token";
 import api from "../../services/api";
-import { FiEdit } from "react-icons/fi"
+import { BsCheck } from "react-icons/bs"
 import { AiOutlineDelete } from "react-icons/ai"
 import { GoalBox } from "./style";
+import { toast } from "react-toastify";
 
 const GoalCard = ({goal}) => {
 
@@ -11,22 +12,24 @@ const GoalCard = ({goal}) => {
     const { token } = useToken();
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
-    // const getOneGoal = () => {
-    //     api
-    //         .get(`/goals/${goal.id}/`)
-    //         .then((response) => setSpecificGoal(response))
-    //         .catch((err) => console.log(err))
-    // }
+    const getOneGoal = () => {
+        api
+            .get(`/goals/${goal.id}/`)
+            .then((response) => setSpecificGoal(response))
+            .catch((err) => console.log(err))
+    }
 
     const editGoal = () => {
-        // getOneGoal();  
+        getOneGoal();
+        const achievedGoal = { "achieved": true }  
         api
-            .patch(`/goals/${goal.id}/`, config)
+            .patch(`/goals/${goal.id}/`, achievedGoal, config)
+            .then(toast.success("Meta realizada com sucesso!"))
             .catch((err) => console.log(err))
     }
 
     const deleteGoal = () => {
-        // getOneGoal();
+        getOneGoal();
         api
             .delete(`/goals/${goal.id}/`, config)
             .catch((err) => console.log(err))
@@ -36,7 +39,7 @@ const GoalCard = ({goal}) => {
         <GoalBox>
             <div className="goalTitle">{goal.title}</div>
             <div className="goalButtons">
-              <button><FiEdit/></button>
+              <button onClick={editGoal}><BsCheck/></button>
               <button onClick={deleteGoal}><AiOutlineDelete/></button>  
             </div>            
         </GoalBox>
