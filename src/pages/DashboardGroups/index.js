@@ -15,6 +15,7 @@ import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
 import { GroupsBox } from "./style";
 import SubscribeGroup from '../../components/SubscribeGroup';
+import { GrAdd } from "react-icons/gr"
 
 const DashboardGroups = () => {
   const [openModalCreator, setOpenModalCreator] = useState(false);
@@ -62,7 +63,14 @@ const DashboardGroups = () => {
             {groupsList.map((group, index) => (
               <GroupCard key={index} group={group} />
             ))}
-            <button onClick={handleOpenCreator}>Novo grupo</button>
+            <div className="groupsButton" onClick={handleOpenCreator}>
+              <GrAdd/>
+            </div>  
+            
+            <div className="GroupExplorer">
+              <h1 className="DashboardTitle">explorar grupos</h1>
+              <button onClick={handleOpenSubscribe} > Procurar grupo novo </button>
+            </div>
             <ModalComponent
               openModal={openModalCreator}
               setOpenModal={setOpenModalCreator}
@@ -70,15 +78,9 @@ const DashboardGroups = () => {
               <GroupCreatorPopup />
             </ModalComponent>
           </GroupsBox>
-          <GroupsBox>
-            <h1 className="DashboardTitle">explorar grupos</h1>
-            <div className="GroupExplorer">
-              <button onClick={handleOpenSubscribe} > Procurar grupo novo </button>
-            </div>
             <ModalComponent openModal={openModalSubscribe} setOpenModal={setOpenModalSubscribe}>
               <SubscribeGroup />
             </ModalComponent>
-          </GroupsBox>
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />

@@ -11,6 +11,7 @@ to {
     transform: translateX(0px)
 }
 `;
+
 const showUp = keyframes`
 from{
     opacity: 0;
@@ -41,7 +42,7 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 90%;
   max-width: 400px;
 `;
 
@@ -52,31 +53,56 @@ export const AnimationContainer = styled.div`
   align-items: center;
   justify-content: center;
   animation: ${appearFromRight} 1s;
-  /* background: #DEBBA0 */
-  form {
-    margin: 30px 0;
-    width: 280px;
-    text-align: center;
-  }
-  button {
-    margin-top: 15px;
-    width: 280px;
-    height: 40px;
-    background-color: rgba(246, 72, 37, 1);
-    border-radius: 10px;
-    border-style: none;
-    font: "Roboto";
-    font-size: 25px;
-    color: #ffffff;
-  }
-  a {
-    font-weight: bold;
-    color: rgba(246, 72, 37, 1);
-    text-decoration: none;
-    font-size: 18px;
-  }
-  p {
-    margin-top: 15px;
-    font-size: 18px;
-  }
+
+    h1 {
+      font-family: "Flamenco", cursive;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 200;
+    }
+
+    form {
+      margin: 30px 0;
+      width: 280px;
+      text-align: center;
+    }
+
+    input {
+      font-family: "Nunito";
+      font-size: 14px;
+    }
+
+    button {
+      margin-block: 15px;
+      width: 200px;
+      height: 40px;
+      background-color: rgba(246, 72, 37, 1);
+      border-radius: 50px;
+      border-style: none;
+      font-family: "Nunito", sans-serif;
+      font-size: 18px;
+      color: #ffffff;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(247, 133, 55, 1);
+        transition: 0.2s;
+      }
+    }
+
+    a {
+      font-weight: bold;
+      color: rgba(246, 72, 37, 1);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    p {
+      margin-top: 3px;
+      font-size: 10px;
+      color: red;
+      font-family: "Nunito", sans-serif;
+    }
 `;

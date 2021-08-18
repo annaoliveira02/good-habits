@@ -13,6 +13,7 @@ import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
 import { HabitsBox } from "./style";
 import ModalContainer from '../../components/Modal';
+import { GrAdd } from "react-icons/gr"
 
 const DashboardHabits = () => {
   const { habitsList, addHabit } = useHabits();
@@ -23,6 +24,16 @@ const DashboardHabits = () => {
   const handleOpenHabitsCreator = () => {
     setOpenModalCreator(true);
   };
+
+  const setMotivation = () => {
+    if (habitsList.length <= 3) {
+      return <div className="motivationMessage">Crie novos hábitos e otimize sua rotina!</div>
+    } else if (habitsList.length <= 7 && habitsList.length > 3) {
+      return <div className="motivationMessage">Você está no caminho certo! Tente manter a disciplina!</div>
+    } else if (habitsList.length > 7) {
+      return <div className="motivationMessage">Muitos hábitos novos... Melhor priorizar alguns pra não ficar sobrecarregado!</div>
+    }
+  }
 
   if (authenticated === false) {
     return <Redirect to="/login" />;
@@ -43,12 +54,17 @@ const DashboardHabits = () => {
         <DashboardMainBox>
           <HabitsBox>
             <h1 className="DashboardTitle">meus hábitos</h1>
-            <div>
-              {habitsList.map((habit, index) => {
+               {habitsList.map((habit, index) => {
                 return <HabitCard key={index} habit={habit} />;
               })}
+            <div className="habitsButton" onClick={handleOpenHabitsCreator}>
+              <GrAdd/>
+            </div>          
+            <div className="habitsExplorer">
+              <h1 className="DashboardTitle">mais informações</h1>
+              <p className="habitsCounter">Você possui {habitsList.length} hábito(s)!</p>
+              {setMotivation()}
             </div>
-            <button onClick={handleOpenHabitsCreator}>Novo hábito</button>
           </HabitsBox>
           <ModalContainer
             openModal={openModalCreator}
@@ -56,8 +72,6 @@ const DashboardHabits = () => {
           >
             <HabitCreator />
           </ModalContainer>
-
-          <div>Mais informações</div>
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />

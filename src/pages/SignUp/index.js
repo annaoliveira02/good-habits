@@ -12,9 +12,7 @@ const SignUp = ({ authenticated }) => {
   return (
     <div>
       <Header />
-      <InitialContainer>
         <SignUpForm />
-      </InitialContainer>
       <Footer />
     </div>
   );

@@ -9,7 +9,7 @@ export const InitialContainer = styled.div`
   margin: 15px;
   width: 90vw;
   min-height: 70vh;
-  margin-block-start: 70px;
+  margin-block: 20px;
   border-radius: 5px;
 `;
 
@@ -23,10 +23,8 @@ export const DashboardContainer = styled.div`
   margin: 15px;
   width: 90vw;
   min-height: 70vh;
-  max-height: 70vh;
-  margin-block-start: 70px;
+  margin-block: 20px;
   border-radius: 5px;
-  overflow: auto;
 `;
 
 export const MainButton = styled.button`
