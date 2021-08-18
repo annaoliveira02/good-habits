@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../../services/api";
 import { useToken } from "../token";
@@ -34,15 +34,29 @@ export const HabitsProvider = ({ children }) => {
         },
         { headers: { Authorization: `Bearer ${token}` } }
       )
-      .then((e) => setHabitsList([...habitsList, e.data]))
-      .catch((error) => console.log(error));
+      .then((e) => {
+        setHabitsList([...habitsList, e.data])
+        toast.success("Hábito adicionado com sucesso!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          });})
+      .catch(() => toast.error("Algo deu errado. Tente novamente.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          }));
   };
 
   const removeHabit = (id) => {
     const filteredHabits = habitsList.filter((habit) => habit.id !== id);
     api
       .delete(`/habits/${id}/`, config)
-      .then((response) => setHabitsList(filteredHabits));
+      .then(() => setHabitsList(filteredHabits));
   };
 
   const editHabit = (data) => {
@@ -56,7 +70,20 @@ export const HabitsProvider = ({ children }) => {
         },
         config
       )
-      .catch((e) => toast.error("Falha ao editar "));
+      .then(toast.success("Suas alterações foram salvas.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        }))
+      .catch((e) => toast.error("Algo deu errado. Tente novamente.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        }));
   };
 
   const getHabits = (tk) => {

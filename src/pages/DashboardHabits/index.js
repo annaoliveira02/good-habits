@@ -16,7 +16,7 @@ import ModalContainer from '../../components/Modal';
 import { GrAdd } from "react-icons/gr"
 
 const DashboardHabits = () => {
-  const { habitsList, addHabit } = useHabits();
+  const { habitsList } = useHabits();
   const [showDrawer, setShowDrawer] = useState(false);
   const { authenticated } = useAuthentication();
   const [openModalCreator, setOpenModalCreator] = useState(false);

@@ -3,11 +3,8 @@ import GlobalStyle from "./styles/global";
 import Routes from "./routes/index";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { useState } from "react";
 
 function App() {
-
-  const [openDrawer, setOpenDrawer] = useState(false)
 
   return (
     <div className="App">

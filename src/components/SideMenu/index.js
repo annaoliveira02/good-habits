@@ -5,7 +5,6 @@ import { useState } from "react";
 import UpdateUser from "../updateUser";
 import React from "react";
 import { useAuthentication } from "../../Providers/Authentication";
-import Modal from "../Modal";
 import { useContext } from "react";
 import { UserContext } from "../../Providers/user";
 

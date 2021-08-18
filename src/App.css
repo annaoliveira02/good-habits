@@ -13,3 +13,8 @@
   font-size: calc(10px + 2vmin);
   color: #3B322C;
 }
+
+.Toastify__toast {
+  font-family: "Nunito", sans-serif;
+  font-size: 14px;
+}

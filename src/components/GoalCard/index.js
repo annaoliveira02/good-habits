@@ -14,7 +14,8 @@ const GoalCard = ({ goal, setGoalsList, group }) => {
   const getOneGoal = () => {
     api
       .get(`/goals/${goal.id}/`)
-      .then((response) => setSpecificGoal(response))
+      .then((response) => {setSpecificGoal(response)
+      console.log(specificGoal)})
       .catch((err) => console.log(err))
   }
 
@@ -23,7 +24,13 @@ const GoalCard = ({ goal, setGoalsList, group }) => {
     const achievedGoal = { "achieved": true }  
     api
       .patch(`/goals/${goal.id}/`, achievedGoal, config)
-      .then(toast.success("Meta realizada com sucesso!"))
+      .then(toast.success("Meta concluída! Parabéns!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        }))
       .catch((err) => console.log(err))
   }
 
@@ -33,7 +40,13 @@ const GoalCard = ({ goal, setGoalsList, group }) => {
       .delete(`/goals/${goal.id}/`, {
         headers: { Authorization: `Bearer ${tk}` }
       })
-      .then((_) => toast.info("Deletado!"))
+      .then(() => toast.success("Meta excluída!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        }))
       .then((res) => api.get(`/goals/?group=${group.id}`))
       .then((res) => setGoalsList(res.data.results))
       .catch((err) => console.log(err));

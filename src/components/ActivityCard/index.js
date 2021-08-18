@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useToken } from "../../Providers/token";
 import api from "../../services/api";
-import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { ActivityBox } from "./style";
-import { EditText, EditTextarea } from 'react-edit-text';
+import { EditText } from 'react-edit-text';
+import { toast } from "react-toastify";
 import 'react-edit-text/dist/index.css';
 
 const ActivityCard = ({ activity, setActivitiesList, group }) => {
@@ -14,19 +14,27 @@ const ActivityCard = ({ activity, setActivitiesList, group }) => {
   const { token } = useToken();
   const config = { headers: { Authorization: `Bearer ${token}` } };
   
-  //   const getOneActivity = () => {
-  //     api
-  //       .get(`/activities/${activity.id}/`)
-  //       .then((response) => setSpecificActivity(response.data))
-  //       .catch((err) => console.log(err));
-  //   };
+  const getOneActivity = () => {
+    api
+      .get(`/activities/${activity.id}/`)
+      .then((response) => {setSpecificActivity(response.data)
+        console.log(specificActivity)})
+      .catch((err) => console.log(err));
+    };
 
   const editActivity = () => {
-  //  getOneActivity();
+    getOneActivity();
     const submitData = { title: newActivity }
     console.log(submitData)  
     api
         .patch(`/activities/${activity.id}/`, submitData, config)
+        .then(() => toast.success("Atividade alterada com sucesso!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          }))
         .catch((err) => console.log(err))
   };
 
@@ -36,6 +44,13 @@ const ActivityCard = ({ activity, setActivitiesList, group }) => {
       .delete(`/activities/${activity.id}/`, {
         headers: { Authorization: `Bearer ${tk}` }
       })
+      .then(() => toast.success("Atividade excluída!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        }))
       .then(() => api.get(`activities/?group=${group.id}`))
       .then(res => setActivitiesList(res.data.results))
       .catch((err) => console.log(err));
@@ -45,12 +60,11 @@ const ActivityCard = ({ activity, setActivitiesList, group }) => {
     <ActivityBox>
       <div>
         <EditText
-          placeholder={activity.title} 
           value={newActivity}
-          onChange={setNewActivity}/>
+          onChange={setNewActivity}
+          onSave={editActivity}/>
       </div>
       <div className="activityButtons">
-        <button onClick={editActivity}><FiEdit/></button>
         <button onClick={deleteActivity}><AiOutlineDelete/></button>  
       </div>            
     </ActivityBox>
