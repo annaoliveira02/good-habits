@@ -11,7 +11,6 @@ import { GroupsContext } from "../../Providers/groups";
 import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
 import { BsCheck } from "react-icons/bs";
-import { useUser } from "../../Providers/user";
 import api from "../../services/api";
 import jwtDecode from "jwt-decode";
 
@@ -34,7 +33,7 @@ const DashboardMain = () => {
         setUser(res.data.username);
       })
       .catch((e) => console.log(e));
-  }, []);
+  }, [user]);
 
   if (!authenticated) {
     return <Redirect to="/login" />;
@@ -47,11 +46,11 @@ const DashboardMain = () => {
         open={showDrawer}
         onClose={() => setShowDrawer(false)}
       >
-        <DrawerMenu user={user} />
+        <DrawerMenu user={user} setUser={setUser} />
       </Drawer>
       <Header setShowDrawer={setShowDrawer} />
       <DashboardContainer>
-        <SideMenu user={user} />
+        <SideMenu user={user} setUser={setUser} />
         <DashboardMainBox>
           <div className="mainHabits">
             <h1 className="DashboardTitle">meus hábitos</h1>

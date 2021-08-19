@@ -6,12 +6,12 @@ import { TextField } from "@material-ui/core";
 import { Container } from "./style";
 import api from "../../services/api";
 import { toast } from "react-toastify";
-import { useContext } from 'react';
+import { useContext } from "react";
 import { GroupsContext } from "../../Providers/groups";
 
-const AddGoalModal = ({ group, setGoalsList }) => {
+const AddGoalModal = ({ setOpenGoal, group, setGoalsList }) => {
   const id = group.id;
-  const { getGroups } = useContext(GroupsContext)
+  const { getGroups } = useContext(GroupsContext);
   const { addGoal } = useGoalsActivities();
   const schema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
@@ -25,17 +25,19 @@ const AddGoalModal = ({ group, setGoalsList }) => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleAdd = (data) => {
+    setOpenGoal(false);
     data.how_much_achieved = 0;
     data.group = id;
-    const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
+    const tk = JSON.parse(localStorage.getItem("@gestaohabitosg5:token"));
     api
       .post("/goals/", data, {
-        headers: { Authorization: `Bearer ${tk}` }
+        headers: { Authorization: `Bearer ${tk}` },
       })
-      .then((_) => toast.success("Meta criada!"))
-    api.get(`/goals/?group=${group.id}`)
-      .then(res => setGoalsList(res.data.results))
-      .then(res => getGroups());
+      .then((_) => toast.success("Meta criada!"));
+    api
+      .get(`/goals/?group=${group.id}`)
+      .then((res) => setGoalsList(res.data.results))
+      .then((res) => getGroups());
   };
 
   return (

@@ -10,7 +10,7 @@ import { useToken } from "../../Providers/token";
 import { GroupsContext } from "../../Providers/groups";
 import { toast } from "react-toastify";
 
-const GroupCreatorPopup = () => {
+const GroupCreatorPopup = ({ setOpenModalCreator }) => {
   const { setGroupsList } = useContext(GroupsContext);
   const [selectedArray, setSelectedArray] = useState([1, 0, 0]);
   const categories = ["Saúde", "Estudos", "Trabalho"];
@@ -47,6 +47,7 @@ const GroupCreatorPopup = () => {
   //  e pega o elemento dessa mesma posição em "categories".
 
   const createGroup = (data) => {
+    setOpenModalCreator(false);
     const categoryArr = getCategory();
     data.category = categoryArr[0];
     // const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
@@ -54,27 +55,32 @@ const GroupCreatorPopup = () => {
       .post("/groups/", data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then(() => toast.success("Grupo criado com sucesso!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        }))
-      .then((res) => api
-        .get('/groups/subscriptions/', {
-          headers: { Authorization: `Bearer ${token}` }
+      .then(() =>
+        toast.success("Grupo criado com sucesso!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
         })
-        .then(res => setGroupsList(res.data))
       )
-      .catch(() => toast.error("Algo deu errado. Tente novamente.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        }))
-  }
+      .then((res) =>
+        api
+          .get("/groups/subscriptions/", {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((res) => setGroupsList(res.data))
+      )
+      .catch(() =>
+        toast.error("Algo deu errado. Tente novamente.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        })
+      );
+  };
 
   return (
     <GroupCreaterContainer

@@ -5,7 +5,7 @@ import { useState } from "react";
 import ModalComponent from "../Modal";
 import UpdateUser from "../updateUser";
 
-const DrawerMenu = ({ user }) => {
+const DrawerMenu = ({ user, setUser }) => {
   const history = useHistory();
   const { setAuthenticated } = useAuthentication();
   const [open, setOpen] = useState(false);
@@ -35,7 +35,7 @@ const DrawerMenu = ({ user }) => {
       </DrawerButton>
       <DrawerButton onClick={handleOpen}>Configurações</DrawerButton>
       <ModalComponent openModal={open} setOpenModal={setOpen}>
-        <UpdateUser />
+        <UpdateUser setOpenModal={setOpen} setUser={setUser} />
       </ModalComponent>
       <DrawerButton onClick={handleLogout}>Logout</DrawerButton>
     </DrawerContainer>

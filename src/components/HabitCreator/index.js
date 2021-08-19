@@ -1,4 +1,3 @@
-import { useUser } from "../../Providers/user";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -7,11 +6,9 @@ import HabitsCreatorContainer from "./style";
 import { TextField } from "@material-ui/core";
 import jwtDecode from "jwt-decode";
 
-const HabitCreator = () => {
+const HabitCreator = ({ setOpenModal }) => {
   const { addHabit } = useHabits();
-  // const { userId } = useUser();
 
-  // esse componente é um modal que deve abrir na tela ao clicar no botão Novo hábito
   const schema = yup.object().shape({
     title: yup.string().required("Título obrigatório"),
     category: yup.string().required("Categoria obrigatoria"),
@@ -26,7 +23,8 @@ const HabitCreator = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleForm = (data) => {
-    const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'))
+    setOpenModal(false);
+    const tk = JSON.parse(localStorage.getItem("@gestaohabitosg5:token"));
     const userId = jwtDecode(tk).user_id;
     const completeData = Object.assign(data, {
       achieved: false,
@@ -38,40 +36,40 @@ const HabitCreator = () => {
 
   return (
     <HabitsCreatorContainer onSubmit={handleSubmit(handleForm)}>
-        <h2>crie o seu hábito</h2>
-        <TextField 
-          variant="outlined"
-          size="small"
-          margin="dense"
-          placeholder="Título"
-          {...register("title")}
-          helperText={errors.title?.message}
-        />
-        <TextField
-          variant="outlined"
-          size="small"
-          margin="dense"
-          placeholder="Categoria"
-          {...register("category")}
-          helperText={errors.category?.message}
-        />
-        <TextField
-          variant="outlined"
-          size="small"
-          margin="dense"
-          placeholder="Dificuldade"
-          {...register("difficulty")}
-          helperText={errors.difficulty?.message}
-        />
-        <TextField
-          variant="outlined"
-          size="small"
-          margin="dense"
-          placeholder="Frequência"
-          {...register("frequency")}
-          helperText={errors.frequency?.message}
-        />      
-        <button type="submit">Criar hábito</button>
+      <h2>crie o seu hábito</h2>
+      <TextField
+        variant="outlined"
+        size="small"
+        margin="dense"
+        placeholder="Título"
+        {...register("title")}
+        helperText={errors.title?.message}
+      />
+      <TextField
+        variant="outlined"
+        size="small"
+        margin="dense"
+        placeholder="Categoria"
+        {...register("category")}
+        helperText={errors.category?.message}
+      />
+      <TextField
+        variant="outlined"
+        size="small"
+        margin="dense"
+        placeholder="Dificuldade"
+        {...register("difficulty")}
+        helperText={errors.difficulty?.message}
+      />
+      <TextField
+        variant="outlined"
+        size="small"
+        margin="dense"
+        placeholder="Frequência"
+        {...register("frequency")}
+        helperText={errors.frequency?.message}
+      />
+      <button type="submit">Criar hábito</button>
     </HabitsCreatorContainer>
   );
 };
