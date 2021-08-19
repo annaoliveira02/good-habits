@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 
 const AppearSlow = keyframes`
     from {
@@ -9,7 +9,6 @@ const AppearSlow = keyframes`
         opacity: 1;
     }
 `;
-
 
 const GroupCreaterContainer = styled.form`
     background-color: #ff8c64;
@@ -50,7 +49,7 @@ const GroupCreaterContainer = styled.form`
             margin-block-start: 10px;
             border-radius: 5px;
             outline: none;
-            color: rgb(0,0,0, 0.2);
+            color: black;
             border: 1px solid rgb(0,0,0, 0.2);
             background-color: #ff8c64;
 
@@ -107,17 +106,22 @@ const GroupCreaterContainer = styled.form`
 
             .health {
                 color: #6558F5;
-                border: ${props => props.selectedArray[0] === 1 ? '3px solid #6558F5' : 'none'}
+                border: ${(props) =>
+                  props.selectedArray[0] === 1 ? "3px solid #6558F5" : "none"}
             }
 
             .study {
                 color: rgba(246, 72, 37, 1);
-                border: ${props => props.selectedArray[1] === 1 ? '3px solid rgba(246, 72, 37, 1)' : 'none'}
+                border: ${(props) =>
+                  props.selectedArray[1] === 1
+                    ? "3px solid rgba(246, 72, 37, 1)"
+                    : "none"}
             }
 
             .work {
                 color: #35AE9F;
-                border: ${props => props.selectedArray[2] === 1 ? '3px solid #35AE9F' : 'none'}
+                border: ${(props) =>
+                  props.selectedArray[2] === 1 ? "3px solid #35AE9F" : "none"}
             }
         }
 
