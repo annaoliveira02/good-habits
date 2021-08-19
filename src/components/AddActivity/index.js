@@ -7,11 +7,13 @@ import { Container } from "./style";
 import api from '../../services/api';
 import { useToken } from "../../Providers/token";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { GroupsContext } from "../../Providers/groups";
 
 const AddActivityModal = ({ group, setActivitiesList }) => {
   const id = group.id;
   const { token } = useToken();
+  const { getGroups } = useContext(GroupsContext);
 
 
   const { addActivity } = useGoalsActivities();
@@ -61,7 +63,7 @@ const AddActivityModal = ({ group, setActivitiesList }) => {
       .then(_ => {
         api.get(`/activities/?group=${group.id}`)
           .then(res => setActivitiesList(res.data.results))
-          .then(() => reset({}))
+          .then(res => getGroups())
       })
       .catch(err => console.log(err))
   };

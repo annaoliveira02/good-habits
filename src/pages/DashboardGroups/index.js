@@ -30,7 +30,6 @@ const DashboardGroups = () => {
     getGroups(tk);
 
   }, [])
-  // console.log('Foi');
 
   const handleOpenCreator = () => {
     setOpenModalCreator(true);

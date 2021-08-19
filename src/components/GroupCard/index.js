@@ -36,12 +36,13 @@ const GroupCard = ({ group }) => {
   useEffect(() => {
     const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
     // if (token) {
-    api
-      .get(`/goals/?group=${group.id}`, {
-        headers: { Authorization: `Bearer ${tk}` }
-      })
-      .then((res) => setGoalsList(res.data.results))
-      .catch((e) => console.log(e));
+    if (goalsList)
+      api
+        .get(`/goals/?group=${group.id}`, {
+          headers: { Authorization: `Bearer ${tk}` }
+        })
+        .then((res) => setGoalsList(res.data.results))
+        .catch((e) => console.log(e));
 
     api
       .get(`/activities/?group=${group.id}`, {
@@ -54,6 +55,7 @@ const GroupCard = ({ group }) => {
     // getActivities(group.id, tk)
   }, []);
 
+  console.log('GroupCard');
 
   return (
     <GroupContainer>
@@ -93,6 +95,7 @@ const GroupCard = ({ group }) => {
               <GoalCard
                 key={index}
                 goal={goal}
+                goalsList={goalsList}
                 setGoalsList={setGoalsList}
                 group={group}
               />

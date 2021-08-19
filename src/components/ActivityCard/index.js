@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { GroupsContext } from "../../Providers/groups";
 import { useToken } from "../../Providers/token";
 import api from "../../services/api";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -13,6 +14,7 @@ const ActivityCard = ({ activity, setActivitiesList, group, activitiesList }) =>
   const [newActivity, setNewActivity] = useState(activity.title)
   const { token } = useToken();
   const config = { headers: { Authorization: `Bearer ${token}` } };
+  const { getGroups } = useContext(GroupsContext);
 
   useEffect(() => {
     setNewActivity(activity.title);
@@ -35,13 +37,16 @@ const ActivityCard = ({ activity, setActivitiesList, group, activitiesList }) =>
     console.log(submitData)
     api
       .patch(`/activities/${activity.id}/`, submitData, config)
-      .then(() => toast.success("Atividade alterada com sucesso!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-      }))
+      .then(() => {
+        toast.success("Atividade alterada com sucesso!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        })
+        getGroups()
+      })
       .catch((err) => console.log(err))
   };
 
@@ -51,16 +56,9 @@ const ActivityCard = ({ activity, setActivitiesList, group, activitiesList }) =>
       .delete(`/activities/${activity.id}/`, {
         headers: { Authorization: `Bearer ${tk}` }
       })
-      // .then(res => {
-      //   console.log(res);
-      //   return res;
-      // })
       .then(() => api.get(`activities/?group=${group.id}`))
-      // .then(res => {
-      //   console.log(res.data.results)
-      //   return res;
-      // })
       .then(res => setActivitiesList(res.data.results))
+      .then(res => getGroups())
       .catch((err) => console.log(err));
   };
 
