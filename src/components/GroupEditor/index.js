@@ -1,18 +1,23 @@
 import { FiActivity, FiBook } from 'react-icons/fi'
 import { BsBriefcase } from 'react-icons/bs';
 import GroupCreaterContainer from './style';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import api from '../../services/api';
 import { useToken } from '../../Providers/token';
 import { toast } from 'react-toastify';
+import { GroupsContext } from '../../Providers/groups';
 
-const GroupEditorPopup = () => {
+const GroupEditorPopup = ({ group, setName, userID }) => {
     const [selectedArray, setSelectedArray] = useState([1, 0, 0]);
     const categories = ['Saúde', 'Estudos', 'Trabalho'];
     const { token } = useToken();
+    const { editGroup } = useContext(GroupsContext);
+    // const userID = jwtDecode(
+    //     JSON.parse(localStorage.getItem('@gestaohabitosg5:token'))
+    // ).user_id
 
     const schema = yup.object().shape({
         name: yup.string().required("Nome obrigatório"),
@@ -39,22 +44,22 @@ const GroupEditorPopup = () => {
     //  de selectedArray. A partir disso, ele verifica em qual posição está o truthy de selectedArray
     //  e pega o elemento dessa mesma posição em "categories".
 
-    const createGroup = (data) => {
-        const categoryArr = getCategory();
-        data.category = categoryArr[0];
-        api.patch('/groups/3852/',
-            data,
-            {
-                headers: { Authorization: `Bearer ${token}` }
-            })
-            .then(toast.success("Alterações feitas com sucesso!"))
-            .catch(toast.error("Algo deu errado. Tente novamente."))
+    const handleEditGroup = (data) => {
+        if (userID === group.creator.id) {
+            const categoryArr = getCategory();
+            data.category = categoryArr[0];
+            setName(data.name)
+            toast.success('Grupo atualizado com sucesso!');
+            editGroup(data, group)
+        } else {
+            toast.error('Você não tem permissão para editar um grupo')
+        }
     }
 
     return (
         <GroupCreaterContainer
             selectedArray={selectedArray}
-            onSubmit={handleSubmit(createGroup)}
+            onSubmit={handleSubmit(handleEditGroup)}
         >
             <section>
                 <h3> Editar grupo: </h3>
@@ -78,7 +83,6 @@ const GroupEditorPopup = () => {
                 </div>
                 <button>Editar grupo</button>
             </section>
-            {/* <FiXCircle /> */}
         </GroupCreaterContainer>
     )
 }

@@ -64,9 +64,9 @@ const DashboardGroups = () => {
               <GroupCard key={index} group={group} />
             ))}
             <div className="groupsButton" onClick={handleOpenCreator}>
-              <GrAdd/>
-            </div>  
-            
+              <GrAdd />
+            </div>
+
             <div className="GroupExplorer">
               <h1 className="DashboardTitle">explorar grupos</h1>
               <button className="searchButton" onClick={handleOpenSubscribe} > Procurar grupos </button>
@@ -78,9 +78,9 @@ const DashboardGroups = () => {
               <GroupCreatorPopup />
             </ModalComponent>
           </GroupsBox>
-            <ModalComponent openModal={openModalSubscribe} setOpenModal={setOpenModalSubscribe}>
-              <SubscribeGroup />
-            </ModalComponent>
+          <ModalComponent openModal={openModalSubscribe} setOpenModal={setOpenModalSubscribe}>
+            <SubscribeGroup />
+          </ModalComponent>
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />

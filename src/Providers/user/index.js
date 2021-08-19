@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
   const { token } = useToken();
 
   useEffect(() => {
-    if (token !== "") {
+    if (token) {
       const decoderId = jwtDecode(token);
       setUserID(decoderId.user_id);
       api.get(`/users/${decoderId.user_id}/`).then((response) => {

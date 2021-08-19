@@ -34,8 +34,7 @@ const HabitCreator = () => {
   };
 
   return (
-    <HabitsCreatorContainer>
-      <form onSubmit={handleSubmit(handleForm)}>
+    <HabitsCreatorContainer onSubmit={handleSubmit(handleForm)}>
         <h2>crie o seu hábito</h2>
         <TextField 
           variant="outlined"
@@ -66,7 +65,6 @@ const HabitCreator = () => {
           helperText={errors.frequency?.message}
         />      
         <button type="submit">Criar hábito</button>
-      </form>
     </HabitsCreatorContainer>
   );
 };

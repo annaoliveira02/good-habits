@@ -45,6 +45,7 @@ export const GroupContainer = styled.div`
                 filter: invert(100);
                 font-size: 20px;
                 cursor: pointer;
+                display: relative;
             }
         }
     }
@@ -67,6 +68,7 @@ export const GroupContainer = styled.div`
                 filter: invert(100);
                 font-size: 20px;
                 cursor: pointer;
+                display: relative;
             }
         }
     }
@@ -102,5 +104,11 @@ export const GroupContainer = styled.div`
             color: black;
             transition: 0.4s;
         }
+    }
+
+    .disabled {
+        background-color: #E5E5E5;
+        color: #666;
+        font-style: italic;
     }
 `

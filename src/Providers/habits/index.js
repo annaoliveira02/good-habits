@@ -59,15 +59,12 @@ export const HabitsProvider = ({ children }) => {
       .then(() => setHabitsList(filteredHabits));
   };
 
-  const editHabit = (data) => {
-    const { how_much_achieved, achieved, id } = data;
+  const editHabit = (data, habit) => {
+    console.log('Na requisição: ', data);
     api
       .patch(
-        `/habits/${id}/`,
-        {
-          how_much_achieved: how_much_achieved,
-          achieved: achieved,
-        },
+        `/habits/${habit.id}/`,
+        data,
         config
       )
       .then(toast.success("Suas alterações foram salvas.", {
@@ -76,14 +73,20 @@ export const HabitsProvider = ({ children }) => {
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
-        }))
+      }))
+        .then(res => habit = {
+        ...habit,
+        how_much_achieved: res.data.how_much_achieved,
+        achieved: res.data.achieved
+      })
       .catch((e) => toast.error("Algo deu errado. Tente novamente.", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
-        }));
+      }));
+      
   };
 
   const getHabits = (tk) => {
