@@ -15,7 +15,7 @@ export const FooterMain = styled.div`
         display:flex;
         justify-content: center;
         align-items: center;
-        margin-inline: 8px;
+        margin-inline-start: 15px;
         font-size: 10px;
     }
 
@@ -23,10 +23,21 @@ export const FooterMain = styled.div`
         display:flex;
         justify-content: center;
         align-items: center;
+        margin-inline-end: 15px;
     }
 
     a {
-        margin-inline: 8px;
+        margin-inline: 5px;
         font-size: 10px;
+    }
+
+    @media(min-width: 600px) {
+        .FooterSignature {
+            font-size: 14px;
+        }
+
+        a {
+            font-size: 14px;
+        }
     }
 `

@@ -5,14 +5,15 @@ import { DashboardMainBox } from "./style";
 import Footer from "../../components/Footer";
 import { useHabits } from "../../Providers/habits";
 import { useEffect, useState, useContext } from "react";
-import { Drawer } from "@material-ui/core";
+import { Drawer, Link } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
 import { GroupsContext } from "../../Providers/groups";
 import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
+import { BsCheck } from "react-icons/bs";
 
 const DashboardMain = () => {
-  const { habitsList, editHabit, getHabits } = useHabits();
+  const { habitsList, removeHabit, getHabits } = useHabits();
   const { groupsList, getGroups } = useContext(GroupsContext);
   const [showDrawer, setShowDrawer] = useState(false);
   const { authenticated } = useAuthentication();
@@ -30,7 +31,7 @@ const DashboardMain = () => {
 
 
   return (
-    <div>
+    <>
       <Drawer
         anchor="left"
         open={showDrawer}
@@ -44,12 +45,16 @@ const DashboardMain = () => {
         <DashboardMainBox>
           <div className="mainHabits">
             <h1 className="DashboardTitle">meus hábitos</h1>
-            {habitsList.map((habits, index) => {
+            { habitsList < 1 ?
+            <h3 className="noHabitsMessage">Você não possui hábitos cadastrados. 
+                      Vá para a seção de hábitos e adicione quantos quiser!</h3>
+            :
+            habitsList.map((habits, index) => {
               return (
                 <div className="habitsMinicard" key={index}>
                   <h1>{habits.title}</h1>
-                  <button onClick={() => editHabit(habits)}>
-                    concluir hábito
+                  <button onClick={() => removeHabit(habits.id)}>
+                    remover hábito
                   </button>
                 </div>
               );
@@ -57,7 +62,11 @@ const DashboardMain = () => {
           </div>
           <div className="mainGroups">
             <h1 className="DashboardTitle">meus grupos</h1>
-            {groupsList.map((group, index) => {
+            { groupsList < 1 ?
+            <h3 className="noHabitsMessage">Você não está inscrito em nenhum grupo. 
+            Vá para a seção de grupos para inscrever-se ou criar seu grupo!</h3>
+            :
+            groupsList.map((group, index) => {
               return (
                 <div className="groupsMinicard" key={index}>
                   <h1>{group.name}</h1>
@@ -66,11 +75,10 @@ const DashboardMain = () => {
               );
             })}
           </div>
-
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />
-    </div>
+    </>
   );
 };
 

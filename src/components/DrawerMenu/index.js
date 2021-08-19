@@ -2,16 +2,19 @@ import { DrawerButton, DrawerContainer } from "./style";
 import { useHistory } from "react-router";
 import { useContext } from "react";
 import { UserContext } from "../../Providers/user";
+import { useAuthentication } from "../../Providers/Authentication";
 
 const DrawerMenu = () => {
 
     const history = useHistory();
+    const { setAuthenticated } = useAuthentication();
     const { userName } = useContext(UserContext)
 
     const handleLogout = () => {
-        localStorage.clear()
-        history.push("/")
-    }
+        localStorage.clear();
+        setAuthenticated(false);
+        history.push("/");
+      };
 
     return (
         <DrawerContainer>

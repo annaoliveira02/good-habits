@@ -24,6 +24,25 @@ export const GroupsBox = styled.div`
         width: 100%;
         background-color: #FFD6B7;
         border-radius: 5px;
+        margin-block-start: 15px;
+
+        .searchButton {
+            margin-block: 15px;
+            width: 200px;
+            height: 40px;
+            background-color: rgba(246, 72, 37, 1);
+            border-radius: 50px;
+            border-style: none;
+            font-family: "Nunito", sans-serif;
+            font-size: 18px;
+            color: #ffffff;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba(247, 133, 55, 1);
+                transition: 0.2s;
+            }
+        }
     }
 
     .groupsButton {
@@ -39,7 +58,7 @@ export const GroupsBox = styled.div`
         font-size: 28px;
         color: white;
         cursor: pointer;
-        margin-block-end: 15px;
+        margin-block: 15px;
 
         &:hover {
             background-color: rgba(247, 133, 55, 1);

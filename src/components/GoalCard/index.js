@@ -49,9 +49,10 @@ const GoalCard = ({ goal, setGoalsList, group }) => {
     <GoalBox>
       <div className="goalTitle">{goal.title}</div>
       <div className="goalButtons">
+       {goal.achieved===false &&
         <button onClick={editGoal}>
           <BsCheck/>
-        </button>
+        </button>}
         <button onClick={deleteGoal}>
           <AiOutlineDelete/>
         </button>  

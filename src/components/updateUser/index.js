@@ -13,7 +13,7 @@ const UpdateUser = () => {
 
   const config = { headers: { Authorization: `Bearer ${token}` } };
   const schema = yup.object().shape({
-    username: yup.string().required("Novo nome de usuário obrigatório"),
+    username: yup.string().required("Campo obrigatório"),
   });
 
   const {
@@ -31,11 +31,11 @@ const UpdateUser = () => {
   return (
     <Container>
       <form onSubmit={handleSubmit(onUpdateForm)}>
-        <h2>Altere seu nome de usuário</h2>
+        <h2>altere sua conta</h2>
         <TextField
           variant="outlined"
           size="small"
-          label="Novo nome de usuário"
+          placeholder="Novo nome de usuário"
           {...register("username")}
           helperText={errors.username?.message}
         />

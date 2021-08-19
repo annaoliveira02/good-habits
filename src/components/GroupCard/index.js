@@ -54,8 +54,6 @@ const GroupCard = ({ group }) => {
 
   }, [token]);
 
-  console.log('Lista atividades: ', activitiesList)
-
   return (
     <GroupContainer>
       <h1>{group.name}</h1>

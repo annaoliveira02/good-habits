@@ -46,7 +46,7 @@ const DashboardGroups = () => {
 
 
   return (
-    <div>
+    <>
       <Drawer
         anchor="left"
         open={showDrawer}
@@ -69,7 +69,7 @@ const DashboardGroups = () => {
             
             <div className="GroupExplorer">
               <h1 className="DashboardTitle">explorar grupos</h1>
-              <button onClick={handleOpenSubscribe} > Procurar grupo novo </button>
+              <button className="searchButton" onClick={handleOpenSubscribe} > Procurar grupos </button>
             </div>
             <ModalComponent
               openModal={openModalCreator}
@@ -84,7 +84,7 @@ const DashboardGroups = () => {
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />
-    </div>
+    </>
   );
 };
 

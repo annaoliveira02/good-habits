@@ -10,11 +10,11 @@ const SignUp = ({ authenticated }) => {
     return <Redirect to='/dashboardMain' />
   }
   return (
-    <div>
+    <>
       <Header />
         <SignUpForm />
       <Footer />
-    </div>
+    </>
   );
 };
 

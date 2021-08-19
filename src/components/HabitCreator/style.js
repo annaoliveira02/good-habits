@@ -17,25 +17,58 @@ const HabitsCreatorContainer = styled.form`
   display: flex;
   align-items: center;
   flex-direction: column;
-  min-width: 40vw;
+  min-width: 50vw;
+  max-width: 90vw;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   animation: ${AppearSlow};
-  animation-duration: 0.2s;
+  animation-duration: 0.4s;
+
+  h2 {
+    margin-block: 10px;
+    font-family: "Flamenco", cursive;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
   input {
     min-width: 20vw;
+    font-family: "Nunito";
+    font-size: 14px;
+    margin-block: 2px;
+  }
+
+  p {
+    margin-top: 3px;
+    font-size: 10px;
+    color: red;
+    font-family: "Nunito", sans-serif;
   }
 
   button {
-    background-color: #ffd6b7;
-    min-width: 30vw;
-    height: 5vh;
-    border-radius: 5px;
-    border-color: transparent;
-  }
+    margin-block: 15px;
+    width: 200px;
+    height: 40px;
+    background-color: rgba(246, 72, 37, 1);
+    border-radius: 50px;
+    border-style: none;
+    font-family: "Nunito", sans-serif;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #FFCCA6;;
+      color:rgba(246, 72, 37, 1);
+      transition: 0.2s;
+    }
 `;
 
 export default HabitsCreatorContainer;

@@ -7,10 +7,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import api from '../../services/api';
 import { useToken } from '../../Providers/token';
+import { toast } from 'react-toastify';
 
 const GroupEditorPopup = () => {
     const [selectedArray, setSelectedArray] = useState([1, 0, 0]);
-    const categories = ['Saúde', 'Etudos', 'Trabalho'];
+    const categories = ['Saúde', 'Estudos', 'Trabalho'];
     const { token } = useToken();
 
     const schema = yup.object().shape({
@@ -46,7 +47,8 @@ const GroupEditorPopup = () => {
             {
                 headers: { Authorization: `Bearer ${token}` }
             })
-            .then(res => console.log('Grupo criado', res));
+            .then(toast.success("Alterações feitas com sucesso!"))
+            .catch(toast.error("Algo deu errado. Tente novamente."))
     }
 
     return (

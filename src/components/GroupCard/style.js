@@ -19,6 +19,7 @@ export const GroupContainer = styled.div`
     h1 {
         font-size: 18px;
         text-transform: uppercase;
+        text-align: center;
     }
 
     h3 {
@@ -32,10 +33,19 @@ export const GroupContainer = styled.div`
         margin-block-start: 5px;
 
         h2 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 16px;
             background-color: #459638;
             width: 100%;
-            padding: 0 3px;
+            padding: 5px;
+
+            svg {
+                filter: invert(100);
+                font-size: 20px;
+                cursor: pointer;
+            }
         }
     }
 
@@ -45,10 +55,19 @@ export const GroupContainer = styled.div`
         margin-block-start: 5px;
 
         h2 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 16px;
             background-color: #459638;
             width: 100%;
-            padding: 0 3px;
+            padding: 5px;
+
+            svg {
+                filter: invert(100);
+                font-size: 20px;
+                cursor: pointer;
+            }
         }
     }
 

@@ -2,9 +2,9 @@ import { useUser } from "../../Providers/user";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { FormInput } from "../SignUpForm/style";
 import { useHabits } from "../../Providers/habits";
 import HabitsCreatorContainer from "./style";
+import { TextField } from "@material-ui/core";
 
 const HabitCreator = () => {
   const { addHabit } = useHabits();
@@ -22,7 +22,6 @@ const HabitCreator = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleForm = (data) => {
@@ -31,39 +30,43 @@ const HabitCreator = () => {
       how_much_achieved: 0,
       user: userId,
     });
-
     addHabit(completeData);
   };
 
   return (
-    <HabitsCreatorContainer onSubmit={handleSubmit(handleForm)}>
-      <h3> Crie o seu hábito </h3>
-      <div>
-        <FormInput placeholder="Título" {...register("title")}></FormInput>
-        <div className="ErrorMessage">{errors.title?.message}</div>
-      </div>
-      <div>
-        <FormInput
+    <HabitsCreatorContainer>
+      <form onSubmit={handleSubmit(handleForm)}>
+        <h2>crie o seu hábito</h2>
+        <TextField 
+          variant="outlined"
+          size="small"
+          placeholder="Título"
+          {...register("title")}
+          helperText={errors.title?.message}
+        />
+        <TextField
+          variant="outlined"
+          size="small"
           placeholder="Categoria"
           {...register("category")}
-        ></FormInput>
-        <div className="ErrorMessage">{errors.category?.message}</div>
-      </div>
-      <div>
-        <FormInput
+          helperText={errors.category?.message}
+        />
+        <TextField
+          variant="outlined"
+          size="small"
           placeholder="Dificuldade"
           {...register("difficulty")}
-        ></FormInput>
-        <div className="ErrorMessage">{errors.difficulty?.message}</div>
-      </div>
-      <div>
-        <FormInput
+          helperText={errors.difficulty?.message}
+        />
+        <TextField
+          variant="outlined"
+          size="small"
           placeholder="Frequência"
           {...register("frequency")}
-        ></FormInput>
-        <div className="ErrorMessage">{errors.frequency?.message}</div>
-      </div>
-      <button type="submit">Criar hábito</button>
+          helperText={errors.frequency?.message}
+        />      
+        <button type="submit">Criar hábito</button>
+      </form>
     </HabitsCreatorContainer>
   );
 };

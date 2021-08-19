@@ -54,7 +54,7 @@ const GroupCreatorPopup = () => {
       .post("/groups/", data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then(() => toast.success("Suas alterações foram salvas.", {
+      .then(() => toast.success("Grupo criado com sucesso!", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

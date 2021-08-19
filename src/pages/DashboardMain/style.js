@@ -36,6 +36,12 @@ export const DashboardMainBox = styled.div`
         border-radius: 5px;
     }
 
+    .noHabitsMessage {
+        font-family: "Nunito", sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+    }
+
     .habitsMinicard {
         display: flex;
         flex-direction: column;
@@ -54,6 +60,7 @@ export const DashboardMainBox = styled.div`
 
         h1 {
             font-size: 18px;
+            text-align: center;
         }
     
         h3 {
@@ -102,8 +109,9 @@ export const DashboardMainBox = styled.div`
         h1 {
             font-size: 18px;
             text-transform: uppercase;
+            text-align: center;
         }
-    
+
         h3 {
             font-size: 14px;
             font-weight: 400;
