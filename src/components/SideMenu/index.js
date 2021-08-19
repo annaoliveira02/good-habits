@@ -1,22 +1,19 @@
 import { MenuButton, MenuContainer } from "./style";
 import { useHistory } from "react-router";
-import ModalComponent from '../Modal';
+import ModalComponent from "../Modal";
 import { useState } from "react";
 import UpdateUser from "../updateUser";
 import React from "react";
 import { useAuthentication } from "../../Providers/Authentication";
-import { useContext } from "react";
-import { UserContext } from "../../Providers/user";
 
-const SideMenu = () => {
+const SideMenu = ({ user }) => {
   const [open, setOpen] = useState(false);
   const { setAuthenticated } = useAuthentication();
-  const { userName } = useContext(UserContext);
+  const history = useHistory();
+
   const handleOpen = () => {
     setOpen(true);
   };
-
-  const history = useHistory();
 
   const handleLogout = () => {
     localStorage.clear();
@@ -27,7 +24,7 @@ const SideMenu = () => {
   return (
     <MenuContainer>
       <img src="https://i.pravatar.cc/120" alt="avatar" />
-      <h4 className="userTitle">Olá, {userName}</h4>
+      <h4 className="userTitle">Olá, {user}</h4>
       <MenuButton onClick={() => history.push("/dashboardMain")}>
         Início
       </MenuButton>
