@@ -12,8 +12,8 @@ import GroupEditorPopup from '../GroupEditor';
 
 const GroupCard = ({ group }) => {
   const [name, setName] = useState(group.name)
-  const [activitiesList, setActivitiesList] = useState([]);
-  const [goalsList, setGoalsList] = useState([]);
+  const [activitiesList, setActivitiesList] = useState(group.activities);
+  const [goalsList, setGoalsList] = useState(group.goals);
   const [openActivty, setOpenActivity] = useState(false);
   const [openGoal, setOpenGoal] = useState(false);
   const [openGroupEditor, setOpenGroupEditor] = useState(false);
@@ -54,6 +54,7 @@ const GroupCard = ({ group }) => {
     // getActivities(group.id, tk)
   }, []);
 
+
   return (
     <GroupContainer>
       <h1>{name}</h1>
@@ -72,6 +73,7 @@ const GroupCard = ({ group }) => {
               activity={activity}
               setActivitiesList={setActivitiesList}
               group={group}
+              activitiesList={activitiesList}
             />;
           })
         ) : (

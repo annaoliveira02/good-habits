@@ -45,6 +45,7 @@ const AddActivityModal = ({ group, setActivitiesList }) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleAdd = (data) => {
@@ -60,6 +61,7 @@ const AddActivityModal = ({ group, setActivitiesList }) => {
       .then(_ => {
         api.get(`/activities/?group=${group.id}`)
           .then(res => setActivitiesList(res.data.results))
+          .then(() => reset({}))
       })
       .catch(err => console.log(err))
   };

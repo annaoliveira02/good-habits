@@ -18,21 +18,26 @@ const SubscribeGroupList = ({ result }) => {
         }
     }, []);
 
-    const handleSubscription = async () => {
+    const handleSubscription = () => {
+        const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
         api.post(`groups/${result.id}/subscribe/`, {},
             {
-                headers: { Authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${tk}` }
             })
-            .then(toast.success("Inscrição feita com sucesso!", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                }))
+            .then(res => {
+                toast.success("Inscrição feita com sucesso!", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                })
+                setIsSubscribed(true)
+            }
+            )
             .then(res => api
                 .get("/groups/subscriptions/", {
-                    headers: { Authorization: `Bearer ${token}` }
+                    headers: { Authorization: `Bearer ${tk}` }
                 })
                 .then((res) => {
                     setGroupsList(res.data)
