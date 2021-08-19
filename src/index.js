@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import Providers from "./Providers"
+import Providers from "./Providers";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -12,7 +12,7 @@ ReactDOM.render(
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </Providers>    
+    </Providers>
   </React.StrictMode>,
   document.getElementById("root")
 );

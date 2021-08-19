@@ -11,6 +11,9 @@ import { AnimationContainer, Background, Content } from "./styles";
 import { TextField } from "@material-ui/core";
 import { useState } from "react";
 import { useAuthentication } from "../../Providers/Authentication";
+import { useEffect } from "react";
+import { useToken } from "../../Providers/token";
+import { useUser } from "../../Providers/user";
 
 const Login = () => {
   const { authenticated, setAuthenticated } = useAuthentication();
@@ -21,7 +24,9 @@ const Login = () => {
       .min(6, "Mínimo de 6 caracateres")
       .required("Campo obrigatório"),
   });
-
+  const { token } = useToken();
+  const { userName } = useUser();
+  const { coisar } = useUser();
   const {
     register,
     handleSubmit,
@@ -36,11 +41,13 @@ const Login = () => {
       .then((response) => {
         localStorage.clear();
         const { access } = response.data;
-        setAuthenticated(true);
+
         localStorage.setItem("@gestaohabitosg5:token", JSON.stringify(access));
+        coisar();
         setAuthenticated(true);
-        // setToken(access);
-        return history.push("/DashboardMain");
+      })
+      .then((res) => {
+        history.push("/DashboardMain");
       })
       .catch((err) =>
         // toast.error("Usuário ou senha inválidos")
