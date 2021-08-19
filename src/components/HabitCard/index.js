@@ -11,7 +11,6 @@ const HabitCard = ({ habit }) => {
   const [inputValue, setInputValue] = useState(habit.how_much_achieved);
   const [showInput, setShowInput] = useState(false);
   const [achieved, setAchieved] = useState(habit.achieved);
-  console.log('Terminado: ', achieved);
 
   const correctInput = (e) => {
     setShowInput(false);
