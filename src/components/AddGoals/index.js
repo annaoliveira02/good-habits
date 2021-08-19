@@ -7,7 +7,7 @@ import { Container } from "./style";
 import api from "../../services/api";
 import { toast } from "react-toastify";
 
-const AddGoalModal = ({ group, setGoalsList }) => {
+const AddGoalModal = ({ setOpenGoal, group, setGoalsList }) => {
   const id = group.id;
 
   const { addGoal } = useGoalsActivities();
@@ -23,17 +23,19 @@ const AddGoalModal = ({ group, setGoalsList }) => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleAdd = (data) => {
+    setOpenGoal(false);
     data.how_much_achieved = 0;
     data.group = id;
-    const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
+    const tk = JSON.parse(localStorage.getItem("@gestaohabitosg5:token"));
     // addGoal(data);
     api
       .post("/goals/", data, {
-        headers: { Authorization: `Bearer ${tk}` }
+        headers: { Authorization: `Bearer ${tk}` },
       })
-      .then((_) => toast.success("Meta criada!"))
-    api.get(`/goals/?group=${group.id}`)
-      .then(res => setGoalsList(res.data.results))
+      .then((_) => toast.success("Meta criada!"));
+    api
+      .get(`/goals/?group=${group.id}`)
+      .then((res) => setGoalsList(res.data.results));
   };
 
   return (

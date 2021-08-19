@@ -6,7 +6,7 @@ import UpdateUser from "../updateUser";
 import React from "react";
 import { useAuthentication } from "../../Providers/Authentication";
 
-const SideMenu = ({ user }) => {
+const SideMenu = ({ user, setUser }) => {
   const [open, setOpen] = useState(false);
   const { setAuthenticated } = useAuthentication();
   const history = useHistory();
@@ -36,7 +36,7 @@ const SideMenu = ({ user }) => {
       </MenuButton>
       <MenuButton onClick={handleOpen}>Configurações</MenuButton>
       <ModalComponent openModal={open} setOpenModal={setOpen}>
-        <UpdateUser />
+        <UpdateUser setOpenModal={setOpen} setUser={setUser} />
       </ModalComponent>
       <MenuButton onClick={handleLogout}>Logout</MenuButton>
     </MenuContainer>

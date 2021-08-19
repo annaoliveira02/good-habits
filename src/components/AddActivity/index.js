@@ -4,15 +4,14 @@ import { useForm } from "react-hook-form";
 import { useGoalsActivities } from "../../Providers/Goals&Activities";
 import { TextField } from "@material-ui/core";
 import { Container } from "./style";
-import api from '../../services/api';
+import api from "../../services/api";
 import { useToken } from "../../Providers/token";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 
-const AddActivityModal = ({ group, setActivitiesList }) => {
+const AddActivityModal = ({ setOpenActivity, group, setActivitiesList }) => {
   const id = group.id;
   const { token } = useToken();
-
 
   const { addActivity } = useGoalsActivities();
   const schema = yup.object().shape({
@@ -21,23 +20,23 @@ const AddActivityModal = ({ group, setActivitiesList }) => {
 
   function timeFormat() {
     const month = {
-      Jan: '01',
-      Fev: '02',
-      Mar: '03',
-      Apr: '04',
-      May: '05',
-      Jun: '06',
-      Jul: '07',
-      Aug: '08',
-      Sep: '09',
-      Oct: '10',
-      Nov: '11',
-      Dec: '12'
-    }
+      Jan: "01",
+      Fev: "02",
+      Mar: "03",
+      Apr: "04",
+      May: "05",
+      Jun: "06",
+      Jul: "07",
+      Aug: "08",
+      Sep: "09",
+      Oct: "10",
+      Nov: "11",
+      Dec: "12",
+    };
     let time = new Date().toString();
-    time = time.split(' ');
+    time = time.split(" ");
     let YMD = [time[3], month[time[1]], time[2]];
-    YMD = YMD.join('-');
+    YMD = YMD.join("-");
     return `${YMD}T${time[4]}Z`;
   }
 
@@ -48,20 +47,22 @@ const AddActivityModal = ({ group, setActivitiesList }) => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleAdd = (data) => {
-    const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
+    setOpenActivity(false);
+    const tk = JSON.parse(localStorage.getItem("@gestaohabitosg5:token"));
     data.realization_time = timeFormat();
     data.group = id;
     // addActivity(data);
     api
       .post("/activities/", data, {
-        headers: { Authorization: `Bearer ${tk}` }
+        headers: { Authorization: `Bearer ${tk}` },
       })
       .then((_) => toast.success("Atividade criada!"))
-      .then(_ => {
-        api.get(`/activities/?group=${group.id}`)
-          .then(res => setActivitiesList(res.data.results))
+      .then((_) => {
+        api
+          .get(`/activities/?group=${group.id}`)
+          .then((res) => setActivitiesList(res.data.results));
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err));
   };
 
   return (

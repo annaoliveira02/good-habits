@@ -6,7 +6,7 @@ import { useHabits } from "../../Providers/habits";
 import HabitsCreatorContainer from "./style";
 import { TextField } from "@material-ui/core";
 
-const HabitCreator = () => {
+const HabitCreator = ({ setOpenModal }) => {
   const { addHabit } = useHabits();
   const { userId } = useUser();
 
@@ -25,6 +25,7 @@ const HabitCreator = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleForm = (data) => {
+    setOpenModal(false);
     const completeData = Object.assign(data, {
       achieved: false,
       how_much_achieved: 0,
@@ -35,36 +36,36 @@ const HabitCreator = () => {
 
   return (
     <HabitsCreatorContainer onSubmit={handleSubmit(handleForm)}>
-        <h2>crie o seu hábito</h2>
-        <TextField 
-          variant="outlined"
-          size="small"
-          placeholder="Título"
-          {...register("title")}
-          helperText={errors.title?.message}
-        />
-        <TextField
-          variant="outlined"
-          size="small"
-          placeholder="Categoria"
-          {...register("category")}
-          helperText={errors.category?.message}
-        />
-        <TextField
-          variant="outlined"
-          size="small"
-          placeholder="Dificuldade"
-          {...register("difficulty")}
-          helperText={errors.difficulty?.message}
-        />
-        <TextField
-          variant="outlined"
-          size="small"
-          placeholder="Frequência"
-          {...register("frequency")}
-          helperText={errors.frequency?.message}
-        />      
-        <button type="submit">Criar hábito</button>
+      <h2>crie o seu hábito</h2>
+      <TextField
+        variant="outlined"
+        size="small"
+        placeholder="Título"
+        {...register("title")}
+        helperText={errors.title?.message}
+      />
+      <TextField
+        variant="outlined"
+        size="small"
+        placeholder="Categoria"
+        {...register("category")}
+        helperText={errors.category?.message}
+      />
+      <TextField
+        variant="outlined"
+        size="small"
+        placeholder="Dificuldade"
+        {...register("difficulty")}
+        helperText={errors.difficulty?.message}
+      />
+      <TextField
+        variant="outlined"
+        size="small"
+        placeholder="Frequência"
+        {...register("frequency")}
+        helperText={errors.frequency?.message}
+      />
+      <button type="submit">Criar hábito</button>
     </HabitsCreatorContainer>
   );
 };
