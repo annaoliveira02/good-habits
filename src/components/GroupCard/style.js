@@ -110,5 +110,11 @@ export const GroupContainer = styled.div`
         background-color: #E5E5E5;
         color: #666;
         font-style: italic;
+
+        &:hover {
+            cursor: initial;
+            background-color: #E5E5E5;
+            color: #666;
+        }
     }
 `

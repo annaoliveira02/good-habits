@@ -34,6 +34,10 @@ const SubscribeContainer = styled.div`
         text-align: center;
         font-style: italic;
     }
+
+    .no-italic{
+        font-style: normal;
+    }
 `;
 
 export default SubscribeContainer;
