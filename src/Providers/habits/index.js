@@ -53,13 +53,13 @@ export const HabitsProvider = ({ children }) => {
   };
 
   const editHabit = (data, habit) => {
-    console.log('Na requisição: ', data);
+    const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
     api
       .patch(
         `/habits/${habit.id}/`,
-        data,
-        config
-      )
+        data, {
+        headers: { Authorization: `Bearer ${tk}` }
+      })
       .then(toast.success("Suas alterações foram salvas.", {
         position: "top-right",
         autoClose: 5000,
@@ -67,11 +67,15 @@ export const HabitsProvider = ({ children }) => {
         closeOnClick: true,
         pauseOnHover: true,
       }))
-      .then(res => habit = {
-        ...habit,
-        how_much_achieved: res.data.how_much_achieved,
-        achieved: res.data.achieved
-      })
+      .then(res => {
+        habit = {
+          ...habit,
+          how_much_achieved: res.data.how_much_achieved,
+          achieved: res.data.achieved
+        }
+        getHabits();
+      }
+      )
       .catch((e) => toast.error("Algo deu errado. Tente novamente.", {
         position: "top-right",
         autoClose: 5000,
