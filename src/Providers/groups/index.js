@@ -6,28 +6,26 @@ import { useToken } from "../token";
 export const GroupsContext = createContext();
 
 export const GroupsProvider = ({ children }) => {
-  const [groupsList, setGroupsList] = useState([]);
-  // const { token } = useToken();
-  const token = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'))
-  const config = { headers: { Authorization: `Bearer ${token}` } };
+  const initialGroupsList = JSON.parse(localStorage.getItem('@gestaohabitosg5:groups')) || [];
+  const [groupsList, setGroupsList] = useState(initialGroupsList);
 
-  const getGroups = (tk) => {
+  const getGroups = () => {
+    const token = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'))
     api
       .get("/groups/subscriptions/", {
-        headers: { Authorization: `Bearer ${tk}` }
+        headers: { Authorization: `Bearer ${token}` }
       })
       .then((res) => {
         setGroupsList(res.data)
+        localStorage.setItem('@gestaohabitosg5:groups', JSON.stringify(res.data))
       })
       .catch((err) => console.log(err));
-    // console.log('Config: ', config);
   }
 
   const removeGroup = () => { };
 
   const editGroup = (data, group, setRealGroup) => {
-
-    // const index = groupsList.indexOf(inGroup => inGroup.id === group.id)
+    const token = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'))
 
     api.patch(`/groups/${group.id}/`,
       data,

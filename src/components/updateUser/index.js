@@ -1,12 +1,9 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useToken } from "../../Providers/token";
 import api from "../../services/api";
-import { useUser } from "../../Providers/user";
 import { TextField } from "@material-ui/core";
 import { Container } from "./styles";
-import { useEffect } from "react";
 import jwtDecode from "jwt-decode";
 import { toast } from "react-toastify";
 

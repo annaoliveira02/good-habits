@@ -7,11 +7,13 @@ import { Container } from "./style";
 import api from "../../services/api";
 import { useToken } from "../../Providers/token";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { GroupsContext } from "../../Providers/groups";
 
 const AddActivityModal = ({ setOpenActivity, group, setActivitiesList }) => {
   const id = group.id;
   const { token } = useToken();
+  const { getGroups } = useContext(GroupsContext);
 
   const { addActivity } = useGoalsActivities();
   const schema = yup.object().shape({
@@ -44,6 +46,7 @@ const AddActivityModal = ({ setOpenActivity, group, setActivitiesList }) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleAdd = (data) => {
@@ -60,7 +63,8 @@ const AddActivityModal = ({ setOpenActivity, group, setActivitiesList }) => {
       .then((_) => {
         api
           .get(`/activities/?group=${group.id}`)
-          .then((res) => setActivitiesList(res.data.results));
+          .then((res) => setActivitiesList(res.data.results))
+          .then((res) => getGroups());
       })
       .catch((err) => console.log(err));
   };
@@ -68,11 +72,12 @@ const AddActivityModal = ({ setOpenActivity, group, setActivitiesList }) => {
   return (
     <Container>
       <form onSubmit={handleSubmit(handleAdd)}>
-        <h2>Adicione uma Atividade</h2>
+        <h2>adicione uma atividade</h2>
         <TextField
           variant="outlined"
           size="small"
-          label="Atividade"
+          margin="dense"
+          placeholder="Atividade"
           {...register("title")}
           helperText={errors.title?.message}
         />
