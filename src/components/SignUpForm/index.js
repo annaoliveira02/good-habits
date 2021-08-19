@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useHistory, Link } from "react-router-dom";
-import { useState } from "react";
 import { Background, Content, AnimationContainer } from "./style";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -28,7 +27,7 @@ const SignUpForm = () => {
       .required("Campo obrigatório"),
     passwordConfirm: yup
       .string()
-      .oneOf([yup.ref("password")], "Senha não confere")
+      .oneOf([yup.ref("password")], "As senhas devem ser iguais")
       .required("Campo obrigatório"),
   });
 
@@ -44,11 +43,23 @@ const SignUpForm = () => {
     axios
       .post("https://kabit-api.herokuapp.com/users/", data)
       .then((response) => {
-        console.log(response);
+        toast.success("Cadastro concluído! Faça seu login abaixo.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          });
         reset({});
         history.push("/login");
       })
-      .catch((e) => toast.error("Nome ou email já cadastrado"));
+      .catch((e) => toast.error("Ops! Nome ou e-mail já cadastrados. Tente novamente", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        }))
   };
 
   return (

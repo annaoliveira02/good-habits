@@ -16,9 +16,9 @@ export const DashboardMainBox = styled.div`
 
     .mainHabits {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         width: 96%;
         min-height: 30vh;
         margin-block: 5px;
@@ -27,13 +27,19 @@ export const DashboardMainBox = styled.div`
 
     .mainGroups {
         display: flex;
-        flex-direction: column;
+        flex-wrap:wrap;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         width: 96%;
         min-height: 30vh;
         margin: 5px;
         border-radius: 5px;
+    }
+
+    .noHabitsMessage {
+        font-family: "Nunito", sans-serif;
+        font-size: 16px;
+        font-weight: 400;
     }
 
     .habitsMinicard {
@@ -54,6 +60,7 @@ export const DashboardMainBox = styled.div`
 
         h1 {
             font-size: 18px;
+            text-align: center;
         }
     
         h3 {
@@ -102,8 +109,9 @@ export const DashboardMainBox = styled.div`
         h1 {
             font-size: 18px;
             text-transform: uppercase;
+            text-align: center;
         }
-    
+
         h3 {
             font-size: 14px;
             font-weight: 400;

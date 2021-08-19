@@ -60,7 +60,7 @@ const DashboardHabits = () => {
   }
 
   return (
-    <div>
+    <>
       <Drawer
         anchor="left"
         open={showDrawer}
@@ -97,7 +97,7 @@ const DashboardHabits = () => {
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />
-    </div>
+    </>
   );
 };
 

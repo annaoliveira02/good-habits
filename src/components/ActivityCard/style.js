@@ -25,10 +25,11 @@ export const ActivityBox = styled.div`
             outline: none;
             padding: 3px 4px;
             margin-inline-start: 3px;
-            background-color: #458752;
-            color: white;
-            font-size: 14px;
+            background-color: transparent;
+            color: #458752;
+            font-size: 18px;
             cursor: pointer;
+            text-align: left;
         }
     }
 `

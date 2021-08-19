@@ -53,7 +53,7 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <>
       <Header />
       <InitialContainer>
         <Background />
@@ -88,7 +88,7 @@ const Login = () => {
         </Content>
       </InitialContainer>
       <Footer />
-    </div>
+    </>
   );
 };
 

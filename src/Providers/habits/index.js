@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../../services/api";
 import { useToken } from "../token";
@@ -34,15 +34,29 @@ export const HabitsProvider = ({ children }) => {
         },
         { headers: { Authorization: `Bearer ${token}` } }
       )
-      .then((e) => setHabitsList([...habitsList, e.data]))
-      .catch((error) => console.log(error));
+      .then((e) => {
+        setHabitsList([...habitsList, e.data])
+        toast.success("Hábito criado com sucesso!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          });})
+      .catch(() => toast.error("Algo deu errado. Tente novamente.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          }));
   };
 
   const removeHabit = (id) => {
     const filteredHabits = habitsList.filter((habit) => habit.id !== id);
     api
       .delete(`/habits/${id}/`, config)
-      .then((response) => setHabitsList(filteredHabits));
+      .then(() => setHabitsList(filteredHabits));
   };
 
   const editHabit = (data, habit) => {
@@ -53,11 +67,26 @@ export const HabitsProvider = ({ children }) => {
         data,
         config
       )
-      .then(res => habit = {
+      .then(toast.success("Suas alterações foram salvas.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      }))
+        .then(res => habit = {
         ...habit,
         how_much_achieved: res.data.how_much_achieved,
         achieved: res.data.achieved
       })
+      .catch((e) => toast.error("Algo deu errado. Tente novamente.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      }));
+      
   };
 
   const getHabits = (tk) => {

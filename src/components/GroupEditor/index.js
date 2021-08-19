@@ -5,12 +5,15 @@ import { useContext, useState } from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { toast } from "react-toastify";
+import api from '../../services/api';
+import { useToken } from '../../Providers/token';
+import { toast } from 'react-toastify';
 import { GroupsContext } from '../../Providers/groups';
 
 const GroupEditorPopup = ({ group, setName, userID }) => {
     const [selectedArray, setSelectedArray] = useState([1, 0, 0]);
-    const categories = ['Saúde', 'Etudos', 'Trabalho'];
+    const categories = ['Saúde', 'Estudos', 'Trabalho'];
+    const { token } = useToken();
     const { editGroup } = useContext(GroupsContext);
     // const userID = jwtDecode(
     //     JSON.parse(localStorage.getItem('@gestaohabitosg5:token'))

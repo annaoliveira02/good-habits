@@ -15,7 +15,7 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <>
       <Header />
       <InitialContainer>
         <Breaker>
@@ -28,14 +28,14 @@ const Home = () => {
             e definem metas.
           </div>
           <div>
-            <MainButton onClick={() => history.push("/signup")}>
+            <button className="startButton" onClick={() => history.push("/signup")}>
               Começar
-            </MainButton>
+            </button>
           </div>
         </Breaker>
       </InitialContainer>
       <Footer />
-    </div>
+    </>
   );
 };
 
