@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { useToken } from "../../Providers/token";
+import jwtDecode from "jwt-decode";
+import { useState, useEffect } from "react";
 import api from "../../services/api";
 import ActivityCard from "../ActivityCard";
 import GoalCard from "../GoalCard";
@@ -9,16 +8,19 @@ import { GrAddCircle } from "react-icons/gr";
 import Modal from "../Modal";
 import AddActivityModal from "../AddActivity";
 import AddGoalModal from "../AddGoals";
-import { useGoalsActivities } from '../../Providers/Goals&Activities';
+import GroupEditorPopup from '../GroupEditor';
 
 const GroupCard = ({ group }) => {
-  const { token } = useToken();
-  const config = { headers: { Authorization: `Bearer ${token}` } };
+  const [name, setName] = useState(group.name)
   const [activitiesList, setActivitiesList] = useState([]);
   const [goalsList, setGoalsList] = useState([]);
-  // const { goals, activities, setGoals, setActivities, getGoals, getActivities } = useGoalsActivities();
   const [openActivty, setOpenActivity] = useState(false);
   const [openGoal, setOpenGoal] = useState(false);
+  const [openGroupEditor, setOpenGroupEditor] = useState(false);
+  const userID = jwtDecode(
+    JSON.parse(localStorage.getItem('@gestaohabitosg5:token'))
+  ).user_id
+  const groupID = group.creator.id;
 
   const handleOpenActivity = () => {
     setOpenActivity(true);
@@ -50,15 +52,11 @@ const GroupCard = ({ group }) => {
     // }
     // getGoals(group.id, tk);
     // getActivities(group.id, tk)
-
-
   }, []);
-
-  console.log('Lista atividades: ', activitiesList)
 
   return (
     <GroupContainer>
-      <h1>{group.name}</h1>
+      <h1>{name}</h1>
       <h3>Categoria: {group.category}</h3>
       <div className="activitiesSection">
         <h2>
@@ -102,7 +100,14 @@ const GroupCard = ({ group }) => {
           <span className="noContentMessage">Não há metas</span>
         )}
       </div>
-      <button>Editar grupo</button>
+      {groupID === userID ?
+        <button onClick={() => setOpenGroupEditor(true)}> Editar grupo </button>
+        :
+        <button className='disabled' disabled> Editar grupo </button>
+      }
+      <Modal openModal={openGroupEditor} setOpenModal={setOpenGroupEditor} >
+        <GroupEditorPopup group={group} setName={setName} userID={userID} />
+      </Modal>
     </GroupContainer>
   );
 };

@@ -84,4 +84,10 @@ export const GroupContainer = styled.div`
             transition: 0.4s;
         }
     }
+
+    .disabled {
+        background-color: #E5E5E5;
+        color: #666;
+        font-style: italic;
+    }
 `
