@@ -75,6 +75,10 @@ const SubscribeContainer = styled.div`
     @media(min-width: 600px) {
         max-width: 50vw;
     }
+
+    .no-italic{
+        font-style: normal;
+    }
 `;
 
 export default SubscribeContainer;

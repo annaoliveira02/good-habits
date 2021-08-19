@@ -5,10 +5,11 @@ import { useForm } from "react-hook-form";
 import { useHabits } from "../../Providers/habits";
 import HabitsCreatorContainer from "./style";
 import { TextField } from "@material-ui/core";
+import jwtDecode from "jwt-decode";
 
 const HabitCreator = () => {
   const { addHabit } = useHabits();
-  const { userId } = useUser();
+  // const { userId } = useUser();
 
   // esse componente é um modal que deve abrir na tela ao clicar no botão Novo hábito
   const schema = yup.object().shape({
@@ -25,12 +26,14 @@ const HabitCreator = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleForm = (data) => {
+    const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'))
+    const userId = jwtDecode(tk).user_id;
     const completeData = Object.assign(data, {
       achieved: false,
       how_much_achieved: 0,
       user: userId,
     });
-    addHabit(completeData);
+    addHabit(completeData, tk);
   };
 
   return (
