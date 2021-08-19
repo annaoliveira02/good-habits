@@ -10,14 +10,18 @@ export const UserProvider = ({ children }) => {
   const [userName, setUserName] = useState("");
   const { token } = useToken();
 
-  useEffect(() => {
-    if (token !== "") {
+  const coisar = () => {
+    if (token) {
       const decoderId = jwtDecode(token);
       setUserID(decoderId.user_id);
       api.get(`/users/${decoderId.user_id}/`).then((response) => {
         setUserName(response.data.username);
       });
     }
+  };
+
+  useEffect(() => {
+    coisar();
   }, [token]);
 
   const createUser = (data) => {
@@ -27,7 +31,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ userName, userId, createUser }}>
+    <UserContext.Provider value={{ userName, coisar, userId, createUser }}>
       {children}
     </UserContext.Provider>
   );

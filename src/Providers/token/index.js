@@ -6,7 +6,9 @@ import { createContext } from "react";
 export const TokenContext = createContext([]);
 
 export const TokenProvider = ({ children }) => {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(
+    JSON.parse(localStorage.getItem("@gestaohabitosg5:token")) || ""
+  );
 
   useEffect(() => {
     const initialToken =
@@ -14,7 +16,6 @@ export const TokenProvider = ({ children }) => {
 
     setToken(initialToken);
   }, []);
-
   return (
     <TokenContext.Provider value={{ token, setToken }}>
       {children}

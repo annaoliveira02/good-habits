@@ -19,6 +19,7 @@ export const GroupContainer = styled.div`
     h1 {
         font-size: 18px;
         text-transform: uppercase;
+        text-align: center;
     }
 
     h3 {
@@ -31,11 +32,20 @@ export const GroupContainer = styled.div`
         width: 100%;
         margin-block-start: 5px;
 
-        h2 {
+        .groupSectionTitle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 16px;
             background-color: #459638;
             width: 100%;
-            padding: 0 3px;
+            padding: 5px;
+
+            svg {
+                font-size: 20px;
+                cursor: pointer;
+                display: relative;
+            }
         }
     }
 
@@ -44,11 +54,20 @@ export const GroupContainer = styled.div`
         width: 100%;
         margin-block-start: 5px;
 
-        h2 {
+        .groupSectionTitle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 16px;
             background-color: #459638;
             width: 100%;
-            padding: 0 3px;
+            padding: 5px;
+
+            svg {
+                font-size: 20px;
+                cursor: pointer;
+                display: relative;
+            }
         }
     }
 
@@ -82,6 +101,19 @@ export const GroupContainer = styled.div`
             background-color: #C6E8C1;
             color: black;
             transition: 0.4s;
+        }
+    }
+
+    .disabled {
+        background-color: #E5E5E5;
+        color: #666;
+        font-style: italic;
+
+        &:hover {
+            background-color: #E5E5E5;
+            color: #666;
+            font-style: italic;
+            cursor: initial;
         }
     }
 `

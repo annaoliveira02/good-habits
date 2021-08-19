@@ -1,16 +1,19 @@
-import { FiActivity, FiBook, FiXCircle } from "react-icons/fi";
+import { FiActivity, FiBook } from "react-icons/fi";
 import { BsBriefcase } from "react-icons/bs";
 import GroupCreaterContainer from "./style";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import { useToken } from "../../Providers/token";
+import { GroupsContext } from "../../Providers/groups";
+import { toast } from "react-toastify";
 
-const GroupCreatorPopup = () => {
+const GroupCreatorPopup = ({ setOpenModalCreator }) => {
+  const { setGroupsList } = useContext(GroupsContext);
   const [selectedArray, setSelectedArray] = useState([1, 0, 0]);
-  const categories = ["Saúde", "Etudos", "Trabalho"];
+  const categories = ["Saúde", "Estudos", "Trabalho"];
   const { token } = useToken();
 
   const schema = yup.object().shape({
@@ -44,13 +47,39 @@ const GroupCreatorPopup = () => {
   //  e pega o elemento dessa mesma posição em "categories".
 
   const createGroup = (data) => {
+    setOpenModalCreator(false);
     const categoryArr = getCategory();
     data.category = categoryArr[0];
+    // const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
     api
       .post("/groups/", data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => console.log("Grupo criado", res));
+      .then(() =>
+        toast.success("Grupo criado com sucesso!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        })
+      )
+      .then((res) =>
+        api
+          .get("/groups/subscriptions/", {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((res) => setGroupsList(res.data))
+      )
+      .catch(() =>
+        toast.error("Algo deu errado. Tente novamente.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        })
+      );
   };
 
   return (
@@ -59,23 +88,23 @@ const GroupCreatorPopup = () => {
       onSubmit={handleSubmit(createGroup)}
     >
       <section>
-        <h3> Crie seu grupo </h3>
+        <h2> crie seu grupo </h2>
         <input placeholder="Nome do grupo" {...register("name")} />
         {errors.name && <span> {errors.name.message} </span>}
         <input placeholder="Descrição" {...register("description")} />
         {errors.description && <span> {errors.description.message} </span>}
       </section>
       <section>
-        <p> Selecione a categoria: </p>
+        <h3> selecione a categoria: </h3>
         <div>
           <p onClick={() => highlightSelected(0)}>
-            <FiActivity className="health" /> <br /> Saúde
+            <FiActivity className="health" /> <br /> saúde
           </p>
           <p onClick={() => highlightSelected(1)}>
-            <FiBook className="study" /> <br /> Estudos
+            <FiBook className="study" /> <br /> estudos
           </p>
           <p onClick={() => highlightSelected(2)}>
-            <BsBriefcase className="work" /> <br /> Trabalho
+            <BsBriefcase className="work" /> <br /> trabalho
           </p>
         </div>
         <button>Criar grupo</button>

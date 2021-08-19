@@ -10,13 +10,12 @@ const AppearSlow = keyframes`
     }
 `;
 
-const HabitsCreatorContainer = styled.form`
+export const Container = styled.div`
   background-color: #ff8c64;
   border-radius: 5px;
   padding: 15px;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
   min-width: 50vw;
   max-width: 90vw;
@@ -30,6 +29,8 @@ const HabitsCreatorContainer = styled.form`
   h2 {
     margin-block: 10px;
     font-family: "Flamenco", cursive;
+    color: #3B322C;
+    text-align: center;
   }
 
   form {
@@ -71,5 +72,3 @@ const HabitsCreatorContainer = styled.form`
       transition: 0.2s;
     }
 `;
-
-export default HabitsCreatorContainer;

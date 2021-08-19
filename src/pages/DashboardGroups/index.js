@@ -6,23 +6,39 @@ import Footer from "../../components/Footer";
 import { useState } from "react";
 import { Drawer } from "@material-ui/core";
 import DrawerMenu from "../../components/DrawerMenu";
-import ModalComponent from '../../components/Modal';
+import ModalComponent from "../../components/Modal";
 import GroupCreatorPopup from "../../components/GroupCreator";
 import GroupCard from "../../components/GroupCard";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GroupsContext } from "../../Providers/groups";
 import { Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
 import { GroupsBox } from "./style";
-import SubscribeGroup from '../../components/SubscribeGroup';
+import SubscribeGroup from "../../components/SubscribeGroup";
+import { GrAdd } from "react-icons/gr";
+import api from "../../services/api";
+import jwtDecode from "jwt-decode";
 
 const DashboardGroups = () => {
   const [openModalCreator, setOpenModalCreator] = useState(false);
   const [openModalSubscribe, setOpenModalSubscribe] = useState(false);
-  const { groupsList } = useContext(GroupsContext);
+  const { groupsList, getGroups } = useContext(GroupsContext);
   const [showDrawer, setShowDrawer] = useState(false);
   const { authenticated } = useAuthentication();
+  const [user, setUser] = useState("");
 
+  useEffect(() => {
+    const tk = JSON.parse(localStorage.getItem("@gestaohabitosg5:token"));
+    getGroups(tk);
+    const decoded = jwtDecode(tk);
+
+    api
+      .get(`/users/${decoded.user_id}/`)
+      .then((res) => {
+        setUser(res.data.username);
+      })
+      .catch((e) => console.log(e));
+  }, []);
 
   const handleOpenCreator = () => {
     setOpenModalCreator(true);
@@ -30,51 +46,58 @@ const DashboardGroups = () => {
 
   const handleOpenSubscribe = () => {
     setOpenModalSubscribe(true);
-  }
+  };
 
   if (authenticated === false) {
     return <Redirect to="/login" />;
   }
 
   return (
-    <div>
+    <>
       <Drawer
         anchor="left"
         open={showDrawer}
         onClose={() => setShowDrawer(false)}
       >
-        <DrawerMenu />
+        <DrawerMenu user={user} setUser={setUser} />
       </Drawer>
       <Header setShowDrawer={setShowDrawer} />
       <DashboardContainer>
-        <SideMenu />
+        <SideMenu user={user} setUser={setUser} />
         <DashboardMainBox>
           <GroupsBox>
             <h1 className="DashboardTitle">meus grupos</h1>
-            {groupsList.map((group) => (
-              <GroupCard key={group.id} group={group} />
+            {groupsList.map((group, index) => (
+              <GroupCard key={index} group={group} />
             ))}
-            <button onClick={handleOpenCreator}>Novo grupo</button>
+            <div className="groupsButton" onClick={handleOpenCreator}>
+              <GrAdd />
+            </div>
+
+            <div className="GroupExplorer">
+              <h1 className="DashboardTitle">explorar grupos</h1>
+              <button className="searchButton" onClick={handleOpenSubscribe}>
+                {" "}
+                Procurar grupos{" "}
+              </button>
+            </div>
             <ModalComponent
               openModal={openModalCreator}
               setOpenModal={setOpenModalCreator}
             >
-              <GroupCreatorPopup />
+              <GroupCreatorPopup setOpenModalCreator={setOpenModalCreator} />
             </ModalComponent>
           </GroupsBox>
-          <GroupsBox>
-            <h1 className="DashboardTitle">explorar grupos</h1>
-            <div className="GroupExplorer">
-              <button onClick={handleOpenSubscribe} > Procurar grupo novo </button>
-            </div>
-            <ModalComponent openModal={openModalSubscribe} setOpenModal={setOpenModalSubscribe}>
-              <SubscribeGroup />
-            </ModalComponent>
-          </GroupsBox>
+          <ModalComponent
+            openModal={openModalSubscribe}
+            setOpenModal={setOpenModalSubscribe}
+          >
+            <SubscribeGroup />
+          </ModalComponent>
         </DashboardMainBox>
       </DashboardContainer>
       <Footer />
-    </div>
+    </>
   );
 };
 

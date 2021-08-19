@@ -2,7 +2,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { InitialContainer } from "../../styles/mainContainers";
 import { MainButton } from "../../styles/mainContainers";
-import { Breaker } from "./style";
+import { Background, Breaker } from "./style";
 import { useHistory, Redirect } from "react-router-dom";
 import { useAuthentication } from "../../Providers/Authentication";
 
@@ -15,12 +15,13 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <>
       <Header />
       <InitialContainer>
+        <Background/>
         <Breaker>
           <div className="title">
-            Gerencie melhor sua rotina com <span className="trademark">goodhabits</span>™
+            Transforme sua rotina com <span className="trademark">goodhabits</span>™
           </div>
           <div className="subtitle">
             A plataforma que faltava para enumerar e manter seus hábitos,
@@ -28,14 +29,14 @@ const Home = () => {
             e definem metas.
           </div>
           <div>
-            <MainButton onClick={() => history.push("/signup")}>
+            <button className="startButton" onClick={() => history.push("/signup")}>
               Começar
-            </MainButton>
+            </button>
           </div>
         </Breaker>
       </InitialContainer>
       <Footer />
-    </div>
+    </>
   );
 };
 

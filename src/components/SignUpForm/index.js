@@ -2,11 +2,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useHistory, Link } from "react-router-dom";
-import { useState } from "react";
-import { FormContainer, FormInput, FormButton, Breaker } from "./style";
-import { ImageContainer } from "./style";
+import { Background, Content, AnimationContainer } from "./style";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { InitialContainer } from "../../styles/mainContainers";
+import { TextField } from "@material-ui/core";
 
 const SignUpForm = () => {
   const history = useHistory();
@@ -15,8 +15,8 @@ const SignUpForm = () => {
     username: yup
       .string()
       .min(4, "Mínimo de 4 dígitos")
-      .required("Campo Obrigatório"),
-    email: yup.string().email("Email inválido").required("Campo Obrigatório"),
+      .required("Campo obrigatório"),
+    email: yup.string().email("Email inválido").required("Campo obrigatório"),
     password: yup
       .string()
       .min(8, "Mínimo de 8 dígitos")
@@ -24,11 +24,11 @@ const SignUpForm = () => {
         /^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
         "Obrigatório: Letras maiúsculas e minúsculas, números e caracteres especiais"
       )
-      .required("Campo Obrigatório"),
+      .required("Campo obrigatório"),
     passwordConfirm: yup
       .string()
-      .oneOf([yup.ref("password")], "Senha não confere")
-      .required("Campo Obrigatório"),
+      .oneOf([yup.ref("password")], "As senhas devem ser iguais")
+      .required("Campo obrigatório"),
   });
 
   const {
@@ -43,56 +43,76 @@ const SignUpForm = () => {
     axios
       .post("https://kabit-api.herokuapp.com/users/", data)
       .then((response) => {
-        console.log(response);
+        toast.success("Cadastro concluído! Faça seu login abaixo.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          });
         reset({});
         history.push("/login");
       })
-      .catch((e) => toast.error("Nome ou email já cadastrado"));
+      .catch((e) => toast.error("Ops! Nome ou e-mail já cadastrados. Tente novamente", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        }))
   };
 
   return (
-    <Breaker>
-      <FormContainer
-        className="FormContainer"
+    <InitialContainer>
+      <Content
         onSubmit={handleSubmit(handleForm)}
       >
-        <div className="FormTitle"> Crie a sua conta </div>
-        <div>
-          <FormInput
+        <AnimationContainer>
+        <form>
+          <h1>crie sua conta</h1>
+          <TextField
+            variant="outlined"
+            margin="dense"
+            size="small"
             placeholder="Nome de usuário"
             {...register("username")}
-          ></FormInput>
-          <div className="ErrorMessage">{errors.username?.message}</div>
-        </div>
-        <div>
-          <FormInput placeholder="E-mail" {...register("email")}></FormInput>
-          <div className="ErrorMessage">{errors.email?.message}</div>
-        </div>
-        <div>
-          <FormInput
+            helperText={errors.username?.message}
+          />
+          <TextField 
+            variant="outlined"
+            margin="dense"
+            size="small"
+            placeholder="E-mail"
+            {...register("email")}
+            helperText={errors.email?.message}
+          />
+          <TextField
+            variant="outlined"
+            margin="dense"
+            size="small"
             placeholder="Senha"
             type="password"
             {...register("password")}
-          ></FormInput>
-          <div className="ErrorMessage">{errors.password?.message}</div>
-        </div>
-        <div>
-          <FormInput
+            helperText={errors.password?.message}
+          />
+          <TextField
+            variant="outlined"
+            margin="dense"
+            size="small"
             placeholder="Confirmar senha"
             type="password"
             {...register("passwordConfirm")}
-          ></FormInput>
-          <div className="ErrorMessage">{errors.passwordConfirm?.message}</div>
-        </div>
-        <FormButton className="FormButtons" type="submit">
-          Criar Conta
-        </FormButton>
-        <div className="linkToLogin">
-          Já possui conta? <Link to="/login"> Faça Login </Link>
-        </div>
-      </FormContainer>
-      <ImageContainer className="image"></ImageContainer>
-    </Breaker>
+            helperText={errors.passwordConfirm?.message}
+          />
+          <button type="submit">Criar conta</button>
+          <h2>
+            Já possui conta? <Link to="/login">Faça seu login.</Link>
+          </h2>
+        </form>       
+        </AnimationContainer>
+      </Content>
+      <Background />
+    </InitialContainer>
   );
 };
 

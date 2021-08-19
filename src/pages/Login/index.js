@@ -11,17 +11,22 @@ import { AnimationContainer, Background, Content } from "./styles";
 import { TextField } from "@material-ui/core";
 import { useState } from "react";
 import { useAuthentication } from "../../Providers/Authentication";
+import { useEffect } from "react";
+import { useToken } from "../../Providers/token";
+import { useUser } from "../../Providers/user";
 
 const Login = () => {
   const { authenticated, setAuthenticated } = useAuthentication();
   const schema = yup.object().shape({
-    username: yup.string().required("User Name obrigatório"),
+    username: yup.string().required("Campo obrigatório"),
     password: yup
       .string()
       .min(6, "Mínimo de 6 caracateres")
-      .required("Senha obrigatória"),
+      .required("Campo obrigatório"),
   });
-
+  const { token } = useToken();
+  const { userName } = useUser();
+  const { coisar } = useUser();
   const {
     register,
     handleSubmit,
@@ -36,15 +41,17 @@ const Login = () => {
       .then((response) => {
         localStorage.clear();
         const { access } = response.data;
-        setAuthenticated(true);
+
         localStorage.setItem("@gestaohabitosg5:token", JSON.stringify(access));
+        coisar();
         setAuthenticated(true);
-        // setToken(access);
-        return history.push("/DashboardMain");
       })
-      .catch((err) =>
-        // toast.error("Usuário ou senha inválidos")
-        console.log(err)
+      .then((res) => {
+        history.push("/DashboardMain");
+      })
+      .catch((err) => {
+        toast.error("Usuário ou senha inválidos")
+      }
       );
   };
 
@@ -53,43 +60,42 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <>
       <Header />
       <InitialContainer>
         <Background />
         <Content>
           <AnimationContainer>
             <form onSubmit={handleSubmit(onSubmitLogin)}>
-              <h1>Login</h1>
-
+              <h1>login</h1>
               <TextField
                 variant="outlined"
-                margin="normal"
+                margin="dense"
                 size="small"
-                label="Nome de Usuário"
+                placeholder="Nome de usuário"
                 {...register("username")}
                 helperText={errors.username?.message}
               />
               <TextField
                 variant="outlined"
-                margin="normal"
-                label="Senha"
+                margin="dense"
+                placeholder="Senha"
                 size="small"
                 type="password"
                 {...register("password")}
                 helperText={errors.password?.message}
               />
 
-              <button type="submit">Login</button>
-              <p>
-                Não possui conta? <Link to="/signUp">Crie a sua</Link>
-              </p>
+              <button type="submit">Entrar</button>
+              <h2>
+                Não possui conta? <Link to="/signUp">Crie a sua!</Link>
+              </h2>
             </form>
           </AnimationContainer>
         </Content>
       </InitialContainer>
       <Footer />
-    </div>
+    </>
   );
 };
 

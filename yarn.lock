@@ -2041,6 +2041,13 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
 
+"@types/react-edit-text@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-edit-text/-/react-edit-text-4.0.1.tgz#fd7228d6706c92baa66e057bfeed62fac61b8915"
+  integrity sha512-iZlibPy1+1HbYvXdt4Nq/j3Im4GoMF/ANBvnQ4Jv+kmbTppNmF+J1Snvhf//q2RnFG12Fk58xIZWRNVKSX7ELQ==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-transition-group@^4.2.0":
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.2.tgz#38890fd9db68bf1f2252b99a942998dc7877c5b3"
@@ -3541,6 +3548,11 @@ class-utils@^0.3.5:
     define-property "^0.2.5"
     isobject "^3.0.0"
     static-extend "^0.1.1"
+
+classnames@^2.2.6:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
+  integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
 
 clean-css@^4.2.3:
   version "4.2.3"
@@ -9670,6 +9682,11 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
+react-circular-progressbar@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-circular-progressbar/-/react-circular-progressbar-2.0.4.tgz#5b04a9cf6be8c522c180e4e99ec6db63677335b0"
+  integrity sha512-OfX0ThSxRYEVGaQSt0DlXfyl5w4DbXHsXetyeivmoQrh9xA9bzVPHNf8aAhOIiwiaxX2WYWpLDB3gcpsDJ9oww==
+
 react-dev-utils@^11.0.3:
   version "11.0.4"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-11.0.4.tgz#a7ccb60257a1ca2e0efe7a83e38e6700d17aa37a"
@@ -9709,10 +9726,22 @@ react-dom@^17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
+react-edit-text@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-edit-text/-/react-edit-text-4.1.0.tgz#7a9cad56b3054b2c7b64056f867ecb8a5a60fa0c"
+  integrity sha512-63fEeCOCQxwJrhMdC2YsHMfTF8Dm4kUwXUDLeaWQB+LjWrs+wBc0uROfFlIv5YqxVQb/2Uy4KU3wmnzfE14J4w==
+  dependencies:
+    classnames "^2.2.6"
+
 react-error-overlay@^6.0.9:
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
+
+react-gradient-progress@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-gradient-progress/-/react-gradient-progress-1.0.3.tgz#c873589e2fc44b165c3eb94a54e188993d9b4ed0"
+  integrity sha512-aEUQ/BxC7OPIqdmR8gSepdwkCA2sPQTnjRHoYO/PtV5Jac7XBVGXRPkhPQNczczc68OhDhCXLt/YAI/eEXzgrw==
 
 react-hook-form@^7.12.2:
   version "7.12.2"

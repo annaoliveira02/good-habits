@@ -6,29 +6,56 @@ import { useToken } from "../token";
 export const GroupsContext = createContext();
 
 export const GroupsProvider = ({ children }) => {
-  const [groupsList, setGroupsList] = useState([]);
-  const [group, setGroup] = useState([]);
-  const { token } = useToken();
-  const config = { headers: { Authorization: `Bearer ${token}` } };
+  const initialGroupsList = JSON.parse(localStorage.getItem('@gestaohabitosg5:groups')) || [];
+  const [groupsList, setGroupsList] = useState(initialGroupsList);
 
-  useEffect(() => {
-    if (token) {
-      api
-        .get("/groups/subscriptions/", config)
-        .then((res) => setGroupsList(res.data))
-        .catch((err) => console.log(err));
-    }
-  }, [token, groupsList]);
+  const getGroups = () => {
+    const token = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'))
+    api
+      .get("/groups/subscriptions/", {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then((res) => {
+        setGroupsList(res.data)
+        localStorage.setItem('@gestaohabitosg5:groups', JSON.stringify(res.data))
+      })
+      .catch((err) => console.log(err));
+  }
 
-  const addGroup = () => {};
+  const removeGroup = () => { };
 
-  const removeGroup = () => {};
+  const editGroup = (data, group, setRealGroup) => {
+    const token = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'))
 
-  const editGroup = () => {};
+    api.patch(`/groups/${group.id}/`,
+      data,
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
+        group = {
+          ...group,
+          name: res.data.name,
+          description: res.data.description,
+          category: res.data.category
+        }
+        // setRealGroup(group);
+      })
+      // .then(
+      //   api.get(`/groups/${group.id}/`)
+      //     .then(res => {
+      //       groupsList.filter(g => g.id !== group.id);
+      //       groupsList.push(res.data)
+      //       // setGroupsList(groupsList)
+      //     })
+      //     .then(res => console.log(res))
+      .catch(err => console.log(err))
+
+  };
 
   return (
     <GroupsContext.Provider
-      value={{ groupsList, group, addGroup, removeGroup, editGroup }}
+      value={{ groupsList, getGroups, setGroupsList, removeGroup, editGroup }}
     >
       {children}
     </GroupsContext.Provider>

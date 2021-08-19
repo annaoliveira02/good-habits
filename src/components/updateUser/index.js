@@ -1,19 +1,19 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useToken } from "../../Providers/token";
 import api from "../../services/api";
-import { useUser } from "../../Providers/user";
 import { TextField } from "@material-ui/core";
 import { Container } from "./styles";
+import jwtDecode from "jwt-decode";
+import { toast } from "react-toastify";
 
-const UpdateUser = () => {
-  const { userId } = useUser();
-  const { token } = useToken();
+const UpdateUser = ({ setOpenModal, setUser }) => {
+  const tk = JSON.parse(localStorage.getItem("@gestaohabitosg5:token"));
+  const decoded = jwtDecode(tk);
 
-  const config = { headers: { Authorization: `Bearer ${token}` } };
+  const config = { headers: { Authorization: `Bearer ${tk}` } };
   const schema = yup.object().shape({
-    username: yup.string().required("Novo nome de usuário obrigatório"),
+    username: yup.string().required("Campo obrigatório"),
   });
 
   const {
@@ -23,19 +23,26 @@ const UpdateUser = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onUpdateForm = (data) => {
-    api.patch(`/users/${userId}/`, data, config).then((response) => {
-      console.log("usuário atualizado");
-    });
+    setOpenModal(false);
+    api
+      .patch(`/users/${decoded.user_id}/`, data, config)
+      .then((response) => {
+        toast.success("Nome de usuário atualizado");
+        return response;
+      })
+      .then((res) => {
+        setUser(res.data.username);
+      });
   };
 
   return (
     <Container>
       <form onSubmit={handleSubmit(onUpdateForm)}>
-        <h2 id="simple-modal-title">Altere seu nome de usuário</h2>
+        <h2>altere sua conta</h2>
         <TextField
           variant="outlined"
           size="small"
-          label="Novo nome de usuário"
+          placeholder="Novo nome de usuário"
           {...register("username")}
           helperText={errors.username?.message}
         />

@@ -9,8 +9,10 @@ export const InitialContainer = styled.div`
   margin: 15px;
   width: 90vw;
   min-height: 70vh;
-  margin-block-start: 70px;
+  max-height: 70vh;
+  margin-block: 20px;
   border-radius: 5px;
+  overflow: auto;
 `;
 
 export const DashboardContainer = styled.div`
@@ -24,7 +26,7 @@ export const DashboardContainer = styled.div`
   width: 90vw;
   min-height: 70vh;
   max-height: 70vh;
-  margin-block-start: 70px;
+  margin-block: 20px;
   border-radius: 5px;
   overflow: auto;
 `;
@@ -47,31 +49,13 @@ export const MainButton = styled.button`
   font-family: "Nunito", sans serif;
 
   &:hover {
-    background: linear-gradient(
-      90deg,
-      rgba(246, 72, 37, 1) 0%,
-      rgba(247, 133, 55, 1) 100%
-    );
+      background-color: rgba(247, 133, 55, 1);
+      background: none;
+      transition: 0.4s;
+      color: rgba(246, 72, 37, 1);
   }
-`;
 
-export const ModalBackground = styled.div`
-  z-index: auto;
-  display: ${({ show }) => (show ? "block" : "none")};
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background: rgba(0, 0, 0, 0.5);
-`;
-
-export const ModalContainer = styled.div`
-  position: absolute;
-  margin: 0 auto;
-  min-width: 30%;
-  display: ${({ show }) => (show ? "block" : "none")};
-  padding: 15px;
-  background-color: white;
-  border-radius: 5px;
+  @media(min-width: 600px) {
+    font-size: 14px;
+  }
 `;
