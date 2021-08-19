@@ -15,18 +15,28 @@ import { HabitsBox } from "./style";
 import ModalContainer from "../../components/Modal";
 import { GrAdd } from "react-icons/gr";
 import ModalComponent from "../../components/Modal";
+import api from "../../services/api";
+import jwtDecode from "jwt-decode";
 
 const DashboardHabits = () => {
   const { habitsList, getHabits } = useHabits();
   const [showDrawer, setShowDrawer] = useState(false);
   const { authenticated } = useAuthentication();
   const [openModalCreator, setOpenModalCreator] = useState(false);
+  const [user, setUser] = useState("");
 
   useEffect(() => {
-    const tk = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
+    const tk = JSON.parse(localStorage.getItem("@gestaohabitosg5:token"));
     getHabits(tk);
+    const decoded = jwtDecode(tk);
 
-  }, []);
+    api
+      .get(`/users/${decoded.user_id}/`)
+      .then((res) => {
+        setUser(res.data.username);
+      })
+      .catch((e) => console.log(e));
+  }, [user]);
 
   const handleOpenHabitsCreator = () => {
     setOpenModalCreator(true);
@@ -66,11 +76,11 @@ const DashboardHabits = () => {
         open={showDrawer}
         onClose={() => setShowDrawer(false)}
       >
-        <DrawerMenu />
+        <DrawerMenu user={user} setUser={setUser} />
       </Drawer>
       <Header setShowDrawer={setShowDrawer} />
       <DashboardContainer>
-        <SideMenu />
+        <SideMenu user={user} setUser={setUser} />
         <DashboardMainBox>
           <HabitsBox>
             <h1 className="DashboardTitle">meus hábitos</h1>
@@ -92,7 +102,7 @@ const DashboardHabits = () => {
             openModal={openModalCreator}
             setOpenModal={setOpenModalCreator}
           >
-            <HabitCreator />
+            <HabitCreator setOpenModal={setOpenModalCreator} />
           </ModalComponent>
         </DashboardMainBox>
       </DashboardContainer>

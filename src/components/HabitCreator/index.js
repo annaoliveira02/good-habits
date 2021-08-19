@@ -6,7 +6,7 @@ import HabitsCreatorContainer from "./style";
 import { TextField } from "@material-ui/core";
 import jwtDecode from "jwt-decode";
 
-const HabitCreator = () => {
+const HabitCreator = ({ setOpenModal }) => {
   const { addHabit } = useHabits();
 
   const schema = yup.object().shape({
@@ -23,6 +23,7 @@ const HabitCreator = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleForm = (data) => {
+    setOpenModal(false);
     const tk = JSON.parse(localStorage.getItem("@gestaohabitosg5:token"));
     const userId = jwtDecode(tk).user_id;
     const completeData = Object.assign(data, {
