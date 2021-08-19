@@ -42,7 +42,6 @@ export const GroupContainer = styled.div`
             padding: 5px;
 
             svg {
-                filter: invert(100);
                 font-size: 20px;
                 cursor: pointer;
                 display: relative;
@@ -65,7 +64,6 @@ export const GroupContainer = styled.div`
             padding: 5px;
 
             svg {
-                filter: invert(100);
                 font-size: 20px;
                 cursor: pointer;
                 display: relative;

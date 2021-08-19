@@ -49,7 +49,7 @@ const GroupCreaterContainer = styled.form`
             margin-block-start: 10px;
             border-radius: 5px;
             outline: none;
-            color: rgb(0,0,0, 0.2);
+            color: black;
             border: 1px solid rgb(0,0,0, 0.2);
             background-color: #ff8c64;
 

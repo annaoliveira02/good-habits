@@ -1,10 +1,43 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import imgHome from "../../assets/img/homeImage.svg";
+
+const appearFromRight = keyframes`
+from{
+    opacity: 0;
+    transform: translate(50px);
+}
+to {
+    opacity:1;
+    transform: translateX(0px)
+}
+`;
+
+const showUp = keyframes`
+from{
+    opacity: 0;
+}
+to{
+    opacity: 1;
+}
+`;
+
+export const Background = styled.div`
+  @media (min-width: 800px) {
+    width: 400px;
+    height: 400px;
+    background: url(${imgHome}) no-repeat center;
+    background-size: contain;
+    animation: ${showUp} 2s;
+  }
+`;
 
 export const Breaker = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 90vw;
+  animation: ${appearFromRight} 1s;
 
   .title {
     margin-bottom: 40px;
@@ -42,29 +75,31 @@ export const Breaker = styled.div`
     font-family: "Nunito", sans serif;
 
     &:hover {
-      background: linear-gradient(
-        90deg,
-        rgba(246, 72, 37, 1) 0%,
-        rgba(247, 133, 55, 1) 100%
-      );
+      background-color: rgba(247, 133, 55, 1);
+      background: none;
+      transition: 0.4s;
+      color: rgba(246, 72, 37, 1);
     }
   }
 
   @media(min-width: 600px) {
     .title {
-      font-size: 32px;
+      font-size: 30px;
     }
 
     .subtitle {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 200;
       max-width: 80%;
     }
 
     .trademark {
-      font-size: 39px;
+      font-size: 37px;
     }
 
-    .
+  }
+
+  @media(min-width: 800px) {
+    max-width: 60vh;
   }
 `;

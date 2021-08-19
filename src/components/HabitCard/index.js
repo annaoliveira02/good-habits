@@ -51,7 +51,7 @@ const HabitCard = ({ habit }) => {
 
       <div>
         Progresso:
-        <div>
+        <div className="circleContainer">
           <CircularProgressbar
             value={inputValue}
             text={`${inputValue}%`}

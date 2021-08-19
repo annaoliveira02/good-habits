@@ -49,11 +49,10 @@ export const MainButton = styled.button`
   font-family: "Nunito", sans serif;
 
   &:hover {
-    background: linear-gradient(
-      90deg,
-      rgba(246, 72, 37, 1) 0%,
-      rgba(247, 133, 55, 1) 100%
-    );
+      background-color: rgba(247, 133, 55, 1);
+      background: none;
+      transition: 0.4s;
+      color: rgba(246, 72, 37, 1);
   }
 
   @media(min-width: 600px) {

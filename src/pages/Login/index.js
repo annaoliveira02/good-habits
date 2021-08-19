@@ -49,9 +49,9 @@ const Login = () => {
       .then((res) => {
         history.push("/DashboardMain");
       })
-      .catch((err) =>
-        // toast.error("Usuário ou senha inválidos")
-        console.log(err)
+      .catch((err) => {
+        toast.error("Usuário ou senha inválidos")
+      }
       );
   };
 
