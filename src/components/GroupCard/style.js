@@ -32,7 +32,7 @@ export const GroupContainer = styled.div`
         width: 100%;
         margin-block-start: 5px;
 
-        h2 {
+        .groupSectionTitle {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -42,7 +42,6 @@ export const GroupContainer = styled.div`
             padding: 5px;
 
             svg {
-                filter: invert(100);
                 font-size: 20px;
                 cursor: pointer;
                 display: relative;
@@ -55,7 +54,7 @@ export const GroupContainer = styled.div`
         width: 100%;
         margin-block-start: 5px;
 
-        h2 {
+        .groupSectionTitle {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -65,7 +64,6 @@ export const GroupContainer = styled.div`
             padding: 5px;
 
             svg {
-                filter: invert(100);
                 font-size: 20px;
                 cursor: pointer;
                 display: relative;
@@ -112,9 +110,10 @@ export const GroupContainer = styled.div`
         font-style: italic;
 
         &:hover {
-            cursor: initial;
             background-color: #E5E5E5;
             color: #666;
+            font-style: italic;
+            cursor: initial;
         }
     }
 `

@@ -71,11 +71,12 @@ const AddActivityModal = ({ group, setActivitiesList }) => {
   return (
     <Container>
       <form onSubmit={handleSubmit(handleAdd)}>
-        <h2>Adicione uma Atividade</h2>
+        <h2>adicione uma atividade</h2>
         <TextField
           variant="outlined"
           size="small"
-          label="Atividade"
+          margin="dense"
+          placeholder="Atividade"
           {...register("title")}
           helperText={errors.title?.message}
         />

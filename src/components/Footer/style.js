@@ -47,7 +47,7 @@ export const FooterMain = styled.div`
       font-size: 14px;
     }
 
-    a {
+    p {
       font-size: 14px;
     }
   }

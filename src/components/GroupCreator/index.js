@@ -82,23 +82,23 @@ const GroupCreatorPopup = () => {
       onSubmit={handleSubmit(createGroup)}
     >
       <section>
-        <h3> Crie seu grupo </h3>
+        <h2> crie seu grupo </h2>
         <input placeholder="Nome do grupo" {...register("name")} />
         {errors.name && <span> {errors.name.message} </span>}
         <input placeholder="Descrição" {...register("description")} />
         {errors.description && <span> {errors.description.message} </span>}
       </section>
       <section>
-        <p> Selecione a categoria: </p>
+        <h3> selecione a categoria: </h3>
         <div>
           <p onClick={() => highlightSelected(0)}>
-            <FiActivity className="health" /> <br /> Saúde
+            <FiActivity className="health" /> <br /> saúde
           </p>
           <p onClick={() => highlightSelected(1)}>
-            <FiBook className="study" /> <br /> Estudos
+            <FiBook className="study" /> <br /> estudos
           </p>
           <p onClick={() => highlightSelected(2)}>
-            <BsBriefcase className="work" /> <br /> Trabalho
+            <BsBriefcase className="work" /> <br /> trabalho
           </p>
         </div>
         <button>Criar grupo</button>

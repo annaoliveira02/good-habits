@@ -3,7 +3,7 @@ import AboutUsContainer from "./style";
 const AboutUs = () => {
   return (
     <AboutUsContainer>
-      <h1> Nossa Equipe: </h1>
+      <h1> nossa equipe: </h1>
       <div>
         <img
           src="https://ca.slack-edge.com/TQZR39SET-U01P8BLFNLT-ad8cb39061a7-512"

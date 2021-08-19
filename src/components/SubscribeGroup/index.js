@@ -22,7 +22,7 @@ const SubscribeGroupPopup = () => {
     return (
         <SubscribeContainer>
             <header>
-                <input placeholder='Procure um Grupo'
+                <input placeholder='Nome do grupo'
                     value={input}
                     onChange={e => setInput(e.target.value)} />
                 <BsSearch onClick={searchGroups} />

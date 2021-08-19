@@ -12,54 +12,82 @@ const AppearSlow = keyframes`
 
 
 const GroupCreaterContainer = styled.form`
-    background-color: #E9A2AD;
-    border: 2px solid #D3455B;
+    background-color: #ff8c64;
+    border-radius: 5px;
     padding: 15px;
-
     display: flex;
-    justify-content: space-around;
-
-    width: 90vw;
-    max-width: 700px;
-
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-width: 50vw;
+    max-width: 90vw;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     animation: ${AppearSlow};
-    animation-duration: .2s;
+    animation-duration: 0.4s;
 
     > section:first-child {
         display:flex;
         flex-direction: column;
         justify-content: space-around;
 
-        > h3 {
-            font-size: 22px;
-            text-align: left;
-            padding-left: 10px;
+        > h2 {
+            margin-block: 10px;
+            font-family: "Flamenco", cursive;
+            color: #3B322C;
+            text-align: center;
         }
 
         > input {
-            padding: 5px;
-            font-size: 18px;
-            margin: 15px 0 15px 10px;
+            padding: 10px;
             margin-left: 10px;
+            min-width: 20vw;
+            font-family: "Nunito";
+            font-size: 14px;
+            margin-block-start: 10px;
+            border-radius: 5px;
+            outline: none;
+            color: rgb(0,0,0, 0.2);
+            border: 1px solid rgb(0,0,0, 0.2);
+            background-color: #ff8c64;
+
+            &:hover {
+                border: 1px solid black;
+            }
         }
 
         > input + span {
             padding-left: 10px;
+            font-size: 10px;
             color: red;
-            font-size: 14px;
-            margin-top: -14px;
+            font-family: "Nunito", sans-serif;
+            margin-top: 3px;
         }
     }
 
     > section + section {
         padding: 0 10px;
+        justify-content: center;
+
+        h3 {
+            margin-block: 10px;
+            font-family: "Flamenco", cursive;
+            font-size: 20px;
+            font-weight: 500;
+            color: #3B322C;
+            text-align: center;
+        }
+
         > p {
-            font-size: 18px;
+            margin-block: 10px;
+            font-family: "Flamenco", cursive;
+            font-size: 20px;
+            font-weight: 500;
+            color: #3B322C;
+            text-align: center;
         }
 
         > div {
@@ -68,9 +96,14 @@ const GroupCreaterContainer = styled.form`
         }
 
         > div > p {
-            font-size: 18px;
             margin: 0 10px;
             cursor: pointer;
+            margin-block: 10px;
+            font-family: "Flamenco", cursive;
+            font-size: 16px;
+            font-weight: 700;
+            color: #3B322C;
+            text-align: center;
 
             .health {
                 color: #6558F5;
@@ -78,8 +111,8 @@ const GroupCreaterContainer = styled.form`
             }
 
             .study {
-                color: #E8833A;
-                border: ${props => props.selectedArray[1] === 1 ? '3px solid #E8833A' : 'none'}
+                color: rgba(246, 72, 37, 1);
+                border: ${props => props.selectedArray[1] === 1 ? '3px solid rgba(246, 72, 37, 1)' : 'none'}
             }
 
             .work {
@@ -94,17 +127,22 @@ const GroupCreaterContainer = styled.form`
         }
 
         > button {
-            font-size: 20px;
-            padding: 10px 30px;
-            border: none;
-            border-radius: 5px;
-            background-color: #D3455B;
-            color: #FFF;
-            font-weight: bold;
+            margin-block: 15px;
+            width: 200px;
+            height: 40px;
+            background-color: rgba(246, 72, 37, 1);
+            border-radius: 50px;
+            border-style: none;
+            font-family: "Nunito", sans-serif;
+            font-size: 18px;
+            color: white;
             cursor: pointer;
-            margin: 0 auto;
-        }
-
+        
+            &:hover {
+              background-color: #FFCCA6;;
+              color:rgba(246, 72, 37, 1);
+              transition: 0.2s;
+            }
     }
 
     > svg {

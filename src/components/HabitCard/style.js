@@ -17,23 +17,29 @@ export const HabitContainer = styled.div`
     font-family: "Nunito", sans-serif;
 
     h1 {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     h3 {
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 400;
     }
 
     > div {
-        font-size: 22px;
+        font-size: 18px;
         text-align: center;
         margin: 10px 0;
+    }
+
+    > div > .circleContainer {
+        width: 100px;
+        margin-block-start: 10px;
     }
 
     .progressEdit {
         display:flex;
         justify-content: center;
+        width: 100px;
     }
 
     .HabitButtons {

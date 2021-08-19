@@ -17,7 +17,7 @@ const AboutUsContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  min-width: 50vw;
+  min-width: 70vw;
   max-width: 90vw;
   position: absolute;
   top: 50%;
@@ -26,6 +26,11 @@ const AboutUsContainer = styled.div`
   animation: ${AppearSlow};
   animation-duration: 0.4s;
   font-family: "Flamenco", cursive;
+
+  h1 {
+    margin-block-start: 10px;
+    margin-block-end: 15px;
+  }
 
   img {
     width: 50px;
@@ -40,12 +45,23 @@ const AboutUsContainer = styled.div`
 
   h4 {
     font-weight: normal;
+    font-family: "Nunito", sans-serif;
+    font-size: 12px;
+    margin-block-end: 10px;
   }
 
   &:hover {
     background-color: #f2d2b6;
 
     transition: 0.2s;
+  }
+
+  @media(min-width: 600px) {
+    max-width: 50vw;
+    
+    h4 {
+      font-size: 16px;
+    }
   }
 `;
 

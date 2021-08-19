@@ -38,36 +38,40 @@ const HabitCreator = () => {
 
   return (
     <HabitsCreatorContainer onSubmit={handleSubmit(handleForm)}>
-      <h2>crie o seu hábito</h2>
-      <TextField
-        variant="outlined"
-        size="small"
-        placeholder="Título"
-        {...register("title")}
-        helperText={errors.title?.message}
-      />
-      <TextField
-        variant="outlined"
-        size="small"
-        placeholder="Categoria"
-        {...register("category")}
-        helperText={errors.category?.message}
-      />
-      <TextField
-        variant="outlined"
-        size="small"
-        placeholder="Dificuldade"
-        {...register("difficulty")}
-        helperText={errors.difficulty?.message}
-      />
-      <TextField
-        variant="outlined"
-        size="small"
-        placeholder="Frequência"
-        {...register("frequency")}
-        helperText={errors.frequency?.message}
-      />
-      <button type="submit">Criar hábito</button>
+        <h2>crie o seu hábito</h2>
+        <TextField 
+          variant="outlined"
+          size="small"
+          margin="dense"
+          placeholder="Título"
+          {...register("title")}
+          helperText={errors.title?.message}
+        />
+        <TextField
+          variant="outlined"
+          size="small"
+          margin="dense"
+          placeholder="Categoria"
+          {...register("category")}
+          helperText={errors.category?.message}
+        />
+        <TextField
+          variant="outlined"
+          size="small"
+          margin="dense"
+          placeholder="Dificuldade"
+          {...register("difficulty")}
+          helperText={errors.difficulty?.message}
+        />
+        <TextField
+          variant="outlined"
+          size="small"
+          margin="dense"
+          placeholder="Frequência"
+          {...register("frequency")}
+          helperText={errors.frequency?.message}
+        />      
+        <button type="submit">Criar hábito</button>
     </HabitsCreatorContainer>
   );
 };
