@@ -39,6 +39,7 @@ const HabitCreator = () => {
         <TextField 
           variant="outlined"
           size="small"
+          margin="dense"
           placeholder="Título"
           {...register("title")}
           helperText={errors.title?.message}
@@ -46,6 +47,7 @@ const HabitCreator = () => {
         <TextField
           variant="outlined"
           size="small"
+          margin="dense"
           placeholder="Categoria"
           {...register("category")}
           helperText={errors.category?.message}
@@ -53,6 +55,7 @@ const HabitCreator = () => {
         <TextField
           variant="outlined"
           size="small"
+          margin="dense"
           placeholder="Dificuldade"
           {...register("difficulty")}
           helperText={errors.difficulty?.message}
@@ -60,6 +63,7 @@ const HabitCreator = () => {
         <TextField
           variant="outlined"
           size="small"
+          margin="dense"
           placeholder="Frequência"
           {...register("frequency")}
           helperText={errors.frequency?.message}

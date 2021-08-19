@@ -12,7 +12,7 @@ const AddGoalModal = ({ group, setGoalsList }) => {
 
   const { addGoal } = useGoalsActivities();
   const schema = yup.object().shape({
-    title: yup.string().required("Nome da Meta necessário"),
+    title: yup.string().required("Campo obrigatório"),
     difficulty: yup.string().required("Fácil, médio ou difícil?"),
   });
 
@@ -39,18 +39,20 @@ const AddGoalModal = ({ group, setGoalsList }) => {
   return (
     <Container>
       <form onSubmit={handleSubmit(handleAdd)}>
-        <h2>Adicione uma Meta</h2>
+        <h2>adicione uma meta</h2>
         <TextField
           variant="outlined"
           size="small"
-          label="Meta"
+          placeholder="Meta"
+          margin="dense"
           {...register("title")}
           helperText={errors.title?.message}
         />
         <TextField
           variant="outlined"
           size="small"
-          label="Dificuldade"
+          margin="dense"
+          placeholder="Dificuldade"
           {...register("difficulty")}
           helperText={errors.difficulty?.message}
         />

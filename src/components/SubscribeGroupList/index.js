@@ -44,7 +44,7 @@ const SubscribeGroupList = ({ result }) => {
         <ListContainer isSubscribed={isSubscribed}>
             <p> {result.name} </p>
             {isSubscribed ?
-                <button disabled> Inscrito </button>
+                <button className="disabledButton" disabled> Inscrito </button>
                 :
                 <button onClick={handleSubscription}> Inscrever-se </button>
             }

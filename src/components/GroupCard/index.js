@@ -59,7 +59,7 @@ const GroupCard = ({ group }) => {
       <h1>{name}</h1>
       <h3>Categoria: {group.category}</h3>
       <div className="activitiesSection">
-        <h2>
+        <h2 className="groupSectionTitle">
           Atividades: <GrAddCircle onClick={handleOpenActivity} />
         </h2>
         <Modal openModal={openActivty} setOpenModal={handleClose}>
@@ -79,7 +79,7 @@ const GroupCard = ({ group }) => {
         )}
       </div>
       <div className="goalsSection">
-        <h2>
+        <h2 className="groupSectionTitle">
           Metas: <GrAddCircle onClick={handleOpenGoals} />
         </h2>
         <Modal openModal={openGoal} setOpenModal={handleClose}>

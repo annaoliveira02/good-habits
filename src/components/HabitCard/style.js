@@ -34,6 +34,7 @@ export const HabitContainer = styled.div`
     .progressEdit {
         display:flex;
         justify-content: center;
+        width: 100px;
     }
 
     .HabitButtons {
