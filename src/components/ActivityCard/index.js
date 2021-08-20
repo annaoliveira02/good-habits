@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import 'react-edit-text/dist/index.css';
 
 const ActivityCard = ({ activity, setActivitiesList, group, activitiesList }) => {
-  const [compAtt, setCompAtt] = useState(0);
   const [specificActivity, setSpecificActivity] = useState([])
   const [newActivity, setNewActivity] = useState(activity.title)
   const { token } = useToken();
@@ -59,6 +58,7 @@ const ActivityCard = ({ activity, setActivitiesList, group, activitiesList }) =>
       .then(() => api.get(`activities/?group=${group.id}`))
       .then(res => setActivitiesList(res.data.results))
       .then(res => getGroups())
+      .then(() => toast.info('Atividade deletada'))
       .catch((err) => console.log(err));
   };
 

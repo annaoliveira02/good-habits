@@ -55,6 +55,10 @@ const FaqContainer = styled.div`
 
   @media(min-width: 600px) {
     max-width: 50vw;
+
+    h4 {
+      font-size: 18px;
+    }
   }
 `;
 

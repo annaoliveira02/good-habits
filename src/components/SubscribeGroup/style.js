@@ -16,7 +16,7 @@ const SubscribeContainer = styled.div`
     background-color: #ff8c64;
     margin: 30px auto;
     max-height:85vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 0 10px 10px;
     border-radius: 5px; 
     min-width: 270px;

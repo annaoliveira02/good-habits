@@ -11,7 +11,7 @@ const GoalCard = ({ goal, setGoalsList, group, goalsList }) => {
   const [isAchieved, setIsAchieved] = useState(goal.achieved);
   const [dinamicGoal, setDinamicGoal] = useState(goal.title);
   const [specificGoal, setSpecificGoal] = useState([]);
-  const { token } = useToken();
+  const token = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'))
   const { getGroups } = useContext(GroupsContext);
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
@@ -43,7 +43,6 @@ const GoalCard = ({ goal, setGoalsList, group, goalsList }) => {
           pauseOnHover: true,
         });
         setIsAchieved(true);
-        // getOneGoal()
         getGroups();
       })
       .catch((err) => console.log(err));
@@ -58,6 +57,7 @@ const GoalCard = ({ goal, setGoalsList, group, goalsList }) => {
       .then((res) => api.get(`/goals/?group=${group.id}`))
       .then((res) => setGoalsList(res.data.results))
       .then((res) => getGroups())
+      .then(() => toast.info('Meta deletada'))
       .catch((err) => console.log(err));
   };
 
