@@ -4,7 +4,7 @@ export const HabitsBox = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 0;
     overflow: auto;
 
@@ -19,7 +19,7 @@ export const HabitsBox = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-self: center;
         padding: 12px;
         border-radius: 100px;
         background-color: #FFD6B7;
