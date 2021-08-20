@@ -11,7 +11,7 @@ const GoalCard = ({ goal, setGoalsList, group, goalsList }) => {
   const [isAchieved, setIsAchieved] = useState(goal.achieved);
   const [dinamicGoal, setDinamicGoal] = useState(goal.title);
   const [specificGoal, setSpecificGoal] = useState([]);
-  const { token } = useToken();
+  const token = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'))
   const { getGroups } = useContext(GroupsContext);
   const config = { headers: { Authorization: `Bearer ${token}` } };
 

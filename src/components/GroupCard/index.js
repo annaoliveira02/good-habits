@@ -55,8 +55,6 @@ const GroupCard = ({ group }) => {
     // getActivities(group.id, tk)
   }, []);
 
-  console.log("GroupCard");
-
   return (
     <GroupContainer>
       <h1>{name}</h1>

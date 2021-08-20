@@ -11,10 +11,10 @@ import { GroupsContext } from "../../Providers/groups";
 import { toast } from "react-toastify";
 
 const GroupCreatorPopup = ({ setOpenModalCreator }) => {
-  const { setGroupsList } = useContext(GroupsContext);
+  const { setGroupsList, getGroups } = useContext(GroupsContext);
   const [selectedArray, setSelectedArray] = useState([1, 0, 0]);
   const categories = ["Saúde", "Estudos", "Trabalho"];
-  const { token } = useToken();
+  // const { token } = useToken();
 
   const schema = yup.object().shape({
     name: yup.string().required("Nome obrigatório"),
@@ -47,6 +47,7 @@ const GroupCreatorPopup = ({ setOpenModalCreator }) => {
   //  e pega o elemento dessa mesma posição em "categories".
 
   const createGroup = (data) => {
+    const token = JSON.parse(localStorage.getItem('@gestaohabitosg5:token'));
     setOpenModalCreator(false);
     const categoryArr = getCategory();
     data.category = categoryArr[0];
@@ -55,7 +56,7 @@ const GroupCreatorPopup = ({ setOpenModalCreator }) => {
       .post("/groups/", data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then(() =>
+      .then(() => {
         toast.success("Grupo criado com sucesso!", {
           position: "top-right",
           autoClose: 5000,
@@ -63,6 +64,8 @@ const GroupCreatorPopup = ({ setOpenModalCreator }) => {
           closeOnClick: true,
           pauseOnHover: true,
         })
+        getGroups();
+      }
       )
       .then((res) =>
         api
