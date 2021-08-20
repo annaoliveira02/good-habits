@@ -33,8 +33,7 @@ const UpdateUser = ({ setOpenModal, setUser }) => {
       .then((res) => {
         setUser(res.data.username);
       })
-      .catch(() => toast.error('Nome já existe!'))
-
+      .catch(() => toast.error("Nome já existe!"));
   };
 
   return (
